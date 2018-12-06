@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        {{ css_settings | safe }}
+        {{ js_settings | safe }}
+    </head>
+    <body>
+        <title> {{ title | safe }} </title>
+        <header> {{ header | safe }} </header>
+        <nav> {{ navigation | safe }} </nav>
+        <aside> {{ aside | safe }} </aside>
+        <article> {{ article | safe }} </article>
+        <footer> {{ footer | safe }} </footer>
+    </body>
+</html>
