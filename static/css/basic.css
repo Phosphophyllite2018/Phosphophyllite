@@ -1,10 +1,41 @@
+/* Phosphophyllite
+ * 2018-12-06
+ * MIT LICENSE
+ */
+
+h1, h2, h3, h4, h5, h6 {
+	padding-top: 15px;
+	padding-bottom: 5px;
+}
+
 p {
 	text-indent: 2em;
 }
 	
+ol, ul {
+	margin-left: 60px; 
+}
+
 pre {
 	background-color: #ddd;
 	border-radius: 15px;
 	margin: 15px;
 	padding: 15px;
+}
+
+code {
+	color: palegreen;
+	background-color: black;
+	padding: 3px;
+	margin: 0 2px;
+	border-radius: 5px;
+}
+
+nav {
+	float: left;
+	width: 20%;
+}
+
+article {
+	float: left;
 }
