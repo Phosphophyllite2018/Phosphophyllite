@@ -3,19 +3,23 @@
  * MIT LICENSE
  */
 
+ /* 标题和前面空一定的距离 */
 h1, h2, h3, h4, h5, h6 {
 	padding-top: 15px;
 	padding-bottom: 5px;
 }
 
+/* 段落开头空2格 */
 p {
 	text-indent: 2em;
 }
 	
+/* 让li标签能够显示圆点 */
 ol, ul {
 	margin-left: 60px; 
 }
 
+/* 代码块显示浅灰色圆角矩形底色 */
 pre {
 	background-color: #ddd;
 	border-radius: 15px;
@@ -23,6 +27,7 @@ pre {
 	padding: 15px;
 }
 
+/* 行内代码视觉增强 */
 code {
 	color: palegreen;
 	background-color: gray;
@@ -31,6 +36,7 @@ code {
 	border-radius: 5px;
 }
 
+/* nav和atcile在同一行 */
 nav {
 	float: left;
 	width: 20%;
@@ -38,4 +44,31 @@ nav {
 
 article {
 	float: left;
+}
+
+/* 清除float */
+footer {
+	clear: both;
+}
+
+/* 链接显示为浅绿色 */
+a {
+	color: palegreen;
+	font-weight: bold;
+}
+
+a:hover {
+	color: white;
+	background-color: palegreen;
+	font-weight: bold;
+}
+
+/* 头像显示为圆形 */
+#photo{
+	width: 200px;
+	height: 200px;
+	display: block;
+	margin: 20px auto;
+	border-radius: 50%;
+	border: 1px solid rgb(221,240,237);
 }

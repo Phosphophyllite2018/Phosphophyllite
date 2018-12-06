@@ -4,9 +4,9 @@
 # CSS
 css_path = 'static/css/'
 css_files = [
-    'basic.css',
     'frameworks.css',
-    'github.css'
+    'github.css',
+    'basic.css',
 ]
 
 def getCSS():
