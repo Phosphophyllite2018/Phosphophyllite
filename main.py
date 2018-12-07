@@ -8,9 +8,9 @@ app = flask.Flask(__name__, template_folder="./static/html")
 def index() :
 	return DemoView.render()
 
-@app.route('/private')
-def private() :
-	flask.abort(404)
+# @app.route('/private')
+# def private() :
+# 	flask.abort(404)
 	
 if __name__ == "__main__" :
 	app.run(port=80)
