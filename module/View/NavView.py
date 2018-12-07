@@ -1,5 +1,4 @@
 from flask import render_template
-from . import NavModel
 
 def render(username, runtime, visiting, articles, messages) :
     output = render_template('nav.html',

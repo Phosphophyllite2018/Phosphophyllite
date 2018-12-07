@@ -1,8 +1,8 @@
 # 示例页面
 
 from flask import render_template
-from . import HeadView , MarkdownView , FooterView , NavView , ArticleView
-from . import HeadModel , NavModel
+from .View import HeadView , MarkdownView , FooterView , NavView , ArticleView
+from .Model import HeadModel , NavModel
 
 def renderPage() :
     demo_article = open('README.md', "r", encoding='utf-8').read()

@@ -1,6 +1,6 @@
 from flask import render_template
-from . import HeadView , MarkdownView , FooterView , NavView , ArticleView
-from . import HeadModel , NavModel , ArticleModel
+from .View import HeadView , MarkdownView , FooterView , NavView , ArticleView
+from .Model import HeadModel , NavModel , ArticleModel
 
 def renderPage() :
     title = ArticleModel.getLatestTitle()

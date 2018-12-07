@@ -1,7 +1,8 @@
 #! /usr/bin/env python3
 
 import flask
-from module import DemoPage , HomePage , ArticleModel
+from module import DemoPage , HomePage
+from module.Model import ArticleModel
 app = flask.Flask(__name__, template_folder="./static/html")
 
 @app.route('/')
