@@ -6,8 +6,6 @@ import hashlib
 # 创建表
 def create_table(cursor, table_name, lines) :
 	try :
-		print("创建表 '%s'" % table_name, end=" - ")
-		
 		# 检查表是否已经存在
 		result = cursor.execute("select * from sqlite_master  where type = 'table' and name = '%s'" % table_name)
 		
@@ -18,9 +16,9 @@ def create_table(cursor, table_name, lines) :
 				sql += line[0] + " " + line[1] + ","
 			sql = sql[:-1] + ");"
 			cursor.execute(sql)
-			print("成功。")
+			print("创建表 '%s' 成功。" % table_name)
 		else :
-			print("该表已经存在。")
+			pass
 	except Exception as e :
 		print(e)
 		
@@ -40,12 +38,13 @@ def init_blog_table(cursor, username, password) :
 			
 			sql = "INSERT INTO blog VALUES(0, '%s','%s',datetime('now'),0)" % (username,password)
 			cursor.execute(sql)
-			print("blog是空表，已经设置用户名密码。")
+			print("设置用户名密码完成。")
+			print("初始化成功。")
 		# 有字段，修改密码
 		else :
 			sql = "UPDATE blog set username='%s',password='%s' WHERE id=0" % (username,password)
 			cursor.execute(sql)
-			print("blog不是空表，已经强制修改用户名密码。")
+			print("强制修改用户名密码成功。")
 	except Exception as e :
 		print(e)
 

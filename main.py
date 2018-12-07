@@ -1,12 +1,12 @@
 #! /usr/bin/env python3
 
 import flask
-from module import DemoView 
+from module import DemoPage 
 app = flask.Flask(__name__, template_folder="./static/html")
 
 @app.route('/')
 def index() :
-	return DemoView.render()
+	return DemoPage.renderPage()
 
 # @app.route('/private')
 # def private() :
