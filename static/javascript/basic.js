@@ -1,5 +1,6 @@
-function imageLoadError()
+function imageLoadError(img)
 {
-    this.onerror = null;
-    this.src = "TODO 前端自动生成随机头像"
+    img.onerror = null;
+    let canvas = document.createElement("canvas");
+    img.src = canvas.toDataURL("canvas")
 }

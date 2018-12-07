@@ -105,3 +105,16 @@ a:hover {
 .subtitle {
 	font-weight: bold;
 }
+
+/* 小标题后面跟的链接 */
+.subtitle > a {
+	float: right;
+	color: salmon;
+	font-weight: normal;
+	margin-right: 2em;
+}
+
+.subtitle > a:hover {
+	color: salmon;
+	background-color: unset;
+}
