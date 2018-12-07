@@ -51,9 +51,9 @@ footer {
 	clear: both;
 }
 
-/* 链接显示为浅绿色 */
+/* 链接显示为深绿色 */
 a {
-	color: palegreen;
+	color: darkgreen;
 	font-weight: bold;
 }
 
@@ -64,11 +64,19 @@ a:hover {
 }
 
 /* 头像显示为圆形 */
-#photo{
+#photo {
 	width: 200px;
 	height: 200px;
 	display: block;
 	margin: 20px auto;
 	border-radius: 50%;
 	border: 1px solid rgb(221,240,237);
+	background-color: aquamarine;
+}
+  
+  
+
+/* 名字 */
+#name {
+	text-align:center;
 }

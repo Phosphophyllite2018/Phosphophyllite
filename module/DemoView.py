@@ -1,7 +1,7 @@
 # 示例页面
 
 from flask import render_template
-from . import HeadView , HeadModel , MarkdownView , FooterView
+from . import HeadView , HeadModel , MarkdownView , FooterView , NavView
 
 def render() :
     demo_article = open('README.md', "r", encoding='utf-8').read()
@@ -9,5 +9,6 @@ def render() :
                             css_settings=HeadView.renderCSS(HeadModel.getCSS()),
                             js_settings=HeadView.renderJS(HeadModel.getJS()),
                             title="Phosphophyllite",
+                            navigation=NavView.renderNav(),
                             article=MarkdownView.renderMarkdown(demo_article),
                             footer=FooterView.renderFooter())
