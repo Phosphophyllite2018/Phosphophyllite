@@ -10,5 +10,5 @@ def renderCSS(css_files):
 def renderJS(js_files):
     html = ""
     for src in js_files :
-        html += '<script src="%s" type="text/javascript"/>\n' % src
+        html += '<script src="%s" type="text/javascript"></script>\n' % src
     return html

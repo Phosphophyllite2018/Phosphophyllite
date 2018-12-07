@@ -15,7 +15,7 @@ def getCSS():
 # JS
 js_path= 'static/javascript/'
 js_files = [
-
+    'basic.js',
 ]
 
 def getJS():

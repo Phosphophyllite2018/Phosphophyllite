@@ -1,5 +1,19 @@
 <div>
-    <img id="photo" src="{{ photo }}"/>
+    <img id="photo" src="{{ photo }}" onerror="imageLoadError()"/>
 </div>
 <h1 id="name">{{ name }}</h1>
-<p>{{ data }}</p>
+<div id="statistics">
+    <p class="statistic">运行时间 : {{ running_time }}</p>
+    <p class="statistic">总访问量 : {{ visiting_count }}</p>
+    <p class="statistic">文章总量 : {{ atcile_count }}</p>
+    <p class="statistic">留言总量 : {{ message_count }}</p>
+    {{ inset_html | safe}}
+</div>
+<div>
+    <hr/>
+    <p class="subtitle">最近文章</p>
+    {{ recent_article | safe }}
+    <hr/>
+    <p class="subtitle">最近留言</p> 
+    {{ recent_message | safe }}
+</div>

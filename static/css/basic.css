@@ -3,6 +3,29 @@
  * MIT LICENSE
  */
 
+body {
+	width: 92%;
+	margin: auto;
+}
+
+/* nav和atcile在同一行 */
+nav {
+	float: left;
+	width: 20%;
+}
+
+article {
+	float: left;
+	margin-left: 20px;
+	width: 70%;
+}
+
+/* 清除float */
+footer {
+	clear: both;
+}
+
+
  /* 标题和前面空一定的距离 */
 h1, h2, h3, h4, h5, h6 {
 	padding-top: 15px;
@@ -36,21 +59,6 @@ code {
 	border-radius: 5px;
 }
 
-/* nav和atcile在同一行 */
-nav {
-	float: left;
-	width: 20%;
-}
-
-article {
-	float: left;
-}
-
-/* 清除float */
-footer {
-	clear: both;
-}
-
 /* 链接显示为深绿色 */
 a {
 	color: darkgreen;
@@ -75,8 +83,25 @@ a:hover {
 }
   
   
-
 /* 名字 */
 #name {
 	text-align:center;
+}
+
+/* 统计数据块 */
+#statistics {
+	display: block;
+	margin-left: 20px;
+	padding: 10px;
+}
+
+/* 统计数据 */
+.statistic {
+	color: salmon;
+	font-weight: bold;
+}
+
+/* 小标题 */
+.subtitle {
+	font-weight: bold;
 }
