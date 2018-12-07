@@ -11,6 +11,10 @@ def index() :
 	else :
 		return HomePage.renderPage()
 
+@app.route('/readme')
+def reame() :
+	return DemoPage.renderPage()
+
 # @app.route('/private')
 # def private() :
 # 	flask.abort(404)
