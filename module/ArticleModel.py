@@ -1,5 +1,4 @@
 import sqlite3
-import time
 from . import PhosLog
 
 def cursor() :
@@ -7,36 +6,7 @@ def cursor() :
     cursor = db.cursor()
     return cursor
 
-def getUsername() :
-    try :
-        sql = "SELECT username FROM blog WHERE id = 0;"
-        result = cursor().execute(sql)
-        return result.fetchone()[0]
-    except Exception as e:
-        PhosLog.log(e)
-        return "Phosphophyllite"
-
-def getRuntime() :
-    try :
-        sql = "SELECT birthday FROM blog WHERE id = 0;"
-        result = cursor().execute(sql)
-        birthday = time.mktime(time.strptime(result.fetchone()[0], "%Y-%m-%d %H:%M:%S")) 
-        now = time.time()
-        return int((now - birthday)/(24*60*60))
-    except Exception as e:
-        PhosLog.log(e)
-        return 0
-
-def getVisiting() :
-    try :
-        sql = "SELECT visiting FROM blog WHERE id = 0;"
-        result = cursor().execute(sql)
-        return result.fetchone()[0]
-    except Exception as e:
-        PhosLog.log(e)
-        return 0
-
-def getArticles() :
+def getArticleCount() :
     try :
         sql = "SELECT count(*) FROM article;"
         result = cursor().execute(sql)
@@ -45,11 +15,37 @@ def getArticles() :
         PhosLog.log(e)
         return 0
 
-def getMessages() :
+def getLatestTitle() :
     try :
-        sql = "SELECT count(*) FROM message;"
+        sql = "SELECT title FROM article ORDER BY id DESC LIMIT 1;"
         result = cursor().execute(sql)
         return result.fetchone()[0]
     except Exception as e:
         PhosLog.log(e)
-        return 0
+        return "Title"
+
+def getLatestContent() :
+    try :
+        sql = "SELECT content FROM article ORDER BY id DESC LIMIT 1;"
+        result = cursor().execute(sql)
+        return result.fetchone()[0]
+    except Exception as e:
+        PhosLog.log(e)
+        return "Content"
+
+def getLatestBirthday() :
+    try :
+        sql = "SELECT birthday FROM article ORDER BY id DESC LIMIT 1;"
+        result = cursor().execute(sql)
+        return result.fetchone()[0]
+    except Exception as e:
+        PhosLog.log(e)
+        return "birthday"
+def getLatestVisiting() :
+    try :
+        sql = "SELECT visiting FROM article ORDER BY id DESC LIMIT 1;"
+        result = cursor().execute(sql)
+        return result.fetchone()[0]
+    except Exception as e:
+        PhosLog.log(e)
+        return "visiting"

@@ -1,12 +1,15 @@
 #! /usr/bin/env python3
 
 import flask
-from module import DemoPage 
+from module import DemoPage , HomePage , ArticleModel
 app = flask.Flask(__name__, template_folder="./static/html")
 
 @app.route('/')
 def index() :
-	return DemoPage.renderPage()
+	if ArticleModel.getArticleCount() == 0 :
+		return DemoPage.renderPage()
+	else :
+		return HomePage.renderPage()
 
 # @app.route('/private')
 # def private() :
