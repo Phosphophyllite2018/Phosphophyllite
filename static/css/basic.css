@@ -100,13 +100,11 @@ a:hover {
 /* 统计数据 */
 .statistic {
 	color: gray;
-	/* font-weight: bold; */
-	text-align:center;
 	text-indent: 0;
 }
 
 /* 统计数据值 */
-#statistics .value {
+.value {
 	color: salmon;
 	font-weight: bold;
 	text-align: right;
