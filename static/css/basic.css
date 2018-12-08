@@ -52,7 +52,7 @@ pre {
 
 /* 行内代码视觉增强 */
 code {
-	color: palegreen;
+	color: aqua;
 	background-color: gray;
 	padding: 3px;
 	margin: 0 2px;
@@ -67,7 +67,7 @@ a {
 
 a:hover {
 	color: white;
-	background-color: palegreen;
+	background-color: aqua;
 	font-weight: bold;
 }
 
@@ -90,15 +90,27 @@ a:hover {
 
 /* 统计数据块 */
 #statistics {
-	display: block;
-	margin-left: 20px;
-	padding: 10px;
+	color: gray;
+	width: auto;
+	margin: 0 auto;	
 }
+
 
 /* 统计数据 */
 .statistic {
+	color: gray;
+	/* font-weight: bold; */
+	text-align:center;
+	text-indent: 0;
+}
+
+/* 统计数据值 */
+#statistics .value {
 	color: salmon;
 	font-weight: bold;
+	text-align: right;
+	padding: 0 3px;
+	border-radius: 100px;
 }
 
 /* 小标题 */

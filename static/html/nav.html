@@ -2,13 +2,16 @@
     <img id="photo" src="{{ photo }}" onerror="imageLoadError(this)"/>
 </div>
 <h1 id="name">{{ name }}</h1>
-<div id="statistics">
-    <p class="statistic">运行时间 : {{ running_time }} 天</p>
-    <p class="statistic">总访问量 : {{ visiting_count }} 人次</p>
-    <p class="statistic">文章总量 : {{ artcile_count }} 篇</p>
-    <p class="statistic">留言总量 : {{ message_count }} 条</p>
-    {{ inset_html | safe}}
-</div>
+
+<table id="statistics">
+    <tr><td class="statistic">运行时间 : </td><td class="value">{{ running_time }}</td> <td>天</td></tr>
+    <tr><td class="statistic">总访问量 : </td><td class="value">{{ visiting_count }}</td> <td>天</td></tr>
+    <tr><td class="statistic">文章总数 : </td><td class="value">{{ artcile_count }}</td> <td>天</td></tr>
+    <tr><td class="statistic">留言总数 : </td><td class="value">{{ message_count }}</td> <td>天</td></tr>
+</table>
+
+    {{ insret_html | safe}}
+    
 <div>
     <hr/>
     <p class="subtitle">最近文章 <a href="/articles">更多</a> </p>
