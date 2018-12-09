@@ -33,6 +33,20 @@ h1, h2, h3, h4, h5, h6 {
 	padding-bottom: 5px;
 }
 
+/* 表格隔行双色 */
+tbody tr:nth-child(odd) {
+	background-color:#cbe0ffe3;
+}
+
+tbody tr:nth-child(even) {
+	background-color:white;
+}
+
+th,td {
+	padding: 0 10px;
+	border: 2px dodgerblue solid;
+}
+
 /* 段落开头空2格 */
 p {
 	text-indent: 2em;
@@ -54,10 +68,31 @@ pre {
 /* 行内代码视觉增强 */
 code {
 	color: aqua;
-	background-color: gray;
+	background-color: black;
 	padding: 3px;
 	margin: 0 2px;
 	border-radius: 5px;
+}
+
+/* 代码块取消上面属性 */
+pre code {
+	color: unset;
+	background-color: unset;
+}
+
+/* 强调标签视觉增强(*TEXT*) */
+em {
+	color: dodgerblue;
+}
+
+/* 强调标签视觉增强(**TEXT**) */
+strong {
+	color: orangered;
+}
+
+/* 强调标签视觉增强(***TEXT***) */
+em > strong {
+	color: red;
 }
 
 /* 链接显示为深绿色 */
@@ -94,18 +129,39 @@ a:hover {
 	color: gray;
 	width: auto;
 	margin: 0 auto;	
+	border: 0;
 }
 
 
-/* 统计数据 */
-.statistic {
+/* 文章数据 */
+.arcicle_statistics {
 	color: gray;
 	text-indent: 0;
 }
 
+/* 消除表格css */
+#statistics tr {
+	border: 0;
+	background-color: unset;
+}
+
+#statistics td {
+	border: 0;
+	padding: 0;
+	background-color: unset;
+}
+
 /* 统计数据值 */
-.value {
+#statistics .value {
 	color: salmon;
+	font-weight: bold;
+	text-align: right;
+	padding: 0 3px;
+}
+
+/* 文章数据值 */
+.arcicle_statistics .value {
+	color: cornflowerblue;
 	font-weight: bold;
 	text-align: right;
 	padding: 0 3px;

@@ -37,3 +37,39 @@ import sqlite3
  - [ ] 文章预览
  - [ ] 文章目录
  - [ ] 留言板
+
+## Markdown测试  
+行内代码`code` 
+
+一级强调 *em*
+
+二级强调 **string**
+
+三级强调 ***em strong***  
+
+代码块
+```
+https://github.com/hubenchang0515/Phosphophyllite.git
+```
+
+语法高亮代码块
+```C
+#include <stdio.h>
+
+int main() 
+{
+    printf("Hello World\n");
+    return 0;
+}
+```
+
+表格  
+
+ 序号 | 单价 | 数量 | 总价 
+ -:   | -:  | -:   | -:
+  1   |5    |100   | 500  
+  2   |2    |10    | 20   
+  3   |4    |50    | 200  
+  4   |1    |100   | 100  
+  5   |7    |10    | 70   
+合计  |     |      | 890  
