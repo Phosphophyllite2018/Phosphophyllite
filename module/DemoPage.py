@@ -19,12 +19,11 @@ def renderPage() :
     recent_article = ""
 
     # 最近留言
-    count = 10
-    recent_message = ""
-    if MessageModel.getCount() < 10 :
-        count = MessageModel.getCount()
-    for i in range(1,count+1) :
-        recent_message += "<p>%s</p>" % MessageModel.getByOrder("content", -i)
+    recent_message = MessageModel.getLatestMessage(10)
+    recent_message_html = ""
+    for message in recent_message :
+        recent_message_html += "<p> %s </p>" % message
+
     # 导航栏
     nav = NavView.render(NavModel.getUsername(), 
                             NavModel.getRuntime(), 
@@ -32,7 +31,7 @@ def renderPage() :
                             NavModel.getArticles(), 
                             NavModel.getMessages(),
                             recent_article,
-                            recent_message)
+                            recent_message_html)
 
     return render_template('template.html', 
                             css_settings=HeadView.renderCSS(HeadModel.getCSS()),

@@ -61,9 +61,19 @@ def append(name, content) :
         name = name.replace("'", "''")
         content = content.replace("'", "''")
         sql = "INSERT INTO message VALUES(NULL,'%s','%s', datetime('now'));" % (name, content)
-        print(sql)
         cursor().execute(sql)
         return True
     except Exception as e:
         PhosLog.log(e)
         return False
+
+def getLatestMessage(n) :
+    recent_message = []
+
+    if getCount() < n :
+        n = getCount()
+
+    for i in range(1, n + 1) :
+        recent_message.append(getByOrder("content", -i))
+
+    return recent_message
