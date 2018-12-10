@@ -80,6 +80,12 @@ code {
     padding: 0.2em 0.4em;
 }
 
+/* 访客名 */
+.visitor {
+	color: dodgerblue;
+	font-weight: bold;
+}
+
 /* 代码块取消上面属性 */
 pre code {
 	color: unset;

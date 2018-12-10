@@ -59,6 +59,8 @@ def getByOrder(key, num) :
 def append(name, content) :
     try :
         name = name.replace("'", "''")
+        if name.strip() == "" :
+            name = "匿名"  
         content = content.replace("'", "''")
         sql = "INSERT INTO message VALUES(NULL,'%s','%s', datetime('now'));" % (name, content)
         cursor().execute(sql)
@@ -74,6 +76,10 @@ def getLatestMessage(n) :
         n = getCount()
 
     for i in range(1, n + 1) :
-        recent_message.append(getByOrder("content", -i))
+        recent_message.append({
+            "name" : getByOrder("name", -i),
+            "birthday" : getByOrder("birthday", -i),
+            "content" : getByOrder("content", -i)
+        })
 
     return recent_message
