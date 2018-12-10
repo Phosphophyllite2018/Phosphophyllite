@@ -1,7 +1,7 @@
 import sqlite3
 import hashlib
 import time
-from . import PhosLog
+from ..Phos import PhosLog
 
 def cursor() :
     db = sqlite3.connect("./private/phosphophyllite.db")
