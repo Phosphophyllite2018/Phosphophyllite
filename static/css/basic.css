@@ -54,7 +54,12 @@ p {
 	
 /* 让li标签能够显示圆点 */
 ol, ul {
-	margin-left: 60px; 
+	margin-left: 4em; 
+}
+
+/* 内层ul缩进2格即可 */
+ol ol, ul ul {
+	margin-left: 2em; 
 }
 
 /* 代码块显示浅灰色圆角矩形底色 */
@@ -97,14 +102,13 @@ em > strong {
 
 /* 链接显示为深绿色 */
 a {
-	color: darkgreen;
-	font-weight: bold;
+	color: forestgreen;
+	text-decoration: underline;
 }
 
 a:hover {
 	color: white;
-	background-color: aqua;
-	font-weight: bold;
+	background-color: forestgreen;
 }
 
 /* 头像显示为圆形 */

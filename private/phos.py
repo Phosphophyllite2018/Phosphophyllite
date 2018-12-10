@@ -9,7 +9,7 @@ import hashlib
 def show_help() :
 	script = os.path.basename(sys.argv[0])
 	print("Usage : %s <opt> <param>" % script)
-	print("        %s init                : 初始化数据库" % script)
+	print("        %s init                : 初始化或还原数据库" % script)
 	print("        %s username <username> : 设置Blog的用户名" % script)
 	print("        %s password <password> : 设置Blog的密码" % script)
 	print("        %s git-name <git-name> : 设置GitHub的用户名" % script)
@@ -36,10 +36,13 @@ def init_blog_table(cursor) :
 	
 	# 没有字段，初始化
 	if length == 0 :
-		
 		sql = "INSERT INTO blog VALUES(0, NULL, NULL, NULL, NULL, datetime('now'), 0)"
 		cursor.execute(sql)
 		print("'blog'表写入初始值。")
+	else :
+		sql = "UPDATE blog set username=NULL,password=NULL,git_name=NULL,git_pass=NULL WHERE id=0"
+		cursor.execute(sql)
+		print("'blog'表重置。")
 
 # blog表的列
 blog_table = [
@@ -85,7 +88,7 @@ def phos_setting_username(cursor, argv) :
 	if len(argv) != 3 or argv[1] != "username" :
 		return False
 		
-	sql = "UPDATE blog set username='%s' WHERE id=0" % argv[2]
+	sql = "UPDATE blog set username='%s' WHERE id=0" % argv[2].replace("'", "''")
 	cursor.execute(sql)
 	print("用户名设置成功。")
 	return True
@@ -108,7 +111,7 @@ def phos_setting_git_name(cursor, argv) :
 	if len(argv) != 3 or argv[1] != "git-name" :
 		return False
 		
-	sql = "UPDATE blog set git_name='%s' WHERE id=0" % argv[2]
+	sql = "UPDATE blog set git_name='%s' WHERE id=0" % argv[2].replace("'", "''")
 	cursor.execute(sql)
 	print("GitHub用户名设置成功。")
 	return True
@@ -117,7 +120,7 @@ def phos_setting_git_pass(cursor, argv) :
 	if len(argv) != 3 or argv[1] != "git-pass" :
 		return False
 		
-	sql = "UPDATE blog set git_pass='%s' WHERE id=0" % argv[2]
+	sql = "UPDATE blog set git_pass='%s' WHERE id=0" % argv[2].replace("'", "''")
 	cursor.execute(sql)
 	print("GitHub密码设置成功。")
 	return True
