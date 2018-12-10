@@ -12,6 +12,7 @@ body {
 nav {
 	float: left;
 	width: 20%;
+	overflow: hidden;
 }
 
 article {
@@ -74,9 +75,16 @@ pre {
 code {
 	color: aqua;
 	background-color: black;
-	padding: 3px;
-	margin: 0 2px;
-	border-radius: 5px;
+    border-radius: 3px;
+    font-size: 85%;
+    margin: 0.2em;
+    padding: 0.2em 0.4em;
+}
+
+/* 访客名 */
+.visitor {
+	color: dodgerblue;
+	font-weight: bold;
 }
 
 /* 代码块取消上面属性 */

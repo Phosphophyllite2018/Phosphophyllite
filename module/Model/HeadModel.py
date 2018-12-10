@@ -7,6 +7,7 @@ css_files = [
     'frameworks.css',
     'github.css',
     'basic.css',
+    'editor.css',
 ]
 
 def getCSS():

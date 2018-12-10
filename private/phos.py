@@ -70,7 +70,6 @@ message_table = [
 	["name" , "VARCHAR(512)"],
 	["content" , "TEXT"],
 	["birthday" , "DATETIME"],
-	["visiting" , "INT"],
 ]
 
 def phos_init(cursor, argv) :

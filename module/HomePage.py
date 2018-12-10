@@ -1,17 +1,34 @@
 from flask import render_template
-from .View import HeadView , MarkdownView , FooterView , NavView , ArticleView
-from .Model import HeadModel , NavModel , ArticleModel
+from .View import HeadView , MarkdownView , FooterView , NavView , ArticleView , MessageView
+from .Model import HeadModel , NavModel , ArticleModel , MessageModel , MarkdownModel
 
 def renderPage() :
+    # 文章
     title = ArticleModel.getLatestTitle()
     birthday = ArticleModel.getLatestBirthday()
     visiting = ArticleModel.getLatestVisiting()
     content = ArticleModel.getLatestContent()
+
+    # GitHub用户名密码
+    gitname = MarkdownModel.getGitName()
+    gitpass = MarkdownModel.getGitPass()
+
+    # 最近文章
+    recent_article = ""
+
+    # 最近留言
+    recent_message = MessageModel.getLatestMessage(10)
+    recent_message_html = MessageView.renderNavMessage(recent_message, gitname, gitpass)
+
+    # 导航栏
     nav = NavView.render(NavModel.getUsername(), 
                             NavModel.getRuntime(), 
                             NavModel.getVisiting(), 
                             NavModel.getArticles(), 
-                            NavModel.getMessages())
+                            NavModel.getMessages(),
+                            recent_article,
+                            recent_message_html)
+
     article_html = ArticleView.render(title, birthday, visiting, MarkdownView.renderMarkdown(content))
     return render_template('template.html', 
                             css_settings=HeadView.renderCSS(HeadModel.getCSS()),

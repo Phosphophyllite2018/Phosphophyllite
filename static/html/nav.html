@@ -14,9 +14,15 @@
 
 <div>
     <hr/>
-    <p class="subtitle">最近文章 <a href="/articles">更多</a> </p>
+    <p class="subtitle">最近文章 <a href="/article">更多</a> </p>
     {{ recent_article | safe }}
     <hr/>
-    <p class="subtitle">最近留言 <a href="/articles">更多</a> </p> 
+    <p class="subtitle">最近留言 <a href="/message">更多</a> </p> 
     {{ recent_message | safe }}
+    <textarea class="editor mini_editor" placeholder="给我留言"></textarea>
+    <div class="combo_box">
+        <input type="text" class="line_editor mini_name" placeholder="你的名字" autocomplete="off"/>
+        <input type="button" class="commit" value="提交" onclick="addMessage('mini')"/>
+    </div>
 </div>
+
