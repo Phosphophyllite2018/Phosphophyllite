@@ -7,6 +7,7 @@ def renderMarkdown(md_text, gitname=None, gitpass=None) :
         payload = {"text" : md_text, "mode" : "gfm", "context" : "https://github.com/hubenchang0515/Phosphophyllite"}
         response = requests.post("https://api.github.com/markdown", data=json.dumps(payload), auth=(gitname,gitpass))
         if response.status_code != 200 :
+            PhosLog.log("GitHub API failed authenticaion , retry without authenticaion.")
             response = requests.post("https://api.github.com/markdown", data=json.dumps(payload))
         output = response.text #.encode("utf-8").decode("utf-8")
         return output
