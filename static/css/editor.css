@@ -4,9 +4,16 @@
     border-radius: 10px;
     resize: none;
     width: 100%;
-    height: 8em;
     padding: 5px 1em;
     outline: none;
+}
+
+.big_editor {
+    height: 30em;
+}
+
+.mini_editor {
+    height: 8em;
 }
 
 .combo_box {

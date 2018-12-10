@@ -12,6 +12,7 @@ body {
 nav {
 	float: left;
 	width: 20%;
+	overflow: hidden;
 }
 
 article {

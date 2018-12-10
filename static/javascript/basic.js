@@ -43,10 +43,17 @@ function httpGet(url, params)
 }
 
 /* 添加留言 */
-function addMessage()
+function addMessage(pre)
 {
+    name = "." + pre + "_name"
+    content = "." + pre + "_editor"
     let params = {}
-    params['name'] = document.getElementById('message_name').value
-    params['content'] = document.getElementById('message').value
+    params['name'] = document.querySelector(name).value
+    params['content'] = document.querySelector(content).value
+    if(params['content'].replace(/^\s*|\s*$/g,"") == "") // 去除空格后为空
+    {
+        alert("请写点什么。")
+        return false
+    }
     httpPost("/addmessage", params)
 }

@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 
 import flask
-from module import DemoPage , HomePage
+from module import DemoPage , HomePage , MessagePage
 from module.Model import ArticleModel
 from module.Interface import MessageInterface
 app = flask.Flask(__name__, template_folder="./static/html")
@@ -13,14 +13,19 @@ def index() :
 	else :
 		return HomePage.renderPage()
 
+@app.route('/message')
+def message() :
+	return MessagePage.renderPage()
+
+
 @app.route('/readme')
-def reame() :
+def readme() :
 	return DemoPage.renderPage()
 
 @app.route('/addmessage', methods=["POST"])
-def message() :
+def addmessage() :
 	MessageInterface.addMessage() 
-	return flask.redirect(flask.url_for('index'))
+	return flask.redirect('/message')
 
 # @app.route('/private')
 # def private() :

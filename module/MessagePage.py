@@ -3,12 +3,6 @@ from .View import HeadView , MarkdownView , FooterView , NavView , ArticleView ,
 from .Model import HeadModel , NavModel , ArticleModel , MessageModel , MarkdownModel
 
 def renderPage() :
-    # 文章
-    title = ArticleModel.getLatestTitle()
-    birthday = ArticleModel.getLatestBirthday()
-    visiting = ArticleModel.getLatestVisiting()
-    content = ArticleModel.getLatestContent()
-
     # GitHub用户名密码
     gitname = MarkdownModel.getGitName()
     gitpass = MarkdownModel.getGitPass()
@@ -29,7 +23,9 @@ def renderPage() :
                             recent_article,
                             recent_message_html)
 
-    article_html = ArticleView.render(title, birthday, visiting, MarkdownView.renderMarkdown(content))
+    # article块
+    article_html = MessageView.renderMessagePage(recent_message, gitname, gitpass)
+
     return render_template('template.html', 
                             css_settings=HeadView.renderCSS(HeadModel.getCSS()),
                             js_settings=HeadView.renderJS(HeadModel.getJS()),
