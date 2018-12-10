@@ -32,14 +32,14 @@
 }
 
 .commit:hover {
-    color: black;
-    background-color: aqua;
+    color: white;
+    background-color: rgb(38, 86, 230);
     cursor: pointer;
 }
 
 .commit:active {
     color: white;
-    background-color: darkblue;
+    background-color: rgb(12, 36, 109);
     cursor: pointer;
 }
 
