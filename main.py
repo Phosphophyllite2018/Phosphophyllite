@@ -7,7 +7,7 @@ app = flask.Flask(__name__, template_folder="./static/html")
 
 @app.route('/')
 def index() :
-	if ArticleModel.getArticleCount() == 0 :
+	if ArticleModel.getCount() == 0 :
 		return DemoPage.renderPage()
 	else :
 		return HomePage.renderPage()

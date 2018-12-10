@@ -1,0 +1,45 @@
+.editor {
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+    border: 1px dodgerblue solid;
+    border-radius: 10px;
+    resize: none;
+    width: 100%;
+    height: 8em;
+    padding: 5px 1em;
+    outline: none;
+}
+
+.combo_box {
+    width: 100%;
+}
+
+.line_editor {
+    width: 80%;
+    border: 1px dodgerblue solid;
+    padding: 0 1em;
+    border-radius: 10px;
+    outline: none;
+}
+
+.commit {
+    width: 19%;
+    color: white;
+    background-color: royalblue; 
+    border: 1px #2e6da4 solid;
+    border-radius: 5px;
+    outline: none;
+    float: right;
+}
+
+.commit:hover {
+    color: black;
+    background-color: aqua;
+    cursor: pointer;
+}
+
+.commit:active {
+    color: white;
+    background-color: darkblue;
+    cursor: pointer;
+}
+
