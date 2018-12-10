@@ -3,11 +3,20 @@
 
 ## 初始化
 * 打开终端，进入`private`目录下。  
-* 运行`init.py`脚本，这个脚本需要两个参数，依次是`用户名`和`密码`，如果忘记了用户名和密码，也可以运行这个脚本强制修改。  
-
-例如：
+* 运行`phos.py`脚本，进行初始化 : 
 ```bash
-./init.py "phos2018" "l!QQgLu&K0T66Vm*"
+./phos.py init
+```
+* 运行`phos.py`脚本，设置用户名和密码 : 
+```bash
+./phos.py username "Phos2018"
+./phos.py password "l!Q'gLu&K0T66Vm*"
+```
+
+* 运行`phos.py`脚本，绑定GitHub(由于使用GitHub API渲染Markdown，需要进行身份验证，否则每小时只能请求60次。建议注册一个不使用的GitHub账号以免密码泄露。) :
+```bash
+./phos.py git-name "gituser2018"
+./phos.py git-pass "!k'GLu4^%0V86xY*q"
 ```
 
 ## Markdown语法
@@ -63,7 +72,7 @@ int main()
 }
 ```
 
-表格  
+表格(元素右对齐)  
 
  序号 | 单价 | 数量 | 总价 
  -:   | -:  | -:   | -:
@@ -73,3 +82,4 @@ int main()
   4   |1    |100   | 100  
   5   |7    |10    | 70   
 合计  |     |      | 890  
+

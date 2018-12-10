@@ -54,7 +54,7 @@ p {
 	
 /* 让li标签能够显示圆点 */
 ol, ul {
-	margin-left: 60px; 
+	margin-left: 5em; 
 }
 
 /* 代码块显示浅灰色圆角矩形底色 */

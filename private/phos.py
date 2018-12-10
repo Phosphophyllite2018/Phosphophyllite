@@ -85,7 +85,7 @@ def phos_setting_username(cursor, argv) :
 	if len(argv) != 3 or argv[1] != "username" :
 		return False
 		
-	sql = "UPDATE blog set username='%s' WHERE id=0" % argv[2]
+	sql = "UPDATE blog set username='%s' WHERE id=0" % argv[2].replace("'", "''")
 	cursor.execute(sql)
 	print("用户名设置成功。")
 	return True
@@ -108,7 +108,7 @@ def phos_setting_git_name(cursor, argv) :
 	if len(argv) != 3 or argv[1] != "git-name" :
 		return False
 		
-	sql = "UPDATE blog set git_name='%s' WHERE id=0" % argv[2]
+	sql = "UPDATE blog set git_name='%s' WHERE id=0" % argv[2].replace("'", "''")
 	cursor.execute(sql)
 	print("GitHub用户名设置成功。")
 	return True
@@ -117,7 +117,7 @@ def phos_setting_git_pass(cursor, argv) :
 	if len(argv) != 3 or argv[1] != "git-pass" :
 		return False
 		
-	sql = "UPDATE blog set git_pass='%s' WHERE id=0" % argv[2]
+	sql = "UPDATE blog set git_pass='%s' WHERE id=0" % argv[2].replace("'", "''")
 	cursor.execute(sql)
 	print("GitHub密码设置成功。")
 	return True
