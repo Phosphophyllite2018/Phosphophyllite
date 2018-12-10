@@ -2,19 +2,38 @@
 
 from flask import render_template
 from .View import HeadView , MarkdownView , FooterView , NavView , ArticleView
-from .Model import HeadModel , NavModel , MarkdownModel
+from .Model import HeadModel , NavModel , MarkdownModel , MessageModel
 
 def renderPage() :
     demo_article = open('README.md', "r", encoding='utf-8').read()
-    nav = NavView.render(NavModel.getUsername(), 
-                            NavModel.getRuntime(), 
-                            NavModel.getVisiting(), 
-                            NavModel.getArticles(), 
-                            NavModel.getMessages())
+
+    
+
+    # 文章
     article_html = ArticleView.render("示例文章", "2018-12-07", "520", 
                                     MarkdownView.renderMarkdown(demo_article, 
                                                                 MarkdownModel.getGitName(),
                                                                 MarkdownModel.getGitPass()))
+
+    # 最近文章
+    recent_article = ""
+
+    # 最近留言
+    count = 10
+    recent_message = ""
+    if MessageModel.getCount() < 10 :
+        count = MessageModel.getCount()
+    for i in range(1,count+1) :
+        recent_message += "<p>%s</p>" % MessageModel.getByOrder("content", -i)
+    # 导航栏
+    nav = NavView.render(NavModel.getUsername(), 
+                            NavModel.getRuntime(), 
+                            NavModel.getVisiting(), 
+                            NavModel.getArticles(), 
+                            NavModel.getMessages(),
+                            recent_article,
+                            recent_message)
+
     return render_template('template.html', 
                             css_settings=HeadView.renderCSS(HeadModel.getCSS()),
                             js_settings=HeadView.renderJS(HeadModel.getJS()),

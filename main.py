@@ -3,6 +3,7 @@
 import flask
 from module import DemoPage , HomePage
 from module.Model import ArticleModel
+from module.Interface import MessageInterface
 app = flask.Flask(__name__, template_folder="./static/html")
 
 @app.route('/')
@@ -15,6 +16,11 @@ def index() :
 @app.route('/readme')
 def reame() :
 	return DemoPage.renderPage()
+
+@app.route('/addmessage', methods=["POST"])
+def message() :
+	MessageInterface.addMessage() 
+	return flask.redirect(flask.url_for('index'))
 
 # @app.route('/private')
 # def private() :

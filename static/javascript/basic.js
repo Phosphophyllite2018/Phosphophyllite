@@ -26,7 +26,7 @@ function httpPost(url, params)
 
 
 /* 发起get请求 */
-function httpPost(url, params)
+function httpGet(url, params)
 {
     let virtualForm = document.createElement("form");
     virtualForm.action = url;
@@ -40,4 +40,13 @@ function httpPost(url, params)
     }
     document.body.appendChild(virtualForm);
     virtualForm.submit();
+}
+
+/* 添加留言 */
+function addMessage()
+{
+    let params = {}
+    params['name'] = document.getElementById('message_name').value
+    params['content'] = document.getElementById('message').value
+    httpPost("/addmessage", params)
 }

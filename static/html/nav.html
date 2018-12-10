@@ -19,10 +19,10 @@
     <hr/>
     <p class="subtitle">最近留言 <a href="/articles">更多</a> </p> 
     {{ recent_message | safe }}
-    <textarea id="message" class="editor" name="content" placeholder="给我留言"></textarea>
+    <textarea id="message" class="editor" placeholder="给我留言"></textarea>
     <div class="combo_box">
-        <input type="text" name="name" class="line_editor" placeholder="你的名字" autocomplete="off"/>
-        <input type="button" class="commit" value="提交"/>
+        <input type="text" id="message_name" class="line_editor" placeholder="你的名字" autocomplete="off"/>
+        <input type="button" class="commit" value="提交" onclick="addMessage()"/>
     </div>
 </div>
 

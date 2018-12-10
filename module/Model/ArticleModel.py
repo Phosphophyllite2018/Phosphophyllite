@@ -2,7 +2,7 @@ import sqlite3
 from ..Phos import PhosLog
 
 def cursor() :
-    db = sqlite3.connect("./private/phosphophyllite.db")
+    db = sqlite3.connect("./private/phosphophyllite.db", isolation_level=None)
     cursor = db.cursor()
     return cursor
 
