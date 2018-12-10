@@ -17,12 +17,12 @@
     width: 80%;
     border: 1px dodgerblue solid;
     padding: 0 1em;
-    border-radius: 10px;
+    border-radius: 20px;
     outline: none;
 }
 
 .commit {
-    width: 19%;
+    width: 18%;
     color: white;
     background-color: royalblue; 
     border: 1px #2e6da4 solid;
