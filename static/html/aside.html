@@ -21,10 +21,10 @@
     <hr/>
     <p class="subtitle">最近留言 <a href="/message">更多</a> </p> 
     {{ recent_message | safe }}
-    <textarea class="editor mini_editor" placeholder="给我留言(支持Markdown，限150字以内。)"></textarea>
+    <textarea id="message_content" class="editor mini_editor" placeholder="给我留言(支持Markdown，限150字以内。)"></textarea>
     <div class="combo_box">
-        <input type="text" class="line_editor mini_name" placeholder="你的名字" autocomplete="off"/>
-        <input type="button" class="commit" value="提交" onclick="addMessage('mini')"/>
+        <input id="message_name" type="text" class="line_editor mini_name" placeholder="你的名字" autocomplete="off"/>
+        <input type="button" class="commit" value="提交" onclick="addMessage()"/>
     </div>
     {% endif %}
 </div>

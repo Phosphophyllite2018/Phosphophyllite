@@ -45,11 +45,9 @@ function httpGet(url, params)
 /* 添加留言 */
 function addMessage(pre)
 {
-    name = "." + pre + "_name"
-    content = "." + pre + "_editor"
-    let params = {}
-    params['name'] = document.querySelector(name).value
-    params['content'] = document.querySelector(content).value
+    params = {}
+    params['name'] = document.querySelector("#message_name").value
+    params['content'] = document.querySelector("#message_content").value
     if(params['content'].replace(/^\s*|\s*$/g,"") == "") // 去除空格后为空
     {
         alert("请写点什么。")
