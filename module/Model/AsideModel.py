@@ -16,7 +16,7 @@ def getUsername() :
         PhosLog.log(e)
         return "Phosphophyllite"
 
-def getRuntime() :
+def getRunDays() :
     try :
         sql = "SELECT birthday FROM blog WHERE id = 0;"
         result = cursor().execute(sql)

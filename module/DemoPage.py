@@ -23,13 +23,13 @@ def renderPage() :
     recent_message_html = MessageView.renderAsideMessage(recent_message, gitname, gitpass)
 
     # 侧边栏
-    aside = AsideView.render(AsideModel.getUsername(), 
-                            AsideModel.getRuntime(), 
-                            AsideModel.getVisiting(), 
-                            AsideModel.getArticles(), 
-                            AsideModel.getMessages(),
-                            recent_article,
-                            recent_message_html)
+    aside = AsideView.render(username=AsideModel.getUsername(), 
+                            running_days=AsideModel.getRunDays(), 
+                            visiting_count=AsideModel.getVisiting(), 
+                            artcile_count=AsideModel.getArticles(), 
+                            message_count=AsideModel.getMessages(),
+                            recent_article=recent_article,
+                            recent_message=recent_message_html)
 
     return render_template('template.html', 
                             css_settings=HeadView.renderCSS(HeadModel.getCSS()),

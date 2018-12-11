@@ -1,12 +1,12 @@
 from flask import render_template
 
-def render(username, runtime, visiting, articles, messages,recent_article,recent_message) :
+def render(**kwargs) :
     output = render_template('aside.html',
-                            name=username,
-                            running_time=runtime,
-                            visiting_count=visiting,
-                            artcile_count=articles,
-                            message_count=messages,
-                            recent_article=recent_article,
-                            recent_message=recent_message)
+                            username=kwargs['username'],
+                            running_days=kwargs['running_days'],
+                            visiting_count=kwargs['visiting_count'],
+                            artcile_count=kwargs['artcile_count'],
+                            message_count=kwargs['message_count'],
+                            recent_article=kwargs['recent_article'],
+                            recent_message=kwargs['recent_message'])
     return output

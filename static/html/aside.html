@@ -1,10 +1,10 @@
 <div>
     <img id="photo" src="{{ photo }}" onerror="imageLoadError(this)"/>
 </div>
-<h1 id="name">{{ name }}</h1>
+<h1 id="name">{{ username }}</h1>
 
 <table id="statistics">
-    <tr><td class="statistic">运行时间 : </td><td class="value">{{ running_time }}</td> <td>天</td></tr>
+    <tr><td class="statistic">运行时间 : </td><td class="value">{{ running_days }}</td> <td>天</td></tr>
     <tr><td class="statistic">总访问量 : </td><td class="value">{{ visiting_count }}</td> <td>次</td></tr>
     <tr><td class="statistic">文章总数 : </td><td class="value">{{ artcile_count }}</td> <td>篇</td></tr>
     <tr><td class="statistic">留言总数 : </td><td class="value">{{ message_count }}</td> <td>条</td></tr>
