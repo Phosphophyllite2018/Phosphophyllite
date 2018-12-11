@@ -8,8 +8,8 @@ body {
 	margin: auto;
 }
 
-/* nav和atcile在同一行 */
-nav {
+/* aside和atcile在同一行 */
+aside {
 	float: left;
 	width: 20%;
 	overflow: hidden;

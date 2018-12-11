@@ -1,7 +1,7 @@
 from flask import render_template
 
 def render(username, runtime, visiting, articles, messages,recent_article,recent_message) :
-    output = render_template('nav.html',
+    output = render_template('aside.html',
                             name=username,
                             running_time=runtime,
                             visiting_count=visiting,

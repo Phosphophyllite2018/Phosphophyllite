@@ -1,6 +1,6 @@
 from flask import render_template
-from .View import HeadView , MarkdownView , FooterView , NavView , ArticleView , MessageView
-from .Model import HeadModel , NavModel , ArticleModel , MessageModel , MarkdownModel
+from .View import HeadView , MarkdownView , FooterView , AsideView , ArticleView , MessageView
+from .Model import HeadModel , AsideModel , ArticleModel , MessageModel , MarkdownModel
 
 def renderPage() :
     # GitHub用户名密码
@@ -15,11 +15,11 @@ def renderPage() :
     recent_message_html = MessageView.renderNavMessage(recent_message, gitname, gitpass)
 
     # 导航栏
-    nav = NavView.render(NavModel.getUsername(), 
-                            NavModel.getRuntime(), 
-                            NavModel.getVisiting(), 
-                            NavModel.getArticles(), 
-                            NavModel.getMessages(),
+    nav = AsideView.render(AsideModel.getUsername(), 
+                            AsideModel.getRuntime(), 
+                            AsideModel.getVisiting(), 
+                            AsideModel.getArticles(), 
+                            AsideModel.getMessages(),
                             recent_article,
                             "")
 

@@ -1,8 +1,8 @@
 # 示例页面
 
 from flask import render_template
-from .View import HeadView , MarkdownView , FooterView , NavView , ArticleView , MessageView
-from .Model import HeadModel , NavModel , MarkdownModel , MessageModel
+from .View import HeadView , MarkdownView , FooterView , AsideView , ArticleView , MessageView
+from .Model import HeadModel , AsideModel , MarkdownModel , MessageModel
 
 def renderPage() :
     demo_article = open('README.md', "r", encoding='utf-8').read()
@@ -22,12 +22,12 @@ def renderPage() :
     recent_message = MessageModel.getLatestMessage(10)
     recent_message_html = MessageView.renderNavMessage(recent_message, gitname, gitpass)
 
-    # 导航栏
-    nav = NavView.render(NavModel.getUsername(), 
-                            NavModel.getRuntime(), 
-                            NavModel.getVisiting(), 
-                            NavModel.getArticles(), 
-                            NavModel.getMessages(),
+    # 侧边栏
+    aside = AsideView.render(AsideModel.getUsername(), 
+                            AsideModel.getRuntime(), 
+                            AsideModel.getVisiting(), 
+                            AsideModel.getArticles(), 
+                            AsideModel.getMessages(),
                             recent_article,
                             recent_message_html)
 
@@ -35,6 +35,6 @@ def renderPage() :
                             css_settings=HeadView.renderCSS(HeadModel.getCSS()),
                             js_settings=HeadView.renderJS(HeadModel.getJS()),
                             title="Phosphophyllite",
-                            navigation=nav,
+                            aside=aside,
                             article=article_html,
                             footer=FooterView.renderFooter())
