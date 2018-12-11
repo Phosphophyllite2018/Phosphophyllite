@@ -12,7 +12,8 @@ def renderPage() :
     gitpass = MarkdownModel.getGitPass()
 
     # 最近文章
-    recent_article = ""
+    recent_article = ArticleModel.getRecentArticle(10)
+    recent_article_html = ArticleView.renderAsideArticle(recent_article, gitname, gitpass)
 
     # 最近留言
     recent_message = MessageModel.getRecentMessage(10)
@@ -24,7 +25,7 @@ def renderPage() :
                             visiting_count=AsideModel.getVisiting(), 
                             artcile_count=AsideModel.getArticles(), 
                             message_count=AsideModel.getMessages(),
-                            recent_article=recent_article,
+                            recent_article=recent_article_html,
                             recent_message=recent_message_html)
 
     editor_html = ArticleView.renderEditor()

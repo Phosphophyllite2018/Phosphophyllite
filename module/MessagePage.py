@@ -8,19 +8,20 @@ def renderPage() :
     gitpass = MarkdownModel.getGitPass()
 
     # 最近文章
-    recent_article = ""
+    recent_article = ArticleModel.getRecentArticle(10)
+    recent_article_html = ArticleView.renderAsideArticle(recent_article, gitname, gitpass)
 
     # 最近留言
     recent_message = MessageModel.getRecentMessage(10)
     recent_message_html = MessageView.renderAsideMessage(recent_message, gitname, gitpass)
 
-    # 导航栏
+    # 侧边栏
     aside = AsideView.render(username=AsideModel.getUsername(), 
                             running_days=AsideModel.getRunDays(), 
                             visiting_count=AsideModel.getVisiting(), 
                             artcile_count=AsideModel.getArticles(), 
                             message_count=AsideModel.getMessages(),
-                            recent_article=recent_article,
+                            recent_article=recent_article_html,
                             recent_message=None)
 
     # article块
