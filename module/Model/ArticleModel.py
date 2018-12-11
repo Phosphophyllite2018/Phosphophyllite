@@ -87,37 +87,20 @@ def save(title, content, id=None) :
         PhosLog.log(e)
         return False
 
-# def getLatestTitle() :
-#     try :
-#         sql = "SELECT title FROM article ORDER BY id DESC LIMIT 1;"
-#         result = cursor().execute(sql)
-#         return result.fetchone()[0]
-#     except Exception as e:
-#         PhosLog.log(e)
-#         return "Title"
+# 返回最近的n条留言
+def getRecentArticle(n) :
+    recent_article = []
 
-# def getLatestContent() :
-#     try :
-#         sql = "SELECT content FROM article ORDER BY id DESC LIMIT 1;"
-#         result = cursor().execute(sql)
-#         return result.fetchone()[0]
-#     except Exception as e:
-#         PhosLog.log(e)
-#         return "Content"
+    if getCount() < n :
+        n = getCount()
 
-# def getLatestBirthday() :
-#     try :
-#         sql = "SELECT birthday FROM article ORDER BY id DESC LIMIT 1;"
-#         result = cursor().execute(sql)
-#         return result.fetchone()[0]
-#     except Exception as e:
-#         PhosLog.log(e)
-#         return "birthday"
-# def getLatestVisiting() :
-#     try :
-#         sql = "SELECT visiting FROM article ORDER BY id DESC LIMIT 1;"
-#         result = cursor().execute(sql)
-#         return result.fetchone()[0]
-#     except Exception as e:
-#         PhosLog.log(e)
-#         return "visiting"
+    for i in range(1, n + 1) :
+        recent_article.append({
+            "id"         : getByOrder("id", -i),
+            "title"      : getByOrder("title", -i),
+            "birthday"   : getByOrder("birthday", -i),
+            "content"    : getByOrder("content", -i),
+            "visiting"   : getByOrder("visiting", -i)
+        })
+
+    return recent_article

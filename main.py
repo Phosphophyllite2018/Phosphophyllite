@@ -3,7 +3,7 @@
 import os
 from datetime import timedelta
 import flask
-from module import DemoPage , HomePage , MessagePage , LoginPage , EditorPage
+from module import DemoPage , ArticlePage , MessagePage , LoginPage , EditorPage
 from module.Model import ArticleModel
 from module.Interface import MessageInterface , AuthInterface , ArticleInterface
 
@@ -16,7 +16,7 @@ def index() :
 	if ArticleModel.getCount() == 0 :
 		return DemoPage.renderPage()
 	else :
-		return HomePage.renderPage()
+		return ArticlePage.renderPage()
 
 # 页面
 
@@ -35,6 +35,11 @@ def login() :
 @app.route('/edit')
 def edit():
 	return EditorPage.renderPage()
+
+@app.route('/article')
+def article() :
+	id = flask.request.args.get('id', type=int)
+	return ArticlePage.renderPage(id)
 
 
 

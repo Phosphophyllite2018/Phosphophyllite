@@ -1,8 +1,12 @@
-from flask import render_template
+import flask
+from flask import render_template , session
 from .View import HeadView , MarkdownView , FooterView , AsideView , ArticleView , MessageView
 from .Model import HeadModel , AsideModel , ArticleModel , MessageModel , MarkdownModel
 
 def renderPage() :
+    if 'login' not in session or session['login'] != True :
+        return flask.redirect('/login')
+
     # GitHub用户名密码
     gitname = MarkdownModel.getGitName()
     gitpass = MarkdownModel.getGitPass()
