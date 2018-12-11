@@ -55,5 +55,10 @@ function addMessage(pre)
         alert("请写点什么。")
         return false
     }
+    if(params['content'].length > 150) // 去除空格后为空
+    {
+        alert("内容太长了。")
+        return false
+    }
     httpPost("/addmessage", params)
 }

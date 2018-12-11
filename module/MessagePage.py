@@ -21,7 +21,7 @@ def renderPage() :
                             NavModel.getArticles(), 
                             NavModel.getMessages(),
                             recent_article,
-                            recent_message_html)
+                            "")
 
     # article块
     article_html = MessageView.renderMessagePage(recent_message, gitname, gitpass)

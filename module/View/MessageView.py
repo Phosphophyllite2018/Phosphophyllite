@@ -9,6 +9,11 @@ def renderNavMessage(recent_message, gitname, gitpass) :
         name = message['name']
         date = message['birthday']
         content = message['content']
+
+        # 如果没有内容
+        if content.strip() == "" :
+            continue
+
         recent_message_html += "<span class='visitor'>[ %s ]</span>" % name
         # recent_message_html += "<em>( %s )</em>" % date
         recent_message_html += MarkdownView.renderMarkdown(content, gitname, gitpass)
@@ -21,6 +26,11 @@ def renderMessagePage(recent_message, gitname, gitpass) :
         name = message['name']
         date = message['birthday']
         content = message['content']
+
+       # 如果没有内容
+        if content.strip() == "" :
+            continue
+            
         recent_message_html += "<hr/>"
         recent_message_html += "<span class='visitor'>[ %s ]</span>" % name
         recent_message_html += "<em>( %s )</em>" % date
