@@ -43,7 +43,7 @@ function httpGet(url, params)
 }
 
 /* 添加留言 */
-function addMessage(pre)
+function addMessage()
 {
     params = {}
     params['name'] = document.querySelector("#message_name").value
@@ -53,10 +53,33 @@ function addMessage(pre)
         alert("请写点什么。")
         return false
     }
+
     if(params['content'].length > 150) // 去除空格后为空
     {
         alert("内容太长了。")
         return false
     }
+
     httpPost("/addmessage", params)
+}
+
+/* 保存文章 */
+function saveArticle()
+{
+    params = {}
+    params['title'] = document.querySelector("#article_title").value
+    params['content'] = document.querySelector("#article_content").value
+    if(params['title'].replace(/^\s*|\s*$/g,"") == "") // 去除空格后为空
+    {
+        alter("请填写标题")
+        return false
+    }
+
+    if(params['content'].replace(/^\s*|\s*$/g,"") == "") // 去除空格后为空
+    {
+        alter("请编辑文章")
+        return false
+    }
+
+    httpPost("/saveArticle", params)
 }

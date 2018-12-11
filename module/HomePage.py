@@ -4,10 +4,10 @@ from .Model import HeadModel , AsideModel , ArticleModel , MessageModel , Markdo
 
 def renderPage() :
     # 文章
-    title = ArticleModel.getLatestTitle()
-    birthday = ArticleModel.getLatestBirthday()
-    visiting = ArticleModel.getLatestVisiting()
-    content = ArticleModel.getLatestContent()
+    title = ArticleModel.getByOrder("title",-1)
+    birthday = ArticleModel.getByOrder("birthday",-1)
+    visiting = ArticleModel.getByOrder("visiting",-1)
+    content = ArticleModel.getByOrder("content",-1)
 
     # GitHub用户名密码
     gitname = MarkdownModel.getGitName()
@@ -17,7 +17,7 @@ def renderPage() :
     recent_article = ""
 
     # 最近留言
-    recent_message = MessageModel.getLatestMessage(10)
+    recent_message = MessageModel.getRecentMessage(10)
     recent_message_html = MessageView.renderAsideMessage(recent_message, gitname, gitpass)
 
     # 侧边栏

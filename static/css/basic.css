@@ -13,6 +13,7 @@ aside {
 	float: left;
 	width: 20%;
 	overflow: hidden;
+	min-height: 100%;
 }
 
 article {
@@ -79,6 +80,11 @@ code {
     font-size: 85%;
     margin: 0.2em;
     padding: 0.2em 0.4em;
+}
+
+/* 留言楼层 */
+.floor {
+	color: gray;
 }
 
 /* 访客名 */

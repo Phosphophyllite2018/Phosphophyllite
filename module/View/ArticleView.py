@@ -7,3 +7,7 @@ def render(title, date, reading, content):
                             arcicle_reading=reading,
                             article_content=content)
     return output
+
+def renderEditor() :
+    output = render_template("editor.html")
+    return output

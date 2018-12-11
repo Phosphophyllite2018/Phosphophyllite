@@ -16,9 +16,9 @@ def renderMarkdown(md_text, gitname=None, gitpass=None, timeout=0.5) :
         
         # 不带身份验证请求仍然失败
         if response.status_code != 200 :
-            output = "<h1>Render Markdown Unsuccessfully</h1>\n"
-            output += "<em>Error Message : </em><br/> %s <hr/>\n" % response.text
-            output += "<em>Markdown Text : </em><br/> %s <hr/>\n" % md_text.replace("\n", "<br/>")
+            output = "<p><em><strong>Render Markdown Unsuccessfully</strong></em></p>\n"
+            output += "<p><em>Error Message : </em><br/> %s </p>\n" % response.text
+            output += "<p><em>Markdown Text : </em><br/> %s </p>\n" % md_text.replace("\n", "<br/>")
 
         # 任意一次请求成功
         else :
@@ -28,7 +28,7 @@ def renderMarkdown(md_text, gitname=None, gitpass=None, timeout=0.5) :
 
     except Exception as e:
         PhosLog.log(e)
-        output = "<h1>Render Markdown Unsuccessfully</h1>\n"
-        output += "<em>Error Message : </em><br/> %s <hr/>\n" % e
-        output += "<em>Markdown Text : </em><br/> %s <hr/>\n" % md_text.replace("\n", "<br/>")
+        output = "<p><em><strong>Render Markdown Unsuccessfully</strong></em></p>\n"
+        output += "<p><em>Error Message : </em><br/> %s </p>\n" % e
+        output += "<p><em>Markdown Text : </em><br/> %s </p>\n" % md_text.replace("\n", "<br/>")
         return output

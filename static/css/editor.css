@@ -1,3 +1,10 @@
+#article_content {
+    resize: both;
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 60em;
+}
+
 .editor {
     font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
     border: 1px dodgerblue solid;

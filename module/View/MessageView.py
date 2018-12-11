@@ -23,6 +23,7 @@ def renderAsideMessage(recent_message, gitname, gitpass) :
 def renderPageMessage(recent_message, gitname, gitpass) :
     recent_message_html = ""
     for message in recent_message :
+        floor = message['id']
         name = message['name']
         date = message['birthday']
         content = message['content']
@@ -32,6 +33,7 @@ def renderPageMessage(recent_message, gitname, gitpass) :
             continue
             
         recent_message_html += "<hr/>"
+        recent_message_html += "<span class='floor'> #%d </span>" % floor
         recent_message_html += "<span class='visitor'>[ %s ]</span>" % name
         recent_message_html += "<em>( %s )</em>" % date
         recent_message_html += MarkdownView.renderMarkdown(content, gitname, gitpass)
