@@ -20,7 +20,7 @@ def renderPage() :
 
     # 最近留言
     recent_message = MessageModel.getLatestMessage(10)
-    recent_message_html = MessageView.renderNavMessage(recent_message, gitname, gitpass)
+    recent_message_html = MessageView.renderAsideMessage(recent_message, gitname, gitpass)
 
     # 侧边栏
     aside = AsideView.render(AsideModel.getUsername(), 

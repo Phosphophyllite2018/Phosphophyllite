@@ -16,6 +16,8 @@
     <hr/>
     <p class="subtitle">最近文章 <a href="/article">更多</a> </p>
     {{ recent_article | safe }}
+
+    {% if recent_message != None %}
     <hr/>
     <p class="subtitle">最近留言 <a href="/message">更多</a> </p> 
     {{ recent_message | safe }}
@@ -24,5 +26,6 @@
         <input type="text" class="line_editor mini_name" placeholder="你的名字" autocomplete="off"/>
         <input type="button" class="commit" value="提交" onclick="addMessage('mini')"/>
     </div>
+    {% endif %}
 </div>
 

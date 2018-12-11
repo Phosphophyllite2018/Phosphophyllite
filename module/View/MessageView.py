@@ -2,8 +2,8 @@ from flask import render_template
 from . import MarkdownView
 from ..Phos import PhosLog
 
-# 导航栏上的最近留言
-def renderNavMessage(recent_message, gitname, gitpass) :
+# 侧边栏的最近留言
+def renderAsideMessage(recent_message, gitname, gitpass) :
     recent_message_html = ""
     for message in recent_message :
         name = message['name']
@@ -20,7 +20,7 @@ def renderNavMessage(recent_message, gitname, gitpass) :
     return recent_message_html
 
 # 留言页面上的留言
-def renderMessagePage(recent_message, gitname, gitpass) :
+def renderPageMessage(recent_message, gitname, gitpass) :
     recent_message_html = ""
     for message in recent_message :
         name = message['name']
