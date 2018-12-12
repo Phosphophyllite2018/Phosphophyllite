@@ -42,6 +42,14 @@ function httpGet(url, params)
     virtualForm.submit();
 }
 
+/* 发起Post请求 */
+function AjaxPost(url, params)
+{
+    let http = new XMLHttpRequest();
+    http.open("post", url, true)
+    
+}
+
 /* 添加留言 */
 function addMessage()
 {

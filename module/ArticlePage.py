@@ -5,15 +5,13 @@ from .Model import HeadModel , AsideModel , ArticleModel , MessageModel , Markdo
 def renderPage(id=None) :
     # 文章
     if id == None :
-        title = ArticleModel.getByOrder("title",-1)
-        birthday = ArticleModel.getByOrder("birthday",-1)
-        visiting = ArticleModel.getByOrder("visiting",-1)
-        content = ArticleModel.getByOrder("content",-1)
-    else :
-        title = ArticleModel.getById("title",id)
-        birthday = ArticleModel.getById("birthday",id)
-        visiting = ArticleModel.getById("visiting",id)
-        content = ArticleModel.getById("content",id)
+        id = ArticleModel.getByOrder("id", -1)
+
+    title = ArticleModel.getById("title",id)
+    birthday = ArticleModel.getById("birthday",id)
+    visiting = ArticleModel.getById("visiting",id)
+    content = ArticleModel.getById("content",id)
+    ArticleModel.addVisiting(id)
 
     # GitHub用户名密码
     gitname = MarkdownModel.getGitName()

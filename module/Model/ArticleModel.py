@@ -41,6 +41,19 @@ def getById(key, id) :
         PhosLog.log(e)
         return None
 
+# 根据id设置
+def setById(key, id, value) :
+    try :
+        sqlCheck(key, id)
+        if isinstance(value, str) :
+            value = sqlFilter(value)
+        sql = "UPDATE article SET %s='%s' where id=%d;" % (key, value, id)
+        cursor().execute(sql)
+        return True
+    except Exception as e:
+        PhosLog.log(e)
+        return None
+
 # 根据排序查找
 # 整数正序，负数逆序
 def getByOrder(key, num) :
@@ -83,6 +96,15 @@ def save(title, content, id=None) :
             
         cursor().execute(sql)
         return True
+    except Exception as e:
+        PhosLog.log(e)
+        return False
+
+# 访问量增加
+def addVisiting(id, n=1) :
+    try :
+        visiting = getById('visiting', id)
+        setById('visiting', id, visiting+1)
     except Exception as e:
         PhosLog.log(e)
         return False
