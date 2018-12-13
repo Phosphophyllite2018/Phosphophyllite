@@ -66,7 +66,7 @@ ol ol, ul ul {
 
 /* 代码块显示浅灰色圆角矩形底色 */
 pre {
-	background-color: #ddd;
+	background-color: #f2fff4;
 	border-radius: 15px;
 	margin: 15px;
 	padding: 15px;
@@ -74,8 +74,8 @@ pre {
 
 /* 行内代码视觉增强 */
 code {
-	color: aqua;
-	background-color: black;
+	color: dodgerblue;
+	background-color: #f2fff4;
     border-radius: 3px;
     font-size: 85%;
     margin: 0.2em;

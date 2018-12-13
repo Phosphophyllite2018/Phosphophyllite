@@ -18,5 +18,5 @@ def renderAsideArticle(recent_article, gitname, gitpass) :
         id = article['id']
         title = article['title']
 
-        recent_message_html += "<p><a href='article?id=%d'>[ %s ]</a><p>" % (id, title)
+        recent_message_html += "<p><a href='article?id=%d'> %s </a><p>" % (id, title)
     return recent_message_html
