@@ -15,7 +15,7 @@ def renderAsideMessage(recent_message, gitname, gitpass) :
         if content.strip() == "" :
             continue
 
-        recent_message_html += "<span class='visitor'>[ %s ]</span><br/>" % textFilter(name)
+        recent_message_html += "<br/><span class='visitor'>[ %s ]</span><br/>" % textFilter(name)
         # recent_message_html += "<em>( %s )</em>" % date
         recent_message_html += MarkdownView.renderMarkdown(content, gitname, gitpass)
     return recent_message_html
