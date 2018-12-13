@@ -4,6 +4,10 @@ from ..Phos import PhosLog
 
 def renderMarkdown(md_text, gitname=None, gitpass=None, timeout=0.5) :
     try :
+        if md_text == None :
+            return "context is null"
+
+        # 请求信息
         payload = {"text" : md_text, "mode" : "gfm", "context" : "https://github.com/Phosphophyllite2018/Phosphophyllite"}
 
         # 带身份验证的请求
