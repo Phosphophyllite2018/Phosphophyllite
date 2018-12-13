@@ -1,4 +1,5 @@
 from flask import render_template
+from ..Phos.common import textFilter
 
 def render(title, date, reading, content):
     output = render_template("article.html",
@@ -16,7 +17,7 @@ def renderAsideArticle(recent_article, gitname, gitpass) :
     recent_message_html = ""
     for article in recent_article :
         id = article['id']
-        title = article['title']
+        title = str(article['title'])
 
-        recent_message_html += "<p><a href='article?id=%d'> %s </a><p>" % (id, title)
+        recent_message_html += "<p><a href='article?id=%d'> %s </a><p>" % (id, textFilter(title))
     return recent_message_html

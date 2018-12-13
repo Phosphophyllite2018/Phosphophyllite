@@ -1,5 +1,6 @@
 import sqlite3
-from ..Phos import PhosLog
+from ..Phos import PhosLog 
+from ..Phos.common import sqlCheck , sqlFilter
 
 def cursor() :
     db = sqlite3.connect("./private/phosphophyllite.db", isolation_level=None)
@@ -18,22 +19,12 @@ def getCount() :
 
 # 列名，做sql语句校验
 columns = ("id", "title", "content", "birthday", "visiting")
-# 检查key
-def sqlCheck(key, id) :
-    if key not in columns :
-        raise Exception("Key %s is invalid." % key)
-    elif not isinstance(id, int) :
-        raise Exception("Id %d is invalid." % id)
 
-# 将'替换为''
-def sqlFilter(text) :
-    text = text.replace("'", "''")
-    return text
 
 # 根据id查找
 def getById(key, id) :
     try :
-        sqlCheck(key, id)
+        sqlCheck(columns, key)
         sql = "SELECT %s FROM article where id=%d;" % (key, id)
         result = cursor().execute(sql)
         return result.fetchone()[0]
@@ -44,7 +35,7 @@ def getById(key, id) :
 # 根据id设置
 def setById(key, id, value) :
     try :
-        sqlCheck(key, id)
+        sqlCheck(columns, key)
         if isinstance(value, str) :
             value = sqlFilter(value)
         sql = "UPDATE article SET %s='%s' where id=%d;" % (key, value, id)
@@ -58,7 +49,7 @@ def setById(key, id, value) :
 # 整数正序，负数逆序
 def getByOrder(key, num) :
     try :
-        sqlCheck(key, num)
+        sqlCheck(columns, key)
         sql = ""
         if num > 0 :
             sql = "SELECT %s FROM article ORDER BY id LIMIT %d,1;" % (key, num-1)
@@ -109,13 +100,13 @@ def addVisiting(id, n=1) :
         PhosLog.log(e)
         return False
 
-# 返回最近的n条留言
+# 返回最近的n篇文章
 def getRecentArticle(n) :
     recent_article = []
 
     if getCount() < n :
         n = getCount()
-
+        
     for i in range(1, n + 1) :
         recent_article.append({
             "id"         : getByOrder("id", -i),

@@ -1,13 +1,7 @@
 import requests
 import json
 from ..Phos import PhosLog 
-
-def textFilter(text) :
-    text = text.replace("\n", "<br/>")
-    text = text.replace("<", "&lt;")
-    text = text.replace(">", "&gt;")
-    
-    return text
+from ..Phos.common import textFilter
 
 def renderMarkdown(md_text, gitname=None, gitpass=None, timeout=15) :
     try :
@@ -28,8 +22,8 @@ def renderMarkdown(md_text, gitname=None, gitpass=None, timeout=15) :
         # 不带身份验证请求仍然失败
         if response.status_code != 200 :
             output = "<p><em><strong>Render Markdown Unsuccessfully</strong></em></p>\n"
-            output += "<p><em>Error Message : </em><br/> %s </p>\n" % response.text
-            output += "<p><em>Markdown Text : </em><br/> %s </p>\n" % md_text.replace("\n", "<br/>").replace("<","&lt;")
+            output += "<p><em>Error Message : </em><br/> %s </p>\n" % textFilter(response.text)
+            output += "<p><em>Markdown Text : </em><br/> %s </p>\n" % textFilter(md_text)
 
         # 任意一次请求成功
         else :
@@ -40,6 +34,6 @@ def renderMarkdown(md_text, gitname=None, gitpass=None, timeout=15) :
     except Exception as e:
         PhosLog.log(e)
         output = "<p><em><strong>Render Markdown Unsuccessfully</strong></em></p>\n"
-        output += "<p><em>Error Message : </em><br/> %s </p>\n" % e
-        output += "<p><em>Markdown Text : </em><br/> %s </p>\n" % md_text.replace("\n", "<br/>")
+        output += "<p><em>Error Message : </em><br/> %s </p>\n" % textFilter(e)
+        output += "<p><em>Markdown Text : </em><br/> %s </p>\n" % textFilter(md_text)
         return output

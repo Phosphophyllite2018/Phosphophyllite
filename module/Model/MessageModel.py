@@ -1,5 +1,6 @@
 import sqlite3
 from ..Phos import PhosLog
+from ..Phos.common import sqlFilter , sqlCheck
 
 def cursor() :
     db = sqlite3.connect("./private/phosphophyllite.db", isolation_level=None)
@@ -8,17 +9,6 @@ def cursor() :
 
 # 列名，做sql语句校验
 columns = ("id", "name", "content", "birthday")
-# key值安全检查
-def sqlCheck(key, id) :
-    if key not in columns :
-        raise Exception("Key %s is invalid." % key)
-    elif not isinstance(id, int) :
-        raise Exception("Id %d is invalid." % id)
-
-# 将'替换为''
-def sqlFilter(text) :
-    text = text.replace("'", "''")
-    return text
 
 # 返回行数
 def getCount() :
@@ -33,7 +23,7 @@ def getCount() :
 # 根据id查找
 def getById(key, id) :
     try :
-        sqlCheck(key, id)
+        sqlCheck(columns, key)
         sql = "SELECT %s FROM message where id=%d;" % (key, id)
         result = cursor().execute(sql)
         return result.fetchone()[0]
@@ -45,7 +35,7 @@ def getById(key, id) :
 # 整数正序，负数逆序
 def getByOrder(key, num) :
     try :
-        sqlCheck(key, num)
+        sqlCheck(columns, key)
         sql = ""
         if num > 0 :
             sql = "SELECT %s FROM message ORDER BY id LIMIT %d,1;" % (key, num-1)
