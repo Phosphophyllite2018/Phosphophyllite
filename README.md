@@ -51,7 +51,7 @@ import sqlite3
 *em*
 
 ### 二级强调 
-**string**
+**strong**
 
 ### 三级强调 
 ***em strong***  
