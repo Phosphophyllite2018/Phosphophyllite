@@ -6,6 +6,6 @@ def log(message) :
     fp = open('./private/phosphophyllite.log.txt', 'a',encoding='utf-8')
     t = time.strftime("%Y-%m-%d %H:%M:%S")
     text = "[PhosLog](%s) : %s \n" % (t, message)
-    traceback.print_exc()
-    fp.write(text)
+    print(text)
+    fp.write(traceback.format_exc())
     fp.close()

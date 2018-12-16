@@ -1,5 +1,5 @@
 from flask import render_template
-from .View import HeadView , MarkdownView , FooterView , AsideView , ArticleView , MessageView
+from .View import HeadView , MarkdownView , FooterView , AsideView , ArticleView , MessageView , HeaderView
 from .Model import HeadModel , AsideModel , ArticleModel , MessageModel , MarkdownModel
 
 def renderPage(id=None) :
@@ -34,11 +34,14 @@ def renderPage(id=None) :
                             recent_article=recent_article_html,
                             recent_message=recent_message_html)
 
-    article_html = ArticleView.render(title, birthday, visiting, MarkdownView.renderMarkdown(content))
+    # 文章
+    article_html = ArticleView.render(title, birthday, visiting, MarkdownView.renderMarkdown(content, gitname, gitpass))
+    
     return render_template('template.html', 
                             css_settings=HeadView.renderCSS(HeadModel.getCSS()),
                             js_settings=HeadView.renderJS(HeadModel.getJS()),
                             title="Phosphophyllite",
+                            header=HeaderView.renderHeader(),
                             aside=aside,
                             article=article_html,
                             footer=FooterView.renderFooter())

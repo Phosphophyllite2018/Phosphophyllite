@@ -1,5 +1,6 @@
 # HeadView
 # 渲染<head>中需要用到的CSS样式表和JavaScript脚本文件的标签
+# 注意不是header
 
 def renderCSS(css_files):
     html = ""
