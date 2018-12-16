@@ -3,7 +3,7 @@
 import os
 from datetime import timedelta
 import flask
-from module import DemoPage , ArticlePage , MessagePage , LoginPage , EditorPage
+from module import DemoPage , ArticlePage , MessagePage , LoginPage , EditorPage , AdminPage
 from module.Model import ArticleModel
 from module.Interface import MessageInterface , AuthInterface , ArticleInterface
 
@@ -36,6 +36,10 @@ def login() :
 def edit():
 	return EditorPage.renderPage()
 
+@app.route('/admin')
+def admin():
+	return AdminPage.renderPage()
+
 @app.route('/article')
 def article() :
 	id = flask.request.args.get('id', type=int)
@@ -58,7 +62,7 @@ def saveArticle() :
 @app.route('/auth', methods=["POST"])
 def auth() :
 	if AuthInterface.checkPassword() :
-		return flask.redirect('/')
+		return flask.redirect('/admin')
 	else :
 		return flask.redirect('/login')
 

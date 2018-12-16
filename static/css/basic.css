@@ -69,6 +69,27 @@ footer {
 	border-radius: 5px;
 }
 
+
+.admin_choice{
+	display: block;
+	background-color: #39f;
+	color: white;
+	text-align: center;
+	text-decoration: none;
+	border: 1px solid #39f;
+	border-radius: 10px;
+	margin: 5px 0;
+}
+
+.admin_choice:hover {
+	display: block;
+	background-color: rgb(38, 116, 194);
+	color: white;
+	text-decoration: none;
+	border: 1px solid #39f;
+	border-radius: 10px;
+}
+
  /* 标题和前面空一定的距离 */
 h1, h2, h3, h4, h5, h6 {
 	padding-top: 15px;

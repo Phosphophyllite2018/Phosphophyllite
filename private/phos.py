@@ -2,6 +2,8 @@
 
 import sys
 import os
+import time
+import shutil
 import sqlite3
 import hashlib
 import traceback
@@ -11,10 +13,13 @@ def show_help() :
     script = os.path.basename(sys.argv[0])
     print("Usage : %s <opt> <param>" % script)
     print("        %s init                : 初始化或还原数据库" % script)
+    print("        %s backup              : 备份数据库" % script)
     print("        %s username <username> : 设置Blog的用户名" % script)
     print("        %s password <password> : 设置Blog的密码" % script)
     print("        %s git-name <git-name> : 设置GitHub的用户名" % script)
     print("        %s git-pass <git-pass> : 设置GitHub的密码" % script)
+
+
 
 # 创建表
 def create_table(cursor, table_name, lines) :
@@ -74,6 +79,7 @@ message_table = [
     ["birthday" , "DATETIME DEFAULT (DATETIME('now')) NOT NULL"],
 ]
 
+# 初始化
 def phos_init(cursor, argv) :
     if len(argv) != 2 or argv[1] != "init" :
         return False
@@ -84,7 +90,18 @@ def phos_init(cursor, argv) :
     init_blog_table(cursor)
     print("初始化完成")
     return True
+
+# 数据库备份
+def phos_backup(cursor, argv) :
+    if len(argv) != 2 or argv[1] != "backup" :
+        return False
     
+    backup = time.strftime("%Y%m%d%H%M%S") + ".db"
+    shutil.copy("phosphophyllite.db", backup)
+    print("备份完成")
+    return True
+    
+# 设置用户名
 def phos_setting_username(cursor, argv) :
     if len(argv) != 3 or argv[1] != "username" :
         return False
@@ -94,6 +111,7 @@ def phos_setting_username(cursor, argv) :
     print("用户名设置成功。")
     return True
     
+# 设置密码
 def phos_setting_password(cursor, argv) :
     if len(argv) != 3 or argv[1] != "password" :
         return False
@@ -108,6 +126,7 @@ def phos_setting_password(cursor, argv) :
     print("密码设置成功。")
     return True
     
+# 设置GitHub用户名
 def phos_setting_git_name(cursor, argv) :
     if len(argv) != 3 or argv[1] != "git-name" :
         return False
@@ -116,7 +135,8 @@ def phos_setting_git_name(cursor, argv) :
     cursor.execute(sql)
     print("GitHub用户名设置成功。")
     return True
-    
+
+# 设置GitHub密码
 def phos_setting_git_pass(cursor, argv) :
     if len(argv) != 3 or argv[1] != "git-pass" :
         return False
@@ -133,7 +153,7 @@ if __name__ == "__main__" :
         db = sqlite3.connect("phosphophyllite.db")
         cursor = db.cursor()
         
-        process = [phos_init, phos_setting_username, phos_setting_password,
+        process = [phos_init, phos_backup, phos_setting_username, phos_setting_password,
                     phos_setting_git_name, phos_setting_git_pass]
         state = False
         for func in process :
