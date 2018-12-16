@@ -4,19 +4,31 @@
  */
 
 body {
-	width: 92%;
+	width: 100%;
 	margin: auto;
 }
 
-/* nav和atcile在同一行 */
-nav {
+header {
+	position:fixed;
+	height: 50px;
+	width: 100%;
+	margin-bottom: 20px;
+	background-color: #39f;
+}
+
+/* aside和atcile在同一行 */
+aside {
 	float: left;
 	width: 20%;
+	margin-top: 50px;
 	overflow: hidden;
+	min-height: 100%;
+	margin-left: 10px;
 }
 
 article {
 	float: left;
+	margin-top: 50px;
 	margin-left: 5%;
 	width: 70%;
 }
@@ -27,6 +39,35 @@ footer {
 	clear: both;
 }
 
+/* header导航选项 */
+.header_title {
+	display: block;
+	float: left;
+	color: white;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	padding: 0 15px;
+	font-size: 25px;
+}
+
+.header_choice {
+	display: block;
+	float: left;
+	color: white;
+	height: 50px;
+	line-height: 50px;
+	padding: 0 15px;
+	text-decoration: none;
+}
+
+.header_choice:hover {
+	background-color: #39f;
+	color: white;
+	text-decoration: none;
+	border: 1px solid rgb(38, 116, 194);
+	border-radius: 5px;
+}
 
  /* 标题和前面空一定的距离 */
 h1, h2, h3, h4, h5, h6 {
@@ -65,7 +106,7 @@ ol ol, ul ul {
 
 /* 代码块显示浅灰色圆角矩形底色 */
 pre {
-	background-color: #ddd;
+	background-color: #f2fff4;
 	border-radius: 15px;
 	margin: 15px;
 	padding: 15px;
@@ -73,12 +114,17 @@ pre {
 
 /* 行内代码视觉增强 */
 code {
-	color: aqua;
-	background-color: black;
+	color: dodgerblue;
+	background-color: #f2fff4;
     border-radius: 3px;
     font-size: 85%;
     margin: 0.2em;
     padding: 0.2em 0.4em;
+}
+
+/* 留言楼层 */
+.floor {
+	color: gray;
 }
 
 /* 访客名 */

@@ -1,7 +1,8 @@
 # Phosphophyllite
 `Phosphophyllite`是一个基于`Flask`开发的小型博客程序，采用`Markdown`作为文章编辑语法。
 
-## Markdown语法 :octocat::octocat::octocat::octocat::octocat::octocat::octocat::octocat::octocat:
+## Markdown语法   
+:octocat::octocat::octocat::octocat::octocat::octocat::octocat::octocat::octocat:  
 使用 GitHub API ( [https://developer.github.com/v3/markdown/](https://developer.github.com/v3/markdown/) ) 来渲染Markdown，因此支持的语法与GitHub一致。  
 * 请确保搭建博客所用的服务器能够正常请求GitHub API，请求GitHub API的速度会影响网站的加载速度。 
 
@@ -50,7 +51,7 @@ import sqlite3
 *em*
 
 ### 二级强调 
-**string**
+**strong**
 
 ### 三级强调 
 ***em strong***  

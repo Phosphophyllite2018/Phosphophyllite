@@ -1,7 +1,6 @@
 import sqlite3
 from ..Phos import PhosLog
-
-
+from ..Phos.common import sqlFilter , sqlCheck
 
 def cursor() :
     db = sqlite3.connect("./private/phosphophyllite.db", isolation_level=None)
@@ -24,10 +23,7 @@ def getCount() :
 # 根据id查找
 def getById(key, id) :
     try :
-        # 安全检查
-        if key not in columns or not isinstance(id, int):
-            return None
-
+        sqlCheck(columns, key)
         sql = "SELECT %s FROM message where id=%d;" % (key, id)
         result = cursor().execute(sql)
         return result.fetchone()[0]
@@ -39,10 +35,7 @@ def getById(key, id) :
 # 整数正序，负数逆序
 def getByOrder(key, num) :
     try :
-        # 安全检查
-        if key not in columns or not isinstance(num, int) or num == 0:
-            return None
-
+        sqlCheck(columns, key)
         sql = ""
         if num > 0 :
             sql = "SELECT %s FROM message ORDER BY id LIMIT %d,1;" % (key, num-1)
@@ -58,10 +51,10 @@ def getByOrder(key, num) :
 # 添加Message
 def append(name, content) :
     try :
-        name = name.replace("'", "''")
         if name.strip() == "" :
             name = "匿名"  
-        content = content.replace("'", "''")
+        name = sqlFilter(name)
+        content = sqlFilter(content)
         sql = "INSERT INTO message VALUES(NULL,'%s','%s', datetime('now'));" % (name, content)
         cursor().execute(sql)
         return True
@@ -69,7 +62,8 @@ def append(name, content) :
         PhosLog.log(e)
         return False
 
-def getLatestMessage(n) :
+# 返回最近的n条留言
+def getRecentMessage(n) :
     recent_message = []
 
     if getCount() < n :
@@ -77,9 +71,10 @@ def getLatestMessage(n) :
 
     for i in range(1, n + 1) :
         recent_message.append({
-            "name" : getByOrder("name", -i),
-            "birthday" : getByOrder("birthday", -i),
-            "content" : getByOrder("content", -i)
+            "id"        : getByOrder("id", -i),
+            "name"      : getByOrder("name", -i),
+            "birthday"  : getByOrder("birthday", -i),
+            "content"   : getByOrder("content", -i)
         })
 
     return recent_message

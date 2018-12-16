@@ -1,8 +1,12 @@
-from flask import render_template
+import flask
+from flask import render_template , session
 from .View import HeadView , MarkdownView , FooterView , AsideView , ArticleView , MessageView
 from .Model import HeadModel , AsideModel , ArticleModel , MessageModel , MarkdownModel
 
 def renderPage() :
+    if 'login' not in session or session['login'] != True :
+        return flask.redirect('/login')
+
     # GitHub用户名密码
     gitname = MarkdownModel.getGitName()
     gitpass = MarkdownModel.getGitPass()
@@ -22,15 +26,13 @@ def renderPage() :
                             artcile_count=AsideModel.getArticles(), 
                             message_count=AsideModel.getMessages(),
                             recent_article=recent_article_html,
-                            recent_message=None)
+                            recent_message=recent_message_html)
 
-    # article块
-    article_html = MessageView.renderPageMessage(recent_message, gitname, gitpass)
-
+    editor_html = ArticleView.renderEditor()
     return render_template('template.html', 
                             css_settings=HeadView.renderCSS(HeadModel.getCSS()),
                             js_settings=HeadView.renderJS(HeadModel.getJS()),
                             title="Phosphophyllite",
                             aside=aside,
-                            article=article_html,
+                            article=editor_html,
                             footer=FooterView.renderFooter())
