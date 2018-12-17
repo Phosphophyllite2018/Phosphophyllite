@@ -32,19 +32,21 @@ def readme() :
 def login() :
 	return LoginPage.renderPage()
 
-@app.route('/edit')
+@app.route('/article')
+def article() :
+	id = flask.request.args.get('id', type=int)
+	return ArticlePage.renderPage(id)
+
+
+# 后台页面
+
+@app.route('/admin_edit')
 def edit():
 	return EditorPage.renderPage()
 
 @app.route('/admin')
 def admin():
 	return AdminPage.renderPage()
-
-@app.route('/article')
-def article() :
-	id = flask.request.args.get('id', type=int)
-	return ArticlePage.renderPage(id)
-
 
 
 # 接口

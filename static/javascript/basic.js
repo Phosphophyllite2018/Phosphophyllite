@@ -13,6 +13,9 @@ function httpPost(url, params)
     let virtualForm = document.createElement("form");
     virtualForm.action = url;
     virtualForm.method = "post";
+    virtualForm.style.height = 0;
+    virtualForm.style.width = 0;
+    virtualForm.style.overflow = "hidden";
     for(let key in params)
     {
         let input = document.createElement("textarea");
@@ -31,6 +34,9 @@ function httpGet(url, params)
     let virtualForm = document.createElement("form");
     virtualForm.action = url;
     virtualForm.method = "get";
+    virtualForm.style.height = 0;
+    virtualForm.style.width = 0;
+    virtualForm.style.overflow = "hidden";
     for(let key in params)
     {
         let input = document.createElement("textarea");
