@@ -7,27 +7,12 @@ def renderPage() :
     if 'login' not in session or session['login'] != True :
         return flask.redirect('/login')
 
-    
-    # GitHub用户名密码
-    gitname = MarkdownModel.getGitName()
-    gitpass = MarkdownModel.getGitPass()
-
-    # 最近文章
-    recent_article = ArticleModel.getRecentArticle(10)
-    recent_article_html = ArticleView.renderAsideArticle(recent_article, gitname, gitpass)
-
-    # 最近留言
-    recent_message = MessageModel.getRecentMessage(10)
-    recent_message_html = MessageView.renderAsideMessage(recent_message, gitname, gitpass)
-
     # 侧边栏
     aside = AsideView.renderAdminAside(username=AsideModel.getUsername(), 
                             running_days=AsideModel.getRunDays(), 
                             visiting_count=AsideModel.getVisiting(), 
                             artcile_count=AsideModel.getArticles(), 
-                            message_count=AsideModel.getMessages(),
-                            recent_article=recent_article_html,
-                            recent_message=recent_message_html)
+                            message_count=AsideModel.getMessages())
 
     editor_html = ArticleView.renderEditor()
     return render_template('template.html', 
