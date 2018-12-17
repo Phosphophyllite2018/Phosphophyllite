@@ -68,9 +68,15 @@ function addMessage()
         return false
     }
 
+    if(params['name'].length > 15) // 去除空格后为空
+    {
+        alert("名字太长了。")
+        return false
+    }
+
     if(params['content'].length > 150) // 去除空格后为空
     {
-        alert("内容太长了。")
+        alert("留言内容太长了。")
         return false
     }
 
