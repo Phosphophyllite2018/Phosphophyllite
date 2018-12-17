@@ -1,6 +1,6 @@
 from flask import render_template
-from .View import HeadView , MarkdownView , FooterView , AsideView , ArticleView , MessageView , HeaderView
-from .Model import HeadModel , AsideModel , ArticleModel , MessageModel , MarkdownModel
+from ..View import HeadView , MarkdownView , FooterView , AsideView , ArticleView , MessageView , HeaderView
+from ..Model import HeadModel , AsideModel , ArticleModel , MessageModel , MarkdownModel
 
 def renderPage(id=None) :
     # 文章

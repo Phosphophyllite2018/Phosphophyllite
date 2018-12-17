@@ -12,7 +12,7 @@ def render(**kwargs) :
     return output
 
 def renderAdminAside(**kwargs) :
-    output = render_template('admin_aside.html',
+    output = render_template('admin/aside.html',
                             username=kwargs['username'],
                             running_days=kwargs['running_days'],
                             visiting_count=kwargs['visiting_count'],

@@ -21,3 +21,13 @@ def renderAsideArticle(recent_article, gitname, gitpass) :
 
         recent_message_html += "<p><a href='article?id=%d'> %s </a><p>" % (id, textFilter(title))
     return recent_message_html
+
+def renderArticleList(page, articles, total_pages) :
+    prev = ("/article_list?page=%d" % (page - 1)) if page - 1 > 0 else ""
+    next = ("/article_list?page=%d" % (page + 1)) if page + 1 > total_pages else ""
+    return render_template("admin/article_list.html",
+                            page=page+1,
+                            total_pages=total_pages,
+                            prev=prev,
+                            next=next,
+                            article_list=articles)

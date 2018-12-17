@@ -1,3 +1,4 @@
+import math
 import sqlite3
 from ..Phos import PhosLog 
 from ..Phos.common import sqlCheck , sqlFilter
@@ -117,3 +118,32 @@ def getRecentArticle(n) :
         })
 
     return recent_article
+
+# 获取最近第num_start到第num_end篇文章
+def getArticleList(num_start, num_end) :
+    article_list = []
+    if getCount() < num_start :
+        num_start = getCount()
+    if getCount() < num_end :
+        num_end = getCount() + 1
+    for i in range(num_start, num_end) :
+        article_list.append({
+            "id"         : getByOrder("id", -i),
+            "title"      : getByOrder("title", -i),
+            "birthday"   : getByOrder("birthday", -i),
+            "visiting"   : getByOrder("visiting", -i)
+        })
+        
+    return article_list
+
+# 按页获取文章列表， page从0开始
+def getArticleListPage(page, perpage) :
+    num_start = (perpage * page + 1)
+    num_end   = (perpage * (page + 1) + 1)
+
+    return getArticleList(num_start, num_end)
+
+
+# 获取总页数
+def getPages(perpage) : 
+    return math.ceil(getCount() / perpage)
