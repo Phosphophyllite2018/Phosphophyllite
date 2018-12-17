@@ -1,6 +1,6 @@
 import flask
 from flask import render_template , session
-from .View import HeadView , MarkdownView , FooterView , AsideView , ArticleView , MessageView
+from .View import HeadView , MarkdownView , FooterView , AsideView , ArticleView , MessageView , HeaderView
 from .Model import HeadModel , AsideModel , ArticleModel , MessageModel , MarkdownModel
 
 def renderPage() :
@@ -19,6 +19,7 @@ def renderPage() :
                             css_settings=HeadView.renderCSS(HeadModel.getCSS()),
                             js_settings=HeadView.renderJS(HeadModel.getJS()),
                             title="Phosphophyllite",
+                            header=HeaderView.renderHeader(),
                             aside=aside,
                             article=editor_html,
                             footer=FooterView.renderFooter())
