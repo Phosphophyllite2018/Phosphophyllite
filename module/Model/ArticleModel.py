@@ -92,6 +92,17 @@ def save(title, content, id=None) :
         PhosLog.log(e)
         return False
 
+# 删除文章
+def delete(id) :
+    try:
+        sql = "DELETE FROM article WHERE id=%d" % id
+        
+        cursor().execute(sql)
+        return True
+    except Exception as e:
+        PhosLog.log(e)
+        return False
+
 # 访问量增加
 def addVisiting(id, n=1) :
     try :

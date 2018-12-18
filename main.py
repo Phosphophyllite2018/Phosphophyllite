@@ -62,26 +62,27 @@ def admin_article_list() :
 
 # 接口
 
-@app.route('/addmessage', methods=["POST"])
-def addmessage() :
-    MessageInterface.addMessage() 
-    return flask.redirect('/message')
+@app.route('/interface/add_message', methods=["POST"])
+def addMessage() :
+    return MessageInterface.addMessage() 
 
-@app.route('/saveArticle', methods=["POST"])
+@app.route('/interface/save_article', methods=["POST"])
 def saveArticle() :
-    ArticleInterface.save() 
-    return flask.redirect('/')
+    return ArticleInterface.save() 
 
-@app.route('/auth', methods=["POST"])
+@app.route('/interface/delete_article', methods=["POST"])
+def deleteArticle() :
+    return ArticleInterface.delete() 
+
+
+@app.route('/interface/auth', methods=["POST"])
 def auth() :
     if AuthInterface.checkPassword() :
         return flask.redirect('/admin')
     else :
         return flask.redirect('/login')
 
-# @app.route('/private')
-# def private() :
-#     flask.abort(404)
+
     
 if __name__ == "__main__" :
     app.run(port=8102)

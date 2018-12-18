@@ -1,4 +1,6 @@
-# 一些多出使用的基本函数
+from flask import session
+
+# 一些多处使用的基本函数
 
 # 检查SQL语句的key值是否合法
 def sqlCheck(columns, key) :
@@ -17,3 +19,10 @@ def textFilter(text) :
     text = text.replace(">", "&gt;")
     
     return text
+
+# 确认登录
+def isLogin() :
+        if "login" not in session or session["login"] != True :
+                return False
+        else :
+                return True

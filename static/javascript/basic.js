@@ -80,7 +80,7 @@ function addMessage()
         return false
     }
 
-    httpPost("/addmessage", params)
+    httpPost("/interface/add_message", params)
 }
 
 /* 保存文章 */
@@ -101,5 +101,13 @@ function saveArticle()
         return false
     }
 
-    httpPost("/saveArticle", params)
+    httpPost("/interface/save_article", params)
+}
+
+/* 删除文章 */
+function deleteArticle(id)
+{
+    params = {}
+    params['id'] = id
+    httpPost("/interface/delete_article", params)
 }
