@@ -18,8 +18,9 @@ def renderPage(page) :
                             message_count=AsideModel.getMessages())
     
     # 目录
-    articles = ArticleModel.getArticleListPage(page, 10)
-    pages = ArticleModel.getPages(10)
+    article_number_per_page = 20
+    articles = ArticleModel.getArticleListPage(page, article_number_per_page)
+    pages = ArticleModel.getPages(article_number_per_page)
     article_list = ArticleView.renderArticleList(page, articles, pages)
 
     return render_template('template.html', 
