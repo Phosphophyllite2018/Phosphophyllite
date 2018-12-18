@@ -3,8 +3,7 @@
 import os
 from datetime import timedelta
 import flask
-from module.Page import DemoPage , ArticlePage , MessagePage , LoginPage , EditorPage 
-from module.AdminPage import AdminPage , ArticleListPage
+from module import Page , AdminPage
 from module.Model import ArticleModel
 from module.Interface import MessageInterface , AuthInterface , ArticleInterface
 
@@ -19,44 +18,44 @@ app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=30)
 @app.route('/')
 def index() :
     if ArticleModel.getCount() == 0 :
-        return DemoPage.renderPage()
+        return Page.DemoPage.renderPage()
     else :
-        return ArticlePage.renderPage()
+        return Page.ArticlePage.renderPage()
 
 @app.route('/message')
 def message() :
-    return MessagePage.renderPage()
+    return Page.MessagePage.renderPage()
 
 @app.route('/readme')
 def readme() :
-    return DemoPage.renderPage()
+    return Page.DemoPage.renderPage()
 
 @app.route('/login')
 def login() :
-    return LoginPage.renderPage()
+    return Page.LoginPage.renderPage()
 
 @app.route('/article')
 def article() :
     id = flask.request.args.get('id', type=int)
-    return ArticlePage.renderPage(id)
+    return Page.ArticlePage.renderPage(id)
 
 
 
 
-# 后台页面
+# 后台页面 
 
 @app.route('/admin')
 def admin():
-    return AdminPage.renderPage()
+    return AdminPage.AdminPage.renderPage()
     
 @app.route('/admin/edit')
 def edit():
-    return EditorPage.renderPage()
+    return AdminPage.EditorPage.renderPage()
 
 @app.route('/admin/article_list')
 def admin_article_list() :
     page = flask.request.args.get('page', type=int)
-    return ArticleListPage.renderPage(page)
+    return AdminPage.ArticleListPage.renderPage(page)
 
 
 
