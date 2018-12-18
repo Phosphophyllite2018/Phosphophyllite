@@ -52,3 +52,13 @@ def getVisiting() :
         PhosLog.log(e)
         return 0
 
+def addVisiting() :
+    try :
+        value = getVisiting() + 1
+        sql = "UPDATE blog SET visiting=%d WHERE id = 0;" % value
+        cursor().execute(sql)
+        return True
+    except Exception as e:
+        PhosLog.log(e)
+        return False
+

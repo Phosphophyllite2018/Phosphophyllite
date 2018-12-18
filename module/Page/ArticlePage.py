@@ -1,8 +1,11 @@
 from flask import render_template
 from ..View import HeadView , MarkdownView , FooterView , AsideView , ArticleView , MessageView , HeaderView
-from ..Model import HeadModel , AsideModel , ArticleModel , MessageModel , MarkdownModel
+from ..Model import HeadModel , AsideModel , ArticleModel , MessageModel , MarkdownModel , BlogModel
 
 def renderPage(id=None) :
+    # 访问量+1
+    BlogModel.addVisiting()
+
     # 文章
     if id == None :
         id = ArticleModel.getByOrder("id", -1)
