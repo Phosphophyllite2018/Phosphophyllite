@@ -105,9 +105,9 @@ function saveArticle()
 }
 
 /* 删除文章 */
-function deleteArticle(id)
+function deleteArticle(link)
 {
     params = {}
-    params['id'] = id
+    params['id'] = link.getAttribute("article-id")
     httpPost("/interface/delete_article", params)
 }
