@@ -81,11 +81,11 @@ def save(title, content, id=None) :
         title = sqlFilter(title)
         content = sqlFilter(content)
         sql = ""
-        if id == None or isExist(id):
+        if id == None or not isExist(int(id)):
             sql = "INSERT INTO article VALUES(NULL, '%s', '%s', datetime('now'), 0);" % (title, content)
         else :
-            sql = "UPDATE article SET title='%s',content='%s' WHERE id=%d;" % (title, content, id) 
-            
+            sql = "UPDATE article SET title='%s',content='%s' WHERE id=%d;" % (title, content, int(id)) 
+        print(sql)
         cursor().execute(sql)
         return True
     except Exception as e:

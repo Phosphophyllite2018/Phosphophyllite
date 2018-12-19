@@ -48,12 +48,21 @@ function httpGet(url, params)
     virtualForm.submit();
 }
 
-/* 发起Post请求 */
-function AjaxPost(url, params)
+/* 异步Post请求 */
+function AsyncPost(url, params, callback)
 {
-    let http = new XMLHttpRequest();
-    http.open("post", url, true)
+    let request = new XMLHttpRequest();
+    request.open("post", url, true)
+    let data = ""
+    for(let key in params)
+    {
+        data += key + "=" + params[key] + "&"
+    }
+    request.setRequestHeader("Content-Type","application/x-www-form-urlencoded;");
+    request.send(data)
     
+    /* 设置回调 */
+    request.onreadystatechange = function() {callback(request)}
 }
 
 /* 添加留言 */
@@ -84,20 +93,29 @@ function addMessage()
 }
 
 /* 保存文章 */
-function saveArticle()
+function saveArticle(button)
 {
     params = {}
+    id = button.getAttribute("article-id")
+    if(Number.isInteger(Number(id)))
+    {
+        params['id'] = id
+    }
+    else
+    {
+        params['id'] = 0
+    }
     params['title'] = document.querySelector("#article_title").value
     params['content'] = document.querySelector("#article_content").value
     if(params['title'].replace(/^\s*|\s*$/g,"") == "") // 去除空格后为空
     {
-        alter("请填写标题")
+        alert("请填写标题")
         return false
     }
 
     if(params['content'].replace(/^\s*|\s*$/g,"") == "") // 去除空格后为空
     {
-        alter("请编辑文章")
+        alert("请编辑文章")
         return false
     }
 

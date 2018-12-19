@@ -74,13 +74,16 @@ def saveArticle() :
 def deleteArticle() :
     return ArticleInterface.delete() 
 
-
 @app.route('/interface/auth', methods=["POST"])
 def auth() :
     if AuthInterface.checkPassword() :
         return flask.redirect('/admin')
     else :
         return flask.redirect('/login')
+
+@app.route('/interface/article_json', methods=["POST"])
+def articleJson() :
+    return ArticleInterface.content() 
 
 
     

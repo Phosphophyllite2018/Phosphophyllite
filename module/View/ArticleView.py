@@ -9,8 +9,8 @@ def render(title, date, reading, content):
                             article_content=content)
     return output
 
-def renderEditor() :
-    output = render_template("editor.html")
+def renderEditor(id=0) :
+    output = render_template("admin/editor.html", article_id=id)
     return output
 
 def renderAsideArticle(recent_article, gitname, gitpass) :
