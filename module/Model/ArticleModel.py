@@ -1,3 +1,4 @@
+import math
 import sqlite3
 from ..Phos import PhosLog 
 from ..Phos.common import sqlCheck , sqlFilter
@@ -80,11 +81,22 @@ def save(title, content, id=None) :
         title = sqlFilter(title)
         content = sqlFilter(content)
         sql = ""
-        if id == None or isExist(id):
+        if id == None or not isExist(int(id)):
             sql = "INSERT INTO article VALUES(NULL, '%s', '%s', datetime('now'), 0);" % (title, content)
         else :
-            sql = "UPDATE article SET title='%s',content='%s' WHERE id=%d;" % (title, content, id) 
-            
+            sql = "UPDATE article SET title='%s',content='%s' WHERE id=%d;" % (title, content, int(id)) 
+        print(sql)
+        cursor().execute(sql)
+        return True
+    except Exception as e:
+        PhosLog.log(e)
+        return False
+
+# 删除文章
+def delete(id) :
+    try:
+        sql = "DELETE FROM article WHERE id=%d" % id
+        
         cursor().execute(sql)
         return True
     except Exception as e:
@@ -117,3 +129,32 @@ def getRecentArticle(n) :
         })
 
     return recent_article
+
+# 获取最近第num_start到第num_end篇文章
+def getArticleList(num_start, num_end) :
+    article_list = []
+    if getCount() < num_start :
+        num_start = getCount()
+    if getCount() < num_end :
+        num_end = getCount() + 1
+    for i in range(num_start, num_end) :
+        article_list.append({
+            "id"         : getByOrder("id", -i),
+            "title"      : getByOrder("title", -i),
+            "birthday"   : getByOrder("birthday", -i),
+            "visiting"   : getByOrder("visiting", -i)
+        })
+        
+    return article_list
+
+# 按页获取文章列表， page从1开始
+def getArticleListPage(page, perpage) :
+    num_start = (perpage * (page-1) + 1)
+    num_end   = (perpage * page + 1)
+
+    return getArticleList(num_start, num_end)
+
+
+# 获取总页数
+def getPages(perpage) : 
+    return math.ceil(getCount() / perpage)

@@ -13,7 +13,7 @@ header {
 	height: 50px;
 	width: 100%;
 	margin-bottom: 20px;
-	background-color: #39f;
+	background-color: #009999;
 }
 
 /* aside和atcile在同一行 */
@@ -67,6 +67,27 @@ footer {
 	text-decoration: none;
 	border: 1px solid rgb(38, 116, 194);
 	border-radius: 5px;
+}
+
+
+.admin_choice{
+	display: block;
+	background-color: #009999;
+	color: white;
+	text-align: center;
+	text-decoration: none;
+	border: 1px solid #39f;
+	border-radius: 10px;
+	margin: 5px 0;
+}
+
+.admin_choice:hover {
+	display: block;
+	background-color: rgb(38, 116, 194);
+	color: white;
+	text-decoration: none;
+	border: 1px solid #39f;
+	border-radius: 10px;
 }
 
  /* 标题和前面空一定的距离 */
@@ -156,13 +177,13 @@ em > strong {
 
 /* 链接显示为深绿色 */
 a {
-	color: forestgreen;
+	color: #009999;
 	text-decoration: underline;
 }
 
 a:hover {
 	color: white;
-	background-color: forestgreen;
+	background-color: #009999;
 }
 
 /* 头像显示为圆形 */
@@ -242,4 +263,17 @@ a:hover {
 .subtitle > a:hover {
 	color: salmon;
 	background-color: unset;
+}
+
+/* 文章列表 */
+.article_href a {
+	color: #009999;
+	text-decoration: none;
+	
+}
+
+.article_href a:hover {
+	color: #009999;
+	background-color: unset;
+	text-decoration: underline;
 }

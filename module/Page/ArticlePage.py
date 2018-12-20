@@ -1,11 +1,20 @@
-import flask
-from flask import render_template , session
-from .View import HeadView , MarkdownView , FooterView , AsideView , ArticleView , MessageView
-from .Model import HeadModel , AsideModel , ArticleModel , MessageModel , MarkdownModel
+from flask import render_template
+from ..View import HeadView , MarkdownView , FooterView , AsideView , ArticleView , MessageView , HeaderView
+from ..Model import HeadModel , AsideModel , ArticleModel , MessageModel , MarkdownModel , BlogModel
 
-def renderPage() :
-    if 'login' not in session or session['login'] != True :
-        return flask.redirect('/login')
+def renderPage(id=None) :
+    # 访问量+1
+    BlogModel.addVisiting()
+
+    # 文章
+    if id == None :
+        id = ArticleModel.getByOrder("id", -1)
+
+    title = ArticleModel.getById("title",id)
+    birthday = ArticleModel.getById("birthday",id)
+    visiting = ArticleModel.getById("visiting",id)
+    content = ArticleModel.getById("content",id)
+    ArticleModel.addVisiting(id)
 
     # GitHub用户名密码
     gitname = MarkdownModel.getGitName()
@@ -13,7 +22,7 @@ def renderPage() :
 
     # 最近文章
     recent_article = ArticleModel.getRecentArticle(10)
-    recent_article_html = ArticleView.renderAsideArticle(recent_article, gitname, gitpass)
+    recent_article_html = ArticleView.renderAsideArticleList(recent_article, gitname, gitpass)
 
     # 最近留言
     recent_message = MessageModel.getRecentMessage(10)
@@ -28,11 +37,14 @@ def renderPage() :
                             recent_article=recent_article_html,
                             recent_message=recent_message_html)
 
-    editor_html = ArticleView.renderEditor()
+    # 文章
+    article_html = ArticleView.render(title, birthday, visiting, MarkdownView.renderMarkdown(content, gitname, gitpass))
+    
     return render_template('template.html', 
                             css_settings=HeadView.renderCSS(HeadModel.getCSS()),
                             js_settings=HeadView.renderJS(HeadModel.getJS()),
                             title="Phosphophyllite",
+                            header=HeaderView.renderHeader(),
                             aside=aside,
-                            article=editor_html,
+                            article=article_html,
                             footer=FooterView.renderFooter())

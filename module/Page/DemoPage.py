@@ -1,8 +1,8 @@
 # 示例页面
 
 from flask import render_template
-from .View import HeadView , MarkdownView , FooterView , AsideView , ArticleView , MessageView , HeaderView
-from .Model import HeadModel , AsideModel , MarkdownModel , MessageModel , ArticleModel
+from ..View import HeadView , MarkdownView , FooterView , AsideView , ArticleView , MessageView , HeaderView
+from ..Model import HeadModel , AsideModel , MarkdownModel , MessageModel , ArticleModel
 
 def renderPage() :
     demo_article = open('README.md', "r", encoding='utf-8').read()
@@ -17,7 +17,7 @@ def renderPage() :
 
     # 最近文章
     recent_article = ArticleModel.getRecentArticle(10) 
-    recent_article_html = ArticleView.renderAsideArticle(recent_article, gitname, gitpass)
+    recent_article_html = ArticleView.renderAsideArticleList(recent_article, gitname, gitpass)
 
     # 最近留言
     recent_message = MessageModel.getRecentMessage(10)
