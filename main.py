@@ -39,6 +39,11 @@ def article() :
     id = flask.request.args.get('id', type=int)
     return Page.ArticlePage.renderPage(id)
 
+@app.route('/article_list')
+def articleList() :
+    id = flask.request.args.get('id', type=int)
+    return Page.ArticleListPage.renderPage(id)
+
 
 
 

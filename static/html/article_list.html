@@ -1,0 +1,13 @@
+<h1>文章目录</h1>
+<a href="{{ prev }}"> 上一页 </a>
+<span class="value"> {{ page }} / {{ total_pages }}</span>
+<a href="{{ next }}"> 下一页 </a>
+<hr/>
+{% for article in article_list %}
+<h1 class="article_href"><a href="/article?id={{ article.id }}">{{ article.title }}</a></h1>
+<p class="arcicle_statistics">
+    日期 : <span class="value">{{ article.birthday }}</span>
+    阅读量 : <span class="value">{{ article.visiting }}</span>
+</p>
+<hr/>
+{% endfor %}

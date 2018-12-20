@@ -177,13 +177,13 @@ em > strong {
 
 /* 链接显示为深绿色 */
 a {
-	color: forestgreen;
+	color: #009999;
 	text-decoration: underline;
 }
 
 a:hover {
 	color: white;
-	background-color: forestgreen;
+	background-color: #009999;
 }
 
 /* 头像显示为圆形 */
@@ -263,4 +263,17 @@ a:hover {
 .subtitle > a:hover {
 	color: salmon;
 	background-color: unset;
+}
+
+/* 文章列表 */
+.article_href a {
+	color: #009999;
+	text-decoration: none;
+	
+}
+
+.article_href a:hover {
+	color: #009999;
+	background-color: unset;
+	text-decoration: underline;
 }

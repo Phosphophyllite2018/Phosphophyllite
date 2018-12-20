@@ -22,7 +22,7 @@ def renderPage(id=None) :
 
     # 最近文章
     recent_article = ArticleModel.getRecentArticle(10)
-    recent_article_html = ArticleView.renderAsideArticle(recent_article, gitname, gitpass)
+    recent_article_html = ArticleView.renderAsideArticleList(recent_article, gitname, gitpass)
 
     # 最近留言
     recent_message = MessageModel.getRecentMessage(10)
