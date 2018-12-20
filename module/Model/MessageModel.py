@@ -78,3 +78,24 @@ def getRecentMessage(n) :
         })
 
     return recent_message
+
+# 返回第n页留言
+def getMessages(page, perpage=20) :
+    recent_message = []
+    if page == 1 :
+        start = 1
+    else :
+        start = perpage * (page-1) + 1
+    n = perpage * page 
+    if getCount() < n :
+        n = getCount()
+
+    for i in range(start, n + 1) :
+        recent_message.append({
+            "id"        : getByOrder("id", -i),
+            "name"      : getByOrder("name", -i),
+            "birthday"  : getByOrder("birthday", -i),
+            "content"   : getByOrder("content", -i)
+        })
+
+    return recent_message

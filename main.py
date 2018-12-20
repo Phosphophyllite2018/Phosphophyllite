@@ -24,7 +24,8 @@ def index() :
 
 @app.route('/message')
 def message() :
-    return Page.MessagePage.renderPage()
+    page = flask.request.args.get('page', type=int)
+    return Page.MessagePage.renderPage(page)
 
 @app.route('/readme')
 def readme() :
@@ -41,8 +42,8 @@ def article() :
 
 @app.route('/article_list')
 def articleList() :
-    id = flask.request.args.get('id', type=int)
-    return Page.ArticleListPage.renderPage(id)
+    page = flask.request.args.get('page', type=int)
+    return Page.ArticleListPage.renderPage(page)
 
 
 

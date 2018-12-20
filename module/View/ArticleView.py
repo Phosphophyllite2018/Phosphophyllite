@@ -27,10 +27,10 @@ def renderAsideArticleList(recent_article, gitname, gitpass) :
 
 # 渲染管理页面文章列表
 def renderAdminArticleList(page, articles, total_pages) :
-    prev = ("/article_list?page=%d" % (page - 1)) if page - 1 > 0 else ""
-    next = ("/article_list?page=%d" % (page + 1)) if page + 1 > total_pages else ""
+    prev = ("/admin/article_list?page=%d" % (page - 1)) if page - 1 > 0 else ""
+    next = ("/admin/article_list?page=%d" % (page + 1)) if page + 1 <= total_pages else ""
     return render_template("admin/article_list.html",
-                            page=page+1,
+                            page=page,
                             total_pages=total_pages,
                             prev=prev,
                             next=next,
@@ -39,9 +39,9 @@ def renderAdminArticleList(page, articles, total_pages) :
 # 渲染文章列表
 def renderArticleList(page, articles, total_pages) :
     prev = ("/article_list?page=%d" % (page - 1)) if page - 1 > 0 else ""
-    next = ("/article_list?page=%d" % (page + 1)) if page + 1 > total_pages else ""
+    next = ("/article_list?page=%d" % (page + 1)) if page + 1 <= total_pages else ""
     return render_template("article_list.html",
-                            page=page+1,
+                            page=page,
                             total_pages=total_pages,
                             prev=prev,
                             next=next,

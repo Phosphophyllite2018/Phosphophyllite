@@ -7,12 +7,12 @@ from ..Phos.common import textFilter
 def renderAsideMessage(recent_message, gitname, gitpass) :
     recent_message_html = ""
     for message in recent_message :
-        name = message['name']
-        date = message['birthday']
-        content = message['content']
+        name = message['name'] 
+        date = message['birthday'] 
+        content = message['content'] 
 
         # 如果没有内容
-        if content.strip() == "" :
+        if not isinstance(content,str) or content.strip() == "" :
             continue
 
         recent_message_html += "<p><span class='visitor'>[ %s ]</span><br/></p>" % textFilter(name)
@@ -21,21 +21,28 @@ def renderAsideMessage(recent_message, gitname, gitpass) :
     return recent_message_html
 
 # 留言页面上的留言
-def renderPageMessage(recent_message, gitname, gitpass) :
+def renderMessageBoard(page, total_pages, messages, gitname, gitpass) :
     recent_message_html = ""
-    for message in recent_message :
+    for message in messages :
         floor = message['id']
         name = message['name']
         date = message['birthday']
         content = message['content']
 
-       # 如果没有内容
-        if content.strip() == "" :
+        # 如果没有内容
+        if not isinstance(content,str) or content.strip() == "" :
             continue
             
-        recent_message_html += "<hr/>"
-        recent_message_html += "<span class='floor'> #%d </span>" % floor
+        recent_message_html += "<br/><span class='floor'> #%d </span>" % floor
         recent_message_html += "<span class='visitor'>[ %s ]</span>" % textFilter(name)
         recent_message_html += "<em>( %s )</em><br/>" % date
         recent_message_html += MarkdownView.renderMarkdown(content, gitname, gitpass)
-    return render_template("message.html", recent_message=recent_message_html)
+
+    prev = ("/message?page=%d" % (page - 1)) if page - 1 > 0 else ""
+    next = ("/message?page=%d" % (page + 1)) if page + 1 <= total_pages else ""
+    return render_template("message.html", 
+                            recent_message=recent_message_html,
+                            page=page,
+                            total_pages=total_pages,
+                            next=next,
+                            prev=prev)

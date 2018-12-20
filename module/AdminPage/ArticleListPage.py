@@ -9,7 +9,7 @@ def renderPage(page) :
         return flask.redirect('/login')
 
     if not isinstance(page, int) :
-        page = 0
+        page = 1
 
     # 侧边栏
     aside = AsideView.renderAdminAside(username=AsideModel.getUsername(), 

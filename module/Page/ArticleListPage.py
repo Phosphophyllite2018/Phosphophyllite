@@ -7,7 +7,7 @@ from ..Model import HeadModel , AsideModel , ArticleModel , MessageModel , Markd
 def renderPage(page) : 
 
     if not isinstance(page, int) :
-        page = 0
+        page = 1
 
     # GitHub用户名密码
     gitname = MarkdownModel.getGitName()

@@ -147,10 +147,10 @@ def getArticleList(num_start, num_end) :
         
     return article_list
 
-# 按页获取文章列表， page从0开始
+# 按页获取文章列表， page从1开始
 def getArticleListPage(page, perpage) :
-    num_start = (perpage * page + 1)
-    num_end   = (perpage * (page + 1) + 1)
+    num_start = (perpage * (page-1) + 1)
+    num_end   = (perpage * page + 1)
 
     return getArticleList(num_start, num_end)
 
