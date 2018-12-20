@@ -13,7 +13,7 @@ header {
 	height: 50px;
 	width: 100%;
 	margin-bottom: 20px;
-	background-color: #39f;
+	background-color: #009999;
 }
 
 /* aside和atcile在同一行 */
@@ -72,7 +72,7 @@ footer {
 
 .admin_choice{
 	display: block;
-	background-color: #39f;
+	background-color: #009999;
 	color: white;
 	text-align: center;
 	text-decoration: none;
