@@ -15,9 +15,9 @@ def renderAsideMessage(recent_message, gitname, gitpass) :
         if content.strip() == "" :
             continue
 
-        recent_message_html += "<br/><span class='visitor'>[ %s ]</span><br/>" % textFilter(name)
+        recent_message_html += "<p><span class='visitor'>[ %s ]</span><br/></p>" % textFilter(name)
         # recent_message_html += "<em>( %s )</em>" % date
-        recent_message_html += MarkdownView.renderMarkdown(content, gitname, gitpass)
+        recent_message_html += "<p>" + MarkdownView.renderMarkdown(content, gitname, gitpass) + "</p>"
     return recent_message_html
 
 # 留言页面上的留言
