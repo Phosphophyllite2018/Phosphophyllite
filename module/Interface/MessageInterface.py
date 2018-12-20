@@ -9,3 +9,10 @@ def addMessage() :
     MessageModel.append(name, content)
 
     return flask.redirect('/message')
+
+
+def deleteMessage() :
+    id = request.form['id']
+    MessageModel.delete(int(id))
+
+    return flask.redirect('/admin/message')

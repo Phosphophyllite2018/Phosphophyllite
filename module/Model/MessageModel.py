@@ -1,4 +1,5 @@
 import sqlite3
+import math
 from ..Phos import PhosLog
 from ..Phos.common import sqlFilter , sqlCheck
 
@@ -62,6 +63,16 @@ def append(name, content) :
         PhosLog.log(e)
         return False
 
+# 删除留言
+def delete(id) :
+    try :
+        sql = "DELETE FROM message WHERE id=%d;" % id
+        cursor().execute(sql)
+        return True
+    except Exception as e:
+        PhosLog.log(e)
+        return False
+
 # 返回最近的n条留言
 def getRecentMessage(n) :
     recent_message = []
@@ -78,6 +89,9 @@ def getRecentMessage(n) :
         })
 
     return recent_message
+
+def getPages(perpage) :
+    return math.ceil(getCount() / perpage)
 
 # 返回第n页留言
 def getMessages(page, perpage=20) :

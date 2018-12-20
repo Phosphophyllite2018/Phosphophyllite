@@ -129,3 +129,11 @@ function deleteArticle(link)
     params['id'] = link.getAttribute("article-id")
     httpPost("/interface/delete_article", params)
 }
+
+/* 删除留言 */
+function deleteMessage(link)
+{
+    params = {}
+    params['id'] = link.getAttribute("message-id")
+    httpPost("/interface/delete_message", params)
+}

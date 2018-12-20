@@ -63,6 +63,11 @@ def admin_article_list() :
     page = flask.request.args.get('page', type=int)
     return AdminPage.ArticleListPage.renderPage(page)
 
+@app.route('/admin/message')
+def admin_message() :
+    page = flask.request.args.get('page', type=int)
+    return AdminPage.MessagePage.renderPage(page)
+
 
 
 
@@ -71,6 +76,10 @@ def admin_article_list() :
 @app.route('/interface/add_message', methods=["POST"])
 def addMessage() :
     return MessageInterface.addMessage() 
+
+@app.route('/interface/delete_message', methods=["POST"])
+def deleteMessage() :
+    return MessageInterface.deleteMessage() 
 
 @app.route('/interface/save_article', methods=["POST"])
 def saveArticle() :

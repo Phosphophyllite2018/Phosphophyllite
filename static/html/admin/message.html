@@ -14,9 +14,8 @@
         {% for message in message_list %}
             <tr>
                 <td align="center" > {{ message.id }} </td>
-                <td align="left"> {{ message.title }} </td>
-                <td align="center"> {{ message.birthday }} </td>
-                <td align="center"> {{ message.visiting }} </td>
+                <td align="left"> {{ message.name }} </td>
+                <td align="center"> {{ message.content }} </td>
                 <td align="center"> 
                     <a href="javascript:void(0);" onclick="deleteMessage(this)" message-id="{{ message.id }}"> 删除 </a>
                 </td>

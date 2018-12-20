@@ -46,3 +46,13 @@ def renderMessageBoard(page, total_pages, messages, gitname, gitpass) :
                             total_pages=total_pages,
                             next=next,
                             prev=prev)
+
+def renderAdminMessageList(page, total_pages, messages) :
+    prev = ("/admin/message?page=%d" % (page - 1)) if page - 1 > 0 else ""
+    next = ("/admin/message?page=%d" % (page + 1)) if page + 1 <= total_pages else ""
+    return render_template("/admin/message.html", 
+                            message_list=messages,
+                            page=page,
+                            total_pages=total_pages,
+                            next=next,
+                            prev=prev)
