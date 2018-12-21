@@ -53,14 +53,6 @@
   * [Markdown渲染](#Markdown渲染)  
 
 
-
-## 用户接口
-
-
-|`error`    | string  | 失败时   | 错误消息 |
-
-
-
 ## 博客数据接口  
 
 ### 用户登录  
@@ -169,7 +161,7 @@
 
 |   字段名   | 变量类型 | 何时存在              | 说明            |
 |        :-:|      :-:|                    :-:|              :-:|
-|`method`   | string  | 总是                  | `'id`或`order'`   |
+|`method`   | string  | 总是                  | `'id'`或`'order'`   |
 |`id`       | int     | `method`为`'id'`时    | 文章id          |
 |`order`    | int     | `method`为`'order'`时 | 文章序号，负数表示逆序 |
 
@@ -187,7 +179,7 @@
 
 |   字段名   | 变量类型 | 何时存在              | 说明            |
 |        :-:|      :-:|                    :-:|              :-:|
-|`method`   | string  | 总是                  | `'id`或`order'`   |
+|`method`   | string  | 总是                  | `'id'`或`'order'`   |
 |`id`       | int     | `method`为`'id'`时    | 文章id          |
 |`order`    | int     | `method`为`'order'`时 | 文章序号，负数表示逆序 |
 
@@ -205,7 +197,7 @@
 
 |   字段名   | 变量类型 | 何时存在              | 说明            |
 |        :-:|      :-:|                    :-:|              :-:|
-|`method`   | string  | 总是                  | `'id`或`order'`   |
+|`method`   | string  | 总是                  | `'id'`或`'order'`   |
 |`id`       | int     | `method`为`'id'`时    | 文章id          |
 |`order`    | int     | `method`为`'order'`时 | 文章序号，负数表示逆序 |
 
@@ -223,7 +215,7 @@
 
 |   字段名   | 变量类型 | 何时存在              | 说明            |
 |        :-:|      :-:|                    :-:|              :-:|
-|`method`   | string  | 总是                  | `'id`或`order'`   |
+|`method`   | string  | 总是                  | `'id'`或`'order'`   |
 |`id`       | int     | `method`为`'id'`时    | 文章id          |
 |`order`    | int     | `method`为`'order'`时 | 文章序号，负数表示逆序 |
 
@@ -245,7 +237,7 @@
 
 |   字段名   | 变量类型 | 何时存在              | 说明            |
 |        :-:|      :-:|                    :-:|              :-:|
-|`method`   | string  | 总是                  | `'id`或`order'`   |
+|`method`   | string  | 总是                  | `'id'`或`'order'`   |
 |`id`       | int     | `method`为`'id'`时    | 文章id          |
 |`order`    | int     | `method`为`'order'`时 | 文章序号，负数表示逆序 |
 |`title`    | string  | 总是                  | 文章标题 |
@@ -263,7 +255,7 @@
 
 |   字段名   | 变量类型 | 何时存在              | 说明            |
 |        :-:|      :-:|                    :-:|              :-:|
-|`method`   | string  | 总是                  | `'id`或`order'`   |
+|`method`   | string  | 总是                  | `'id'`或`'order'`   |
 |`id`       | int     | `method`为`'id'`时    | 文章id          |
 |`order`    | int     | `method`为`'order'`时 | 文章序号，负数表示逆序 |
 |`count`    | string  | 总是                  | 阅读量 |
@@ -281,7 +273,7 @@
 
 |   字段名   | 变量类型 | 何时存在              | 说明            |
 |        :-:|      :-:|                    :-:|              :-:|
-|`method`   | string  | 总是                  | `'id`或`order'`   |
+|`method`   | string  | 总是                  | `'id'`或`'order'`   |
 |`id`       | int     | `method`为`'id'`时    | 文章id          |
 |`order`    | int     | `method`为`'order'`时 | 文章序号，负数表示逆序 |
 |`content`  | string  | 总是                  | 文章内容 |
@@ -299,7 +291,7 @@
 
 |   字段名   | 变量类型 | 何时存在              | 说明            |
 |        :-:|      :-:|                    :-:|              :-:|
-|`method`   | string  | 总是                  | `'id`或`order'`   |
+|`method`   | string  | 总是                  | `'id'`或`'order'`   |
 |`id`       | int     | `method`为`'id'`时    | 文章id          |
 |`order`    | int     | `method`为`'order'`时 | 文章序号，负数表示逆序 |
 |`title`    | string  | 总是                  | 文章标题 |
@@ -311,3 +303,126 @@
 |        :-:|      :-:|       :-:|      :-:|
 |`state`    | bool    | 总是     | 是否成功 |
 |`error`    | string  | 失败时   | 错误消息 |
+
+
+## 留言数据接口  
+
+### 留言总数  
+* URL : `/message/count`
+* 参数列表 : 无
+
+* 返回值列表  
+  
+|   字段名   | 变量类型 | 何时存在 | 说明    |
+|        :-:|      :-:|       :-:|      :-:|
+|`state`    | bool    | 总是     | 是否成功 |
+|`error`    | string  | 失败时   | 错误消息 |
+|`count`    | int     | 成功时   | 留言总数 |
+
+### 留言访客名  
+* URL : `/message/visitor_name`
+* 参数列表  
+
+|   字段名   | 变量类型 | 何时存在              | 说明            |
+|        :-:|      :-:|                    :-:|              :-:|
+|`method`   | string  | 总是                  | `'id'`或`'order'`   |
+|`id`       | int     | `method`为`'id'`时    | 留言id          |
+|`order`    | int     | `method`为`'order'`时 | 留言序号，负数表示逆序 |
+
+* 返回值列表  
+  
+|   字段名   | 变量类型 | 何时存在 | 说明    |
+|        :-:|      :-:|       :-:|      :-:|
+|`state`    | bool    | 总是     | 是否成功 |
+|`error`    | string  | 失败时   | 错误消息 |
+|`name`     | string  | 成功时   | 访客名   |
+
+### 留言日期  
+* URL : `/message/date`
+* 参数列表  
+
+|   字段名   | 变量类型 | 何时存在              | 说明            |
+|        :-:|      :-:|                    :-:|              :-:|
+|`method`   | string  | 总是                  | `'id'`或`'order'`   |
+|`id`       | int     | `method`为`'id'`时    | 留言id          |
+|`order`    | int     | `method`为`'order'`时 | 留言序号，负数表示逆序 |
+
+* 返回值列表  
+  
+|   字段名   | 变量类型 | 何时存在 | 说明    |
+|        :-:|      :-:|       :-:|      :-:|
+|`state`    | bool    | 总是     | 是否成功 |
+|`error`    | string  | 失败时   | 错误消息 |
+|`date`     | string  | 成功时   | 留言日期 |
+
+### 留言内容  
+* URL : `/message/content`
+* 参数列表  
+
+|   字段名   | 变量类型 | 何时存在              | 说明            |
+|        :-:|      :-:|                    :-:|              :-:|
+|`method`   | string  | 总是                  | `'id'`或`'order'`   |
+|`id`       | int     | `method`为`'id'`时    | 留言id          |
+|`order`    | int     | `method`为`'order'`时 | 留言序号，负数表示逆序 |
+
+* 返回值列表  
+  
+|   字段名   | 变量类型 | 何时存在 | 说明    |
+|        :-:|      :-:|       :-:|      :-:|
+|`state`    | bool    | 总是     | 是否成功 |
+|`error`    | string  | 失败时   | 错误消息 |
+|`content`  | string  | 成功时   | 留言内容 |
+
+### 留言完整数据  
+* URL : `/message/content`
+* 参数列表  
+
+|   字段名   | 变量类型 | 何时存在              | 说明            |
+|        :-:|      :-:|                    :-:|              :-:|
+|`method`   | string  | 总是                  | `'id'`或`'order'`   |
+|`id`       | int     | `method`为`'id'`时    | 留言id          |
+|`order`    | int     | `method`为`'order'`时 | 留言序号，负数表示逆序 |
+
+* 返回值列表  
+  
+|   字段名   | 变量类型 | 何时存在 | 说明    |
+|        :-:|      :-:|       :-:|      :-:|
+|`state`    | bool    | 总是     | 是否成功 |
+|`error`    | string  | 失败时   | 错误消息 |
+|`name`     | string  | 成功时   | 访客名   |
+|`date`     | string  | 成功时   | 留言日期 |
+|`content`  | string  | 成功时   | 留言内容 |
+
+### 留言保存  
+* URL : `/message/save`
+* 参数列表  
+
+|   字段名   | 变量类型 | 何时存在 | 说明     |
+|        :-:|      :-:|       :-:|       :-:|
+|`name`     | string  | 成功时    | 访客名   |
+|`content`  | string  | 成功时    | 留言内容 |
+
+* 返回值列表  
+  
+|   字段名   | 变量类型 | 何时存在 | 说明    |
+|        :-:|      :-:|       :-:|      :-:|
+|`state`    | bool    | 总是     | 是否成功 |
+|`error`    | string  | 失败时   | 错误消息 |
+
+
+## Markdown接口  
+### Markdown渲染  
+* URL : `/markdown/render`
+* 参数列表  
+
+|   字段名   | 变量类型 | 何时存在 | 说明         |
+|        :-:|      :-:|       :-:|          :-:|
+|`content`  | string  | 成功时    | 要渲染的内容 |
+
+* 返回值列表  
+  
+|   字段名   | 变量类型 | 何时存在 | 说明        |
+|        :-:|      :-:|       :-:|          :-:|
+|`state`    | bool    | 总是     | 是否成功     |
+|`error`    | string  | 失败时   | 错误消息     |
+|`content`  | string  | 成功时   | 渲染后的内容 |
