@@ -1,5 +1,11 @@
 # Phosphophyllite
-`Phosphophyllite`是一个基于`Flask`开发的小型博客程序，采用`Markdown`作为文章编辑语法。
+`Phosphophyllite`是一个基于`Flask`开发的小型博客程序，采用`Markdown`作为文章编辑语法。  
+* 此分支用于进行重构
+
+## 重构目标
+* 采用Ajax进行通信，使前后端完全分离。
+* 前后端通信的[接口定义](Interface.md)
+
 
 ## Markdown语法   
 :octocat::octocat::octocat::octocat::octocat::octocat::octocat::octocat::octocat:  
