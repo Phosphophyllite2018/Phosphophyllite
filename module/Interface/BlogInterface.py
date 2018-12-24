@@ -1,6 +1,7 @@
 import json
 import flask
 from flask import request , session
+from ..Phos import PhosLog 
 from ..Model import BlogModel
 
 # 是否登录
@@ -9,7 +10,7 @@ def isLogin() :
 
     try :
         jsonStr  = request.form['json']
-        jsonData = json.loads(jsonStr, ensure_ascii=False)
+        jsonData = json.loads(jsonStr)
 
         username = jsonData['username']
         if username in session and session[username] == True :
@@ -22,6 +23,8 @@ def isLogin() :
     except Exception as e:
         returnJsonData['state'] = False
         returnJsonData['error'] = str(e)
+        PhosLog.log(e)
+        
 
     return json.dumps(returnJsonData, ensure_ascii=False)
 
@@ -31,7 +34,7 @@ def login() :
 
     try :
         jsonStr  = request.form['json']
-        jsonData = json.loads(jsonStr, ensure_ascii=False)
+        jsonData = json.loads(jsonStr)
 
         username = jsonData['username']
         password = jsonData['password']
@@ -48,6 +51,7 @@ def login() :
     except Exception as e:
         returnJsonData['state'] = False
         returnJsonData['error'] = str(e)
+        PhosLog.log(e)
 
     return json.dumps(returnJsonData, ensure_ascii=False)
 
@@ -57,7 +61,7 @@ def getUsername() :
 
     try :
         # jsonStr  = request.form['json']
-        # jsonData = json.loads(jsonStr, ensure_ascii=False)
+        # jsonData = json.loads(jsonStr)
 
         returnJsonData['username'] = BlogModel.getUsername()
         returnJsonData['state'] = True
@@ -66,6 +70,7 @@ def getUsername() :
     except Exception as e:
         returnJsonData['state'] = False
         returnJsonData['error'] = str(e)
+        PhosLog.log(e)
 
     return json.dumps(returnJsonData, ensure_ascii=False)
 
@@ -75,7 +80,7 @@ def getRunDays() :
 
     try :
         # jsonStr  = request.form['json']
-        # jsonData = json.loads(jsonStr, ensure_ascii=False)
+        # jsonData = json.loads(jsonStr)
 
         returnJsonData['days'] = BlogModel.getRunDays()
         returnJsonData['state'] = True
@@ -84,6 +89,7 @@ def getRunDays() :
     except Exception as e:
         returnJsonData['state'] = False
         returnJsonData['error'] = str(e)
+        PhosLog.log(e)
 
     return json.dumps(returnJsonData, ensure_ascii=False)
 
@@ -93,7 +99,7 @@ def getVisitingCount() :
 
     try :
         # jsonStr  = request.form['json']
-        # jsonData = json.loads(jsonStr, ensure_ascii=False)
+        # jsonData = json.loads(jsonStr)
 
         returnJsonData['count'] = BlogModel.getVisiting()
         returnJsonData['state'] = True
@@ -102,6 +108,7 @@ def getVisitingCount() :
     except Exception as e:
         returnJsonData['state'] = False
         returnJsonData['error'] = str(e)
+        PhosLog.log(e)
 
     return json.dumps(returnJsonData, ensure_ascii=False)
 
@@ -111,7 +118,7 @@ def addVisitingCount() :
 
     try :
         # jsonStr  = request.form['json']
-        # jsonData = json.loads(jsonStr, ensure_ascii=False)
+        # jsonData = json.loads(jsonStr)
 
         BlogModel.addVisiting()
         returnJsonData['state'] = True
@@ -120,5 +127,6 @@ def addVisitingCount() :
     except Exception as e:
         returnJsonData['state'] = False
         returnJsonData['error'] = str(e)
+        PhosLog.log(e)
 
     return json.dumps(returnJsonData, ensure_ascii=False)

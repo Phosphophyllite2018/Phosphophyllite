@@ -62,7 +62,30 @@ function AsyncPost(url, params, callback)
     request.send(data)
     
     /* 设置回调 */
-    request.onreadystatechange = function() {callback(request)}
+    request.onreadystatechange = function() {
+        if(request.readyState != 4)
+        {
+            return false
+        }
+        
+        callback(request)
+    }
+}
+
+/* 接口测试打印 */
+function InterfacePrint(request)
+{
+    let p = document.createElement("p")
+    p.innerText = request.responseText
+    document.body.appendChild(p)
+}
+
+/* 接口测试函数 */
+function InterfaceTest(url, params)
+{
+    let json = JSON.stringify(params)
+    let jsonParams = {"json" : json}
+    AsyncPost(url, jsonParams, InterfacePrint)
 }
 
 /* 添加留言 */

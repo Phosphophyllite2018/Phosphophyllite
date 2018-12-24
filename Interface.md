@@ -88,7 +88,7 @@
 |`error`    | string  | 失败时   | 错误消息 |
 
 ### 用户名  
-* URL : `/blog/login`
+* URL : `/blog/username`
 * 参数列表 : 无  
 
 * 返回值列表  
