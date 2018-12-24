@@ -52,9 +52,9 @@ def getVisiting() :
         PhosLog.log(e)
         return 0
 
-def addVisiting() :
+def addVisiting(n=1) :
     try :
-        value = getVisiting() + 1
+        value = getVisiting() + n
         sql = "UPDATE blog SET visiting=%d WHERE id = 0;" % value
         cursor().execute(sql)
         return True
