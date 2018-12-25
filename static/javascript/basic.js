@@ -72,6 +72,26 @@ function AsyncPost(url, params, callback)
     }
 }
 
+
+/* 异步Post发送JSON */
+function AsyncJsonPost(url, json, callback)
+{
+    let request = new XMLHttpRequest();
+    request.open("post", url, true)
+    request.setRequestHeader("Content-Type","application/json;");
+    request.send(json)
+    
+    /* 设置回调 */
+    request.onreadystatechange = function() {
+        if(request.readyState != 4)
+        {
+            return false
+        }
+        
+        callback(request)
+    }
+}
+
 /* 接口测试打印 */
 function InterfacePrint(request)
 {
@@ -84,8 +104,7 @@ function InterfacePrint(request)
 function InterfaceTest(url, params)
 {
     let json = JSON.stringify(params)
-    let jsonParams = {"json" : json}
-    AsyncPost(url, jsonParams, InterfacePrint)
+    AsyncJsonPost(url, json, InterfacePrint)
 }
 
 /* 添加留言 */
