@@ -9,10 +9,7 @@ def isLogin() :
     returnJsonData = {}
 
     try :
-        jsonStr  = request.form['json']
-        jsonData = json.loads(jsonStr)
-
-        username = jsonData['username']
+        username = request.json['username']
         if username in session and session[username] == True :
             returnJsonData['login'] = True
         else :
@@ -25,7 +22,6 @@ def isLogin() :
         returnJsonData['error'] = str(e)
         PhosLog.log(e)
         
-
     return json.dumps(returnJsonData, ensure_ascii=False)
 
 # 进行登录
@@ -33,11 +29,8 @@ def login() :
     returnJsonData = {}
 
     try :
-        jsonStr  = request.form['json']
-        jsonData = json.loads(jsonStr)
-
-        username = jsonData['username']
-        password = jsonData['password']
+        username = request.json['username']
+        password = request.json['password']
         if(BlogModel.checkPassword(password)) :
             session[username] = True
             returnJsonData['state'] = True
@@ -60,8 +53,6 @@ def getUsername() :
     returnJsonData = {}
 
     try :
-        # jsonStr  = request.form['json']
-        # jsonData = json.loads(jsonStr)
 
         returnJsonData['username'] = BlogModel.getUsername()
         returnJsonData['state'] = True
@@ -79,8 +70,6 @@ def getRunDays() :
     returnJsonData = {}
 
     try :
-        # jsonStr  = request.form['json']
-        # jsonData = json.loads(jsonStr)
 
         returnJsonData['days'] = BlogModel.getRunDays()
         returnJsonData['state'] = True
@@ -98,8 +87,6 @@ def getVisitingCount() :
     returnJsonData = {}
 
     try :
-        # jsonStr  = request.form['json']
-        # jsonData = json.loads(jsonStr)
 
         returnJsonData['count'] = BlogModel.getVisiting()
         returnJsonData['state'] = True
@@ -117,8 +104,6 @@ def addVisitingCount() :
     returnJsonData = {}
 
     try :
-        # jsonStr  = request.form['json']
-        # jsonData = json.loads(jsonStr)
 
         BlogModel.addVisiting()
         returnJsonData['state'] = True
