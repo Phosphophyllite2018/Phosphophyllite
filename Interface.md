@@ -25,6 +25,7 @@
 * 文章数据接口  
   * 读接口
     * [文章总数](#文章总数)  
+    * [文章ID(通过排序获取)](#文章ID)
     * [文章标题](#文章标题)  
     * [文章日期](#文章日期)  
     * [文章阅读量](#文章阅读量)  
@@ -149,15 +150,29 @@
 |`error`    | string  | 失败时   | 错误消息 |
 |`count`    | int     | 成功时   | 文章总数 |
 
+### 文章ID  
+* URL : `/article/get_id_by_order`
+* 参数列表 
+
+|   字段名   | 变量类型 | 何时存在              | 说明                       |
+|        :-:|      :-:|                    :-:|                        :-:|
+|`order`    | int     | 总是                  | 文章序号，整数正序，负数逆序 |
+
+* 返回值列表  
+  
+|   字段名   | 变量类型 | 何时存在 | 说明    |
+|        :-:|      :-:|       :-:|      :-:|
+|`state`    | bool    | 总是     | 是否成功 |
+|`error`    | string  | 失败时   | 错误消息 |
+|`count`    | int     | 成功时   | 文章总数 |
+
 ### 文章标题  
 * URL : `/article/title`
 * 参数列表  
 
 |   字段名   | 变量类型 | 何时存在              | 说明            |
 |        :-:|      :-:|                    :-:|              :-:|
-|`method`   | string  | 总是                  | `'id'`或`'order'`   |
-|`id`       | int     | `method`为`'id'`时    | 文章id          |
-|`order`    | int     | `method`为`'order'`时 | 文章序号，负数表示逆序 |
+|`id`       | int     | 总是                  | 文章id          |
 
 * 返回值列表  
   
@@ -173,9 +188,7 @@
 
 |   字段名   | 变量类型 | 何时存在              | 说明            |
 |        :-:|      :-:|                    :-:|              :-:|
-|`method`   | string  | 总是                  | `'id'`或`'order'`   |
-|`id`       | int     | `method`为`'id'`时    | 文章id          |
-|`order`    | int     | `method`为`'order'`时 | 文章序号，负数表示逆序 |
+|`id`       | int     | 总是                  | 文章id          |
 
 * 返回值列表  
   
@@ -191,9 +204,7 @@
 
 |   字段名   | 变量类型 | 何时存在              | 说明            |
 |        :-:|      :-:|                    :-:|              :-:|
-|`method`   | string  | 总是                  | `'id'`或`'order'`   |
-|`id`       | int     | `method`为`'id'`时    | 文章id          |
-|`order`    | int     | `method`为`'order'`时 | 文章序号，负数表示逆序 |
+|`id`       | int     | 总是                  | 文章id          |
 
 * 返回值列表  
   
@@ -201,7 +212,7 @@
 |        :-:|      :-:|       :-:|      :-:|
 |`state`    | bool    | 总是     | 是否成功 |
 |`error`    | string  | 失败时   | 错误消息 |
-|`count`    | string  | 成功时   | 阅读量   |
+|`reading`  | string  | 成功时   | 阅读量   |
 
 ### 文章内容  
 * URL : `/article/content`
@@ -209,9 +220,7 @@
 
 |   字段名   | 变量类型 | 何时存在              | 说明            |
 |        :-:|      :-:|                    :-:|              :-:|
-|`method`   | string  | 总是                  | `'id'`或`'order'`   |
-|`id`       | int     | `method`为`'id'`时    | 文章id          |
-|`order`    | int     | `method`为`'order'`时 | 文章序号，负数表示逆序 |
+|`id`       | int     | 总是                  | 文章id          |
 
 * 返回值列表  
   
@@ -227,9 +236,7 @@
 
 |   字段名   | 变量类型 | 何时存在              | 说明            |
 |        :-:|      :-:|                    :-:|              :-:|
-|`method`   | string  | 总是                  | `'id'`或`'order'`   |
-|`id`       | int     | `method`为`'id'`时    | 文章id          |
-|`order`    | int     | `method`为`'order'`时 | 文章序号，负数表示逆序 |
+|`id`       | int     | 总是                  | 文章id          |
 
 * 返回值列表  
   
@@ -239,7 +246,7 @@
 |`error`    | string  | 失败时   | 错误消息 |
 |`title`    | string  | 成功时   | 文章标题 |
 |`date`     | string  | 成功时   | 文章日期 |
-|`count`    | string  | 成功时   | 阅读量   |
+|`reading`  | string  | 成功时   | 阅读量   |
 |`content`  | string  | 成功时   | 文章内容 |
 
 
@@ -249,9 +256,7 @@
 
 |   字段名   | 变量类型 | 何时存在              | 说明            |
 |        :-:|      :-:|                    :-:|              :-:|
-|`method`   | string  | 总是                  | `'id'`或`'order'`   |
-|`id`       | int     | `method`为`'id'`时    | 文章id          |
-|`order`    | int     | `method`为`'order'`时 | 文章序号，负数表示逆序 |
+|`id`       | int     | 总是                  | 文章id          |
 |`title`    | string  | 总是                  | 文章标题 |
 
 * 返回值列表  
@@ -266,11 +271,7 @@
 * 参数列表  
 
 |   字段名   | 变量类型 | 何时存在              | 说明            |
-|        :-:|      :-:|                    :-:|              :-:|
-|`method`   | string  | 总是                  | `'id'`或`'order'`   |
-|`id`       | int     | `method`为`'id'`时    | 文章id          |
-|`order`    | int     | `method`为`'order'`时 | 文章序号，负数表示逆序 |
-|`count`    | string  | 总是                  | 阅读量 |
+|`id`       | int     | 总是                  | 文章id          |
 
 * 返回值列表  
   
@@ -285,9 +286,7 @@
 
 |   字段名   | 变量类型 | 何时存在              | 说明            |
 |        :-:|      :-:|                    :-:|              :-:|
-|`method`   | string  | 总是                  | `'id'`或`'order'`   |
-|`id`       | int     | `method`为`'id'`时    | 文章id          |
-|`order`    | int     | `method`为`'order'`时 | 文章序号，负数表示逆序 |
+|`id`       | int     | 总是                  | 文章id          |
 |`content`  | string  | 总是                  | 文章内容 |
 
 * 返回值列表  
@@ -303,9 +302,7 @@
 
 |   字段名   | 变量类型 | 何时存在              | 说明            |
 |        :-:|      :-:|                    :-:|              :-:|
-|`method`   | string  | 总是                  | `'id'`或`'order'`   |
-|`id`       | int     | `method`为`'id'`时    | 文章id          |
-|`order`    | int     | `method`为`'order'`时 | 文章序号，负数表示逆序 |
+|`id`       | int     | 总是                  | 文章id          |
 |`title`    | string  | 总是                  | 文章标题 |
 |`content`  | string  | 总是                  | 文章内容 |
 

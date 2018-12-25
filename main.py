@@ -14,32 +14,34 @@ def index() :
     return flask.redirect('/static/test/index.html')
 
 # 博客数据接口
+blogInterfaceList = [
+    ['/blog/is_login',          BlogInterface.isLogin],
+    ['/blog/login',             BlogInterface.login],
+    ['/blog/username',          BlogInterface.getUsername],
+    ['/blog/running_days',      BlogInterface.getRunDays],
+    ['/blog/visiting_count',    BlogInterface.getVisitingCount],
+    ['/blog/visiting_modify',   BlogInterface.addVisitingCount],
+]
 
-@app.route('/blog/is_login', methods=["POST"])
-def isLogin() :
-    return BlogInterface.isLogin() 
-
-@app.route('/blog/login', methods=["POST"])
-def login() :
-    return BlogInterface.login() 
-
-@app.route('/blog/username', methods=["POST"])
-def username() :
-    return BlogInterface.getUsername() 
-
-@app.route('/blog/running_days', methods=["POST"])
-def getRunDays() :
-    return BlogInterface.getRunDays() 
-
-@app.route('/blog/visiting_count', methods=["POST"])
-def getVisitingCount() :
-    return BlogInterface.getVisitingCount() 
-
-@app.route('/blog/visiting_modify', methods=["POST"])
-def addVisitingCount() :
-    return BlogInterface.addVisitingCount() 
+for route in blogInterfaceList :
+    app.add_url_rule(route[0], view_func=route[1], methods=['POST'])
 
 
+
+
+# 文章数据接口
+articleInterfaceList = [
+    ['/article/count',           ArticleInterface.count],
+    ['/article/get_id_by_order', ArticleInterface.getIdByOrder],
+    ['/article/title',           ArticleInterface.title],
+    ['/article/date',            ArticleInterface.date],
+    ['/article/reading_count',   ArticleInterface.readingCount],
+    ['/article/content',         ArticleInterface.content],
+    ['/article/total',           ArticleInterface.total],
+]
+
+for route in articleInterfaceList :
+    app.add_url_rule(route[0], view_func=route[1], methods=['POST'])
 
     
 if __name__ == "__main__" :

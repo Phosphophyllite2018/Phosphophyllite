@@ -22,7 +22,6 @@ def isLogin() :
         returnJsonData['error'] = str(e)
         PhosLog.log(e)
         
-
     return json.dumps(returnJsonData, ensure_ascii=False)
 
 # 进行登录

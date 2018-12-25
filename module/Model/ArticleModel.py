@@ -19,7 +19,7 @@ def getCount() :
         return 0
 
 # 列名，做sql语句校验
-columns = ("id", "title", "content", "birthday", "visiting")
+columns = ("id", "title", "content", "date", "reading")
 
 
 # 根据id查找
@@ -59,6 +59,21 @@ def getByOrder(key, num) :
             
         result = cursor().execute(sql)
         return result.fetchone()[0]
+    except Exception as e:
+        PhosLog.log(e)
+        return None
+
+
+# 获取文章数据
+def get(key, id_or_order, method='id') :
+    try :
+        if method == 'id' :
+            return getById(key, id_or_order)
+        elif method == 'order' :
+            return getByOrder(key, id_or_order)
+        else :
+            PhosLog.log('Invalid method')
+            return None
     except Exception as e:
         PhosLog.log(e)
         return None

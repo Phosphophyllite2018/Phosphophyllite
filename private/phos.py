@@ -67,8 +67,8 @@ article_table = [
     ["id" , "INTEGER PRIMARY KEY AUTOINCREMENT"],
     ["title" , "VARCHAR(512)"],
     ["content" , "TEXT"],
-    ["birthday" , "DATETIME DEFAULT (datetime('now')) NOT NULL"],
-    ["visiting" , "INT DEFAULT 0 NOT NULL"],
+    ["date" , "DATETIME DEFAULT (datetime('now')) NOT NULL"],
+    ["reading" , "INT DEFAULT 0 NOT NULL"],
 ]
 
 # message表的列
@@ -76,7 +76,7 @@ message_table = [
     ["id" , "INTEGER PRIMARY KEY AUTOINCREMENT"],
     ["name" , "VARCHAR(512)"],
     ["content" , "TEXT"],
-    ["birthday" , "DATETIME DEFAULT (DATETIME('now')) NOT NULL"],
+    ["date" , "DATETIME DEFAULT (DATETIME('now')) NOT NULL"],
 ]
 
 # 初始化
