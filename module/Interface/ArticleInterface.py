@@ -157,7 +157,7 @@ def save():
         username =request.json['username']
         if not BlogModel.isLogin(username) :
             returnJsonData['state'] = False
-            returnJsonData['error'] = 'had not login'
+            returnJsonData['error'] = 'please-login'
         elif ArticleModel.save(title, content, id) == True :
             returnJsonData['state'] = True
         else :
@@ -171,6 +171,7 @@ def save():
         
     return json.dumps(returnJsonData, ensure_ascii=False)
 
+# 删除文章
 def delete() :
     returnJsonData = {}
 
@@ -179,7 +180,7 @@ def delete() :
         username =request.json['username']
         if not BlogModel.isLogin(username) :
             returnJsonData['state'] = False
-            returnJsonData['error'] = 'had not login'
+            returnJsonData['error'] = 'please-login'
         elif ArticleModel.delete(id) == True :
             returnJsonData['state'] = True
         else :
