@@ -46,6 +46,23 @@ articleInterfaceList = [
 for route in articleInterfaceList :
     app.add_url_rule(route[0], view_func=route[1], methods=['POST'])
 
+
+
+
+# 留言数据接口
+messageInterfaceList = [
+    ['/message/count',                  MessageInterface.count],
+    ['/message/get_id_by_order',        MessageInterface.getIdByOrder],
+    ['/message/date',                   MessageInterface.date],
+    ['/message/content',                MessageInterface.content],
+    ['/message/total',                  MessageInterface.total],
+    ['/message/save',                   MessageInterface.save],
+    ['/message/delete',                 MessageInterface.delete],
+]
+
+for route in messageInterfaceList :
+    app.add_url_rule(route[0], view_func=route[1], methods=['POST'])
+
     
 if __name__ == "__main__" :
     app.run(port=8102)
