@@ -2,8 +2,7 @@ import json
 import flask
 from flask import request
 from ..Phos import PhosLog 
-from ..Phos.common import isLogin
-from ..Model import ArticleModel
+from ..Model import ArticleModel , BlogModel
 
 # 文章数量
 def count() :
@@ -27,7 +26,7 @@ def getIdByOrder() :
 
     try :
         order = request.json['order']
-        returnJsonData['count'] = ArticleModel.getByOrder('id',order)
+        returnJsonData['id'] = ArticleModel.getByOrder('id',order)
         returnJsonData['state'] = True
 
     except Exception as e:
@@ -43,8 +42,8 @@ def title() :
 
     try :
         id = request.json['id']
-
         returnJsonData['title'] = ArticleModel.getById('title', id)
+        returnJsonData['state'] = True
 
     except Exception as e:
         returnJsonData['state'] = False
@@ -60,8 +59,8 @@ def date() :
 
     try :
         id = request.json['id']
-
         returnJsonData['date'] = ArticleModel.getById('date', id)
+        returnJsonData['state'] = True
 
     except Exception as e:
         returnJsonData['state'] = False
@@ -77,8 +76,8 @@ def readingCount() :
 
     try :
         id = request.json['id']
-
         returnJsonData['reading'] = ArticleModel.getById('reading', id)
+        returnJsonData['state'] = True
 
     except Exception as e:
         returnJsonData['state'] = False
@@ -94,11 +93,8 @@ def content():
 
     try :
         id = request.json['id']
-
-        returnJsonData['title'] = ArticleModel.getById('title', id)
-        returnJsonData['date'] = ArticleModel.getById('date', id)
-        returnJsonData['reading'] = ArticleModel.getById('reading', id)
         returnJsonData['content'] = ArticleModel.getById('content', id)
+        returnJsonData['state'] = True
 
     except Exception as e:
         returnJsonData['state'] = False
@@ -113,8 +109,11 @@ def total():
 
     try :
         id = request.json['id']
-
+        returnJsonData['title'] = ArticleModel.getById('title', id)
+        returnJsonData['date'] = ArticleModel.getById('date', id)
+        returnJsonData['reading'] = ArticleModel.getById('reading', id)
         returnJsonData['content'] = ArticleModel.getById('content', id)
+        returnJsonData['state'] = True
 
     except Exception as e:
         returnJsonData['state'] = False
@@ -124,23 +123,73 @@ def total():
     return json.dumps(returnJsonData, ensure_ascii=False)
 
 
-def save() :
-    if not isLogin() :
-        return flask.redirect('/login')
+# 修改文章阅读量
+def modifyReadingCount():
+    returnJsonData = {}
 
-    id = request.form['id']
-    print(id)
-    name = request.form['title']
-    content = request.form['content']
-    ArticleModel.save(name, content, id)
+    try :
+        id = request.json['id']
+        reading = request.json['reading']
 
-    return flask.redirect('/admin/article_list')
+        if ArticleModel.setById('reading', id, reading) == True :
+            returnJsonData['state'] = True
+        else :
+            returnJsonData['state'] = False
+            returnJsonData['error'] = 'update database failed'
 
+    except Exception as e:
+        returnJsonData['state'] = False
+        returnJsonData['error'] = str(e)
+        PhosLog.log(e)
+        
+    return json.dumps(returnJsonData, ensure_ascii=False)
+
+
+
+# 修改文章内容
+def save():
+    returnJsonData = {}
+
+    try :
+        id = request.json['id']
+        title = request.json['title']
+        content = request.json['content']
+        username =request.json['username']
+        if not BlogModel.isLogin(username) :
+            returnJsonData['state'] = False
+            returnJsonData['error'] = 'please-login'
+        elif ArticleModel.save(title, content, id) == True :
+            returnJsonData['state'] = True
+        else :
+            returnJsonData['state'] = False
+            returnJsonData['error'] = 'update database failed'
+
+    except Exception as e:
+        returnJsonData['state'] = False
+        returnJsonData['error'] = str(e)
+        PhosLog.log(e)
+        
+    return json.dumps(returnJsonData, ensure_ascii=False)
+
+# 删除文章
 def delete() :
-    if not isLogin() :
-        return flask.redirect('/login')
+    returnJsonData = {}
 
-    id = int(request.form['id'])
-    ArticleModel.delete(id)
+    try :
+        id = request.json['id']
+        username =request.json['username']
+        if not BlogModel.isLogin(username) :
+            returnJsonData['state'] = False
+            returnJsonData['error'] = 'please-login'
+        elif ArticleModel.delete(id) == True :
+            returnJsonData['state'] = True
+        else :
+            returnJsonData['state'] = False
+            returnJsonData['error'] = 'update database failed'
 
-    return flask.redirect('/admin/article_list')
+    except Exception as e:
+        returnJsonData['state'] = False
+        returnJsonData['error'] = str(e)
+        PhosLog.log(e)
+        
+    return json.dumps(returnJsonData, ensure_ascii=False)

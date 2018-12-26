@@ -24,24 +24,53 @@ blogInterfaceList = [
 ]
 
 for route in blogInterfaceList :
-    app.add_url_rule(route[0], view_func=route[1], methods=['POST'])
+    app.add_url_rule(route[0], endpoint=route[0], view_func=route[1], methods=['POST'])
 
 
 
 
 # 文章数据接口
 articleInterfaceList = [
-    ['/article/count',           ArticleInterface.count],
-    ['/article/get_id_by_order', ArticleInterface.getIdByOrder],
-    ['/article/title',           ArticleInterface.title],
-    ['/article/date',            ArticleInterface.date],
-    ['/article/reading_count',   ArticleInterface.readingCount],
-    ['/article/content',         ArticleInterface.content],
-    ['/article/total',           ArticleInterface.total],
+    ['/article/count',                  ArticleInterface.count],
+    ['/article/get_id_by_order',        ArticleInterface.getIdByOrder],
+    ['/article/title',                  ArticleInterface.title],
+    ['/article/date',                   ArticleInterface.date],
+    ['/article/reading_count',          ArticleInterface.readingCount],
+    ['/article/content',                ArticleInterface.content],
+    ['/article/total',                  ArticleInterface.total],
+    ['/article/modify/reading_count',   ArticleInterface.modifyReadingCount],
+    ['/article/save',                   ArticleInterface.save],
+    ['/article/delete',                 ArticleInterface.delete],
 ]
 
 for route in articleInterfaceList :
-    app.add_url_rule(route[0], view_func=route[1], methods=['POST'])
+    app.add_url_rule(route[0], endpoint=route[0], view_func=route[1], methods=['POST'])
+
+
+
+
+# 留言数据接口
+messageInterfaceList = [
+    ['/message/count',                  MessageInterface.count],
+    ['/message/get_id_by_order',        MessageInterface.getIdByOrder],
+    ['/message/date',                   MessageInterface.date],
+    ['/message/content',                MessageInterface.content],
+    ['/message/total',                  MessageInterface.total],
+    ['/message/save',                   MessageInterface.save],
+    ['/message/delete',                 MessageInterface.delete],
+]
+
+for route in messageInterfaceList :
+    app.add_url_rule(route[0], endpoint=route[0], view_func=route[1], methods=['POST'])
+
+
+# Markdown渲染接口
+markdownInterfaceList = [
+    ['/markdown/render',                MarkdownInterface.render],
+]
+
+for route in markdownInterfaceList :
+    app.add_url_rule(route[0], endpoint=route[0], view_func=route[1], methods=['POST'])
 
     
 if __name__ == "__main__" :

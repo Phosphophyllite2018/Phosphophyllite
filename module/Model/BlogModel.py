@@ -1,6 +1,7 @@
 import sqlite3
 import hashlib
 import time
+from flask import session
 from ..Phos import PhosLog
 
 def cursor() :
@@ -16,6 +17,9 @@ def getUsername() :
     except Exception as e:
         PhosLog.log(e)
         return "Phosphophyllite"
+
+def isLogin(username) :
+    return (username in session) and (session[username] == True)
 
 def checkPassword(pswd) :
     try :
