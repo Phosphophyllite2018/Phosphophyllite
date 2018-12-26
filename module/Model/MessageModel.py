@@ -9,7 +9,7 @@ def cursor() :
     return cursor
 
 # 列名，做sql语句校验
-columns = ("id", "name", "content", "birthday")
+columns = ("id", "name", "content", "date")
 
 # 返回行数
 def getCount() :

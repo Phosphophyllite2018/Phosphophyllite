@@ -24,7 +24,7 @@ blogInterfaceList = [
 ]
 
 for route in blogInterfaceList :
-    app.add_url_rule(route[0], view_func=route[1], methods=['POST'])
+    app.add_url_rule(route[0], endpoint=route[0], view_func=route[1], methods=['POST'])
 
 
 
@@ -44,7 +44,7 @@ articleInterfaceList = [
 ]
 
 for route in articleInterfaceList :
-    app.add_url_rule(route[0], view_func=route[1], methods=['POST'])
+    app.add_url_rule(route[0], endpoint=route[0], view_func=route[1], methods=['POST'])
 
 
 
@@ -61,7 +61,16 @@ messageInterfaceList = [
 ]
 
 for route in messageInterfaceList :
-    app.add_url_rule(route[0], view_func=route[1], methods=['POST'])
+    app.add_url_rule(route[0], endpoint=route[0], view_func=route[1], methods=['POST'])
+
+
+# Markdown渲染接口
+markdownInterfaceList = [
+    ['/markdown/render',                MarkdownInterface.render],
+]
+
+for route in markdownInterfaceList :
+    app.add_url_rule(route[0], endpoint=route[0], view_func=route[1], methods=['POST'])
 
     
 if __name__ == "__main__" :
