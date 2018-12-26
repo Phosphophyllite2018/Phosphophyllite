@@ -10,12 +10,7 @@ def isLogin() :
 
     try :
         username = request.json['username']
-        if username in session and session[username] == True :
-            returnJsonData['login'] = True
-        else :
-            returnJsonData['login'] = False
-
-        returnJsonData['state'] = True
+        returnJsonData['state'] = BlogModel.isLogin(username)
 
     except Exception as e:
         returnJsonData['state'] = False

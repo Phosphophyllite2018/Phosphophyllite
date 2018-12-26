@@ -76,6 +76,20 @@ function AsyncPost(url, params, callback)
 /* 异步Post发送JSON */
 function AsyncJsonPost(url, json, callback)
 {
+    switch(typeof(json))
+    {
+        case "object" : 
+            json = JSON.stringify(json)
+            break;
+
+        case "string" :
+            break;
+
+        default :
+            console.log("json param is invalid type (" + typeof(json) + ")")
+            return false
+
+    }
     let request = new XMLHttpRequest();
     request.open("post", url, true)
     request.setRequestHeader("Content-Type","application/json;");
@@ -88,22 +102,24 @@ function AsyncJsonPost(url, json, callback)
             return false
         }
         
-        callback(request)
+        callback(JSON.parse(request.responseText))
     }
+
+    return true
 }
 
 /* 接口测试打印 */
-function InterfacePrint(request)
+function InterfacePrint(json)
 {
     let p = document.createElement("p")
-    p.innerText = request.responseText
+    p.innerText = String(JSON.stringify(json))
     document.body.appendChild(p)
 }
 
 /* 接口测试函数 */
 function InterfaceTest(url, params)
 {
-    let json = JSON.stringify(params)
+    let json = params
     AsyncJsonPost(url, json, InterfacePrint)
 }
 
