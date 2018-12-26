@@ -123,15 +123,15 @@ def total():
     return json.dumps(returnJsonData, ensure_ascii=False)
 
 
-# 修改文章标题
-def modifyTitle():
+# 修改文章阅读量
+def modifyReadingCount():
     returnJsonData = {}
 
     try :
         id = request.json['id']
-        title = request.json['title']
+        reading = request.json['reading']
 
-        if ArticleModel.setById('title', id, title) == True :
+        if ArticleModel.setById('reading', id, reading) == True :
             returnJsonData['state'] = True
         else :
             returnJsonData['state'] = False

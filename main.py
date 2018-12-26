@@ -31,13 +31,16 @@ for route in blogInterfaceList :
 
 # 文章数据接口
 articleInterfaceList = [
-    ['/article/count',           ArticleInterface.count],
-    ['/article/get_id_by_order', ArticleInterface.getIdByOrder],
-    ['/article/title',           ArticleInterface.title],
-    ['/article/date',            ArticleInterface.date],
-    ['/article/reading_count',   ArticleInterface.readingCount],
-    ['/article/content',         ArticleInterface.content],
-    ['/article/total',           ArticleInterface.total],
+    ['/article/count',                  ArticleInterface.count],
+    ['/article/get_id_by_order',        ArticleInterface.getIdByOrder],
+    ['/article/title',                  ArticleInterface.title],
+    ['/article/date',                   ArticleInterface.date],
+    ['/article/reading_count',          ArticleInterface.readingCount],
+    ['/article/content',                ArticleInterface.content],
+    ['/article/total',                  ArticleInterface.total],
+    ['/article/modify/reading_count',   ArticleInterface.modifyReadingCount],
+    ['/article/save',                   ArticleInterface.save],
+    ['/article/delete',                 ArticleInterface.delete],
 ]
 
 for route in articleInterfaceList :
