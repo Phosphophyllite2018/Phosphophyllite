@@ -167,7 +167,7 @@
 |        :-:|      :-:|       :-:|      :-:|
 |`state`    | bool    | 总是     | 是否成功 |
 |`error`    | string  | 失败时   | 错误消息 |
-|`count`    | int     | 成功时   | 文章总数 |
+|`id`       | int     | 成功时   | 文章ID   |
 
 ### 文章标题  
 * URL : `/article/title`
@@ -215,7 +215,7 @@
 |        :-:|      :-:|       :-:|      :-:|
 |`state`    | bool    | 总是     | 是否成功 |
 |`error`    | string  | 失败时   | 错误消息 |
-|`reading`  | string  | 成功时   | 阅读量   |
+|`reading`  | int     | 成功时   | 阅读量   |
 
 ### 文章内容  
 * URL : `/article/content`
@@ -249,7 +249,7 @@
 |`error`    | string  | 失败时   | 错误消息 |
 |`title`    | string  | 成功时   | 文章标题 |
 |`date`     | string  | 成功时   | 文章日期 |
-|`reading`  | string  | 成功时   | 阅读量   |
+|`reading`  | int     | 成功时   | 阅读量   |
 |`content`  | string  | 成功时   | 文章内容 |
 
 
@@ -339,7 +339,7 @@
 |        :-:|      :-:|       :-:|      :-:|
 |`state`    | bool    | 总是     | 是否成功 |
 |`error`    | string  | 失败时   | 错误消息 |
-|`count`    | int     | 成功时   | 文章总数 |
+|`id`       | int     | 成功时   | 留言ID   |
 
 ### 留言访客名  
 * URL : `/message/visitor_name`
