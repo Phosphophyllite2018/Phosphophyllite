@@ -64,7 +64,7 @@ for route in messageInterfaceList :
     app.add_url_rule(route[0], endpoint=route[0], view_func=route[1], methods=['POST'])
 
 
-# Markdown渲染接口
+# Markdown接口
 markdownInterfaceList = [
     ['/markdown/render',                MarkdownInterface.render],
 ]
