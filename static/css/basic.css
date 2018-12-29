@@ -16,11 +16,16 @@ header {
 	background-color: #009999;
 }
 
+#header_space {
+	height: 50px;
+	width: 100%;
+	margin-bottom: 20px;
+}
+
 /* aside和atcile在同一行 */
 aside {
 	float: left;
-	width: 20%;
-	margin-top: 50px;
+	max-width: 30%;
 	overflow: hidden;
 	min-height: 100%;
 	margin-left: 10px;
@@ -28,9 +33,8 @@ aside {
 
 article {
 	float: left;
-	margin-top: 50px;
 	margin-left: 5%;
-	width: 70%;
+	/* width: 70%; */
 }
 
 /* 清除float */

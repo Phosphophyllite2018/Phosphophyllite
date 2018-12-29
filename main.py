@@ -11,6 +11,10 @@ app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=30)
 
 @app.route('/', methods=["GET", "POST"])
 def index() :
+    return flask.redirect('/static/html/index.html')
+
+@app.route('/test', methods=["GET", "POST"])
+def test() :
     return flask.redirect('/static/test/index.html')
 
 # 博客数据接口
