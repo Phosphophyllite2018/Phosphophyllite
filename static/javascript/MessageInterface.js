@@ -6,7 +6,14 @@ MessageInterface.refreshCount = function(json)
     var elements = document.querySelectorAll('.message_count');
     for(let i = 0; i < elements.length; i++)
     {
-        elements[i].innerText = json['count']
+        if(json['state'] == true)
+        {
+            elements[i].innerText = json['count']
+        }
+        else
+        {
+            alert(json['error'])
+        }
     }
 }
 

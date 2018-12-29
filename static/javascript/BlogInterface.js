@@ -6,7 +6,14 @@ BlogInterface.refreshTitle = function(json)
     var elements = document.querySelectorAll('.blog_title');
     for(let i = 0; i < elements.length; i++)
     {
-        elements[i].innerText = json['username']
+        if(json['state'] == true)
+        {
+            elements[i].innerText = json['username']
+        }
+        else
+        {
+            alert(json['error'])
+        }
     }
 }
 
@@ -16,7 +23,14 @@ BlogInterface.refreshRunDays = function(json)
     var elements = document.querySelectorAll('.running_days');
     for(let i = 0; i < elements.length; i++)
     {
-        elements[i].innerText = json['days']
+        if(json['state'] == true)
+        {
+            elements[i].innerText = json['days']
+        }
+        else
+        {
+            alert(json['error'])
+        }
     }
 }
 
@@ -27,7 +41,14 @@ BlogInterface.refreshVisitingCount = function(json)
     var elements = document.querySelectorAll('.visiting_count');
     for(let i = 0; i < elements.length; i++)
     {
-        elements[i].innerText = json['count']
+        if(json['state'] == true)
+        {
+            elements[i].innerText = json['count']
+        }
+        else
+        {
+            alert(json['error'])
+        }
     }
 }
 
