@@ -1,41 +1,41 @@
 var BlogInterface = {}
 
 /* 显示博客标题 */
-BlogInterface.setTitle = function(json) 
+BlogInterface.refreshTitle = function(json) 
 {
-    var blog_titles = document.querySelectorAll('.blog_title');
-    for(let i = 0; i < blog_titles.length; i++)
+    var elements = document.querySelectorAll('.blog_title');
+    for(let i = 0; i < elements.length; i++)
     {
-        blog_titles[i].innerText = json['username']
+        elements[i].innerText = json['username']
     }
 }
 
 /* 显示运行天数 */
-BlogInterface.setRunDays = function(json) 
+BlogInterface.refreshRunDays = function(json) 
 {
-    var blog_titles = document.querySelectorAll('.running_days');
-    for(let i = 0; i < blog_titles.length; i++)
+    var elements = document.querySelectorAll('.running_days');
+    for(let i = 0; i < elements.length; i++)
     {
-        blog_titles[i].innerText = json['days']
+        elements[i].innerText = json['days']
     }
 }
 
 
 /* 显示访问总量 */
-BlogInterface.setVisitingCount = function(json) 
+BlogInterface.refreshVisitingCount = function(json) 
 {
-    var blog_titles = document.querySelectorAll('.visiting_count');
-    for(let i = 0; i < blog_titles.length; i++)
+    var elements = document.querySelectorAll('.visiting_count');
+    for(let i = 0; i < elements.length; i++)
     {
-        blog_titles[i].innerText = json['count']
+        elements[i].innerText = json['count']
     }
 }
 
 
-/* 全体数据刷新 */
-BlogInterface.fresh = function()
+/* 刷新全部数据 */
+BlogInterface.refresh = function()
 {
-    AsyncJsonPost('/blog/username', {}, BlogInterface.setTitle);
-    AsyncJsonPost('/blog/running_days', {}, BlogInterface.setRunDays)
-    AsyncJsonPost('/blog/visiting_count', {}, BlogInterface.setVisitingCount)
+    AsyncJsonPost('/blog/username', {}, BlogInterface.refreshTitle);
+    AsyncJsonPost('/blog/running_days', {}, BlogInterface.refreshRunDays)
+    AsyncJsonPost('/blog/visiting_count', {}, BlogInterface.refreshVisitingCount)
 }
