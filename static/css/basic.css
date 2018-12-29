@@ -25,7 +25,7 @@ header {
 /* aside和atcile在同一行 */
 aside {
 	float: left;
-	/* width: 20%; */
+	max-width: 30%;
 	overflow: hidden;
 	min-height: 100%;
 	margin-left: 10px;

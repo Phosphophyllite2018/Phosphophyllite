@@ -7,7 +7,6 @@ BlogInterface.setTitle = function(json)
     for(let i = 0; i < blog_titles.length; i++)
     {
         blog_titles[i].innerText = json['username']
-        console.log(blog_titles[i])
     }
 }
 
@@ -18,7 +17,6 @@ BlogInterface.setRunDays = function(json)
     for(let i = 0; i < blog_titles.length; i++)
     {
         blog_titles[i].innerText = json['days']
-        console.log(blog_titles[i])
     }
 }
 
@@ -30,7 +28,6 @@ BlogInterface.setVisitingCount = function(json)
     for(let i = 0; i < blog_titles.length; i++)
     {
         blog_titles[i].innerText = json['count']
-        console.log(blog_titles[i])
     }
 }
 
