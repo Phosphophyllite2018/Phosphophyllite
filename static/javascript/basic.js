@@ -73,6 +73,31 @@ function AsyncPost(url, params, callback)
 }
 
 
+/* 异步Get请求 */
+function AsyncGet(url, params, callback)
+{
+    let request = new XMLHttpRequest();
+    request.open("get", url, true)
+    let data = ""
+    for(let key in params)
+    {
+        data += key + "=" + params[key] + "&"
+    }
+    request.setRequestHeader("Content-Type","application/x-www-form-urlencoded;");
+    request.send(data)
+    
+    /* 设置回调 */
+    request.onreadystatechange = function() {
+        if(request.readyState != 4)
+        {
+            return false
+        }
+        
+        callback(request)
+    }
+}
+
+
 /* 异步Post发送JSON */
 function AsyncJsonPost(url, json, callback)
 {
@@ -123,75 +148,15 @@ function InterfaceTest(url, params)
     AsyncJsonPost(url, json, InterfacePrint)
 }
 
-/* 添加留言 */
-function addMessage()
+/* 页面内容切换 */
+function load(html)
 {
-    params = {}
-    params['name'] = document.querySelector("#message_name").value
-    params['content'] = document.querySelector("#message_content").value
-    if(params['content'].replace(/^\s*|\s*$/g,"") == "") // 去除空格后为空
+    url = '/static/html/template/' + html 
+    AsyncGet(url, null, function(request)
     {
-        alert("请写点什么。")
-        return false
-    }
-
-    if(params['name'].length > 15) // 去除空格后为空
-    {
-        alert("名字太长了。")
-        return false
-    }
-
-    if(params['content'].length > 150) // 去除空格后为空
-    {
-        alert("留言内容太长了。")
-        return false
-    }
-
-    httpPost("/interface/add_message", params)
-}
-
-/* 保存文章 */
-function saveArticle(button)
-{
-    params = {}
-    id = button.getAttribute("article-id")
-    if(Number.isInteger(Number(id)))
-    {
-        params['id'] = id
-    }
-    else
-    {
-        params['id'] = 0
-    }
-    params['title'] = document.querySelector("#article_title").value
-    params['content'] = document.querySelector("#article_content").value
-    if(params['title'].replace(/^\s*|\s*$/g,"") == "") // 去除空格后为空
-    {
-        alert("请填写标题")
-        return false
-    }
-
-    if(params['content'].replace(/^\s*|\s*$/g,"") == "") // 去除空格后为空
-    {
-        alert("请编辑文章")
-        return false
-    }
-
-    httpPost("/interface/save_article", params)
-}
-
-/* 删除文章 */
-function deleteArticle(link)
-{
-    params = {}
-    params['id'] = link.getAttribute("article-id")
-    httpPost("/interface/delete_article", params)
-}
-
-/* 删除留言 */
-function deleteMessage(link)
-{
-    params = {}
-    params['id'] = link.getAttribute("message-id")
-    httpPost("/interface/delete_message", params)
+        document.querySelector('body').innerHTML = request.responseText
+        BlogInterface.refresh()
+        ArticleInterface.refresh()
+        MessageInterface.refresh()
+    })
 }
