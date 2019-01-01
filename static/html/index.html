@@ -8,59 +8,14 @@
         <link href="/static/css/editor.css" rel="stylesheet" type="text/css" />
 
         <script src="/static/javascript/basic.js" type="text/javascript"></script>
-        <script src="/static/javascript/BlogInterface.js" type="text/javascript"></script>
-        <script src="/static/javascript/ArticleInterface.js" type="text/javascript"></script>
-        <script src="/static/javascript/MessageInterface.js" type="text/javascript"></script>
+        <script src="/static/javascript/interface/BlogInterface.js" type="text/javascript"></script>
+        <script src="/static/javascript/interface/ArticleInterface.js" type="text/javascript"></script>
+        <script src="/static/javascript/interface/MessageInterface.js" type="text/javascript"></script>
     </head>
-    <body>
-        <title class='blog_title'> {{ blog_title }} </title>
 
-        <header id='header_div'> 
-            <h1 class="header_title blog_title"> {{ blog_title }} </h1>
-            <a class="header_choice" href="/">首页</a>
-            <a class="header_choice" href="/admin">管理</a>
-        </header>
-        <div id='header_space'></div>
+    <body> </body>
 
-        <nav id='nav_div'> 
-            
-        </nav>
-
-        <aside id='aside_div'>
-            <div>
-                <img id="photo" src="{{ photo }}" onerror="imageLoadError(this)"/>
-            </div>
-            <h1 id="name" class="blog_title">{{ blog_title }}</h1>
-            <table id="statistics">
-                <tr><td class="statistic">运行时间 : </td><td class="value running_days">{{ running_days }}</td> <td>天</td></tr>
-                <tr><td class="statistic">总访问量 : </td><td class="value visiting_count">{{ visiting_count }}</td> <td>次</td></tr>
-                <tr><td class="statistic">文章总数 : </td><td class="value artcile_count">{{ artcile_count }}</td> <td>篇</td></tr>
-                <tr><td class="statistic">留言总数 : </td><td class="value message_count">{{ message_count }}</td> <td>条</td></tr>
-            </table>
-            <div class='recent_article'>
-                <hr/>
-                <p class="subtitle">最近文章 <a href="/article_list">更多</a> </p>
-                <div > {{ recent_article }} </div>
-            </div>
-            <div class='recent_message'>
-                    <hr/>
-                    <p class="subtitle">最近留言 <a href="/message_list">更多</a> </p>
-                    <div > {{ recent_article }} </div>
-            </div>
-        </aside>
-
-        <article id='article_div'>  </article>
-
-        <footer> 
-            <hr/>
-                <center>Powered by <a href='https://github.com/hubenchang0515/Phosphophyllite'>Phosphophyllite</a></center>
-            <hr/>
-        </footer>
-
-    </body>
     <script>
-        BlogInterface.refresh()
-        ArticleInterface.refresh()
-        MessageInterface.refresh()
+        load('home.html')
     </script>
 </html>
