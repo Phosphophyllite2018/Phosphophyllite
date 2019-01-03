@@ -148,15 +148,3 @@ function InterfaceTest(url, params)
     AsyncJsonPost(url, json, InterfacePrint)
 }
 
-/* 页面内容切换 */
-function load(html)
-{
-    url = '/static/html/template/' + html 
-    AsyncGet(url, null, function(request)
-    {
-        document.querySelector('body').innerHTML = request.responseText
-        BlogInterface.refresh()
-        ArticleInterface.refresh()
-        MessageInterface.refresh()
-    })
-}
