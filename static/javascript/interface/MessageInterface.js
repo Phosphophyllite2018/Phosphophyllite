@@ -1,20 +1,24 @@
 var MessageInterface = {}
 
 /* 显示留言总数 */
-MessageInterface.refreshCount = function(json) 
+MessageInterface.showCount = function(label_selector)
 {
-    var elements = document.querySelectorAll('.message_count');
-    for(let i = 0; i < elements.length; i++)
+    label_selector = label_selector ? label_selector : '.message_count'
+    AsyncJsonPost('/message/count', {}, function(json) 
     {
-        if(json['state'] == true)
+        var elements = document.querySelectorAll(label_selector);
+        for(let i = 0; i < elements.length; i++)
         {
-            elements[i].innerText = json['count']
+            if(json['state'] == true)
+            {
+                elements[i].innerText = json['count']
+            }
+            else
+            {
+                alert(json['error'])
+            }
         }
-        else
-        {
-            alert(json['error'])
-        }
-    }
+    })
 }
 
 

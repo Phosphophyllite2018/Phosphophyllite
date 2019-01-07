@@ -2,6 +2,7 @@ import sqlite3
 import math
 from ..Phos import PhosLog
 from ..Phos.common import sqlFilter , sqlCheck
+from . import MarkdownModel
 
 def cursor() :
     db = sqlite3.connect("./private/phosphophyllite.db", isolation_level=None)
@@ -9,7 +10,7 @@ def cursor() :
     return cursor
 
 # 列名，做sql语句校验
-columns = ("id", "name", "content", "date")
+columns = ("id", "name", "markdown", "html", "date")
 
 # 返回行数
 def getCount() :
@@ -55,9 +56,11 @@ def append(name, content) :
         if name.strip() == "" :
             name = "匿名"  
         name = sqlFilter(name)
-        content = sqlFilter(content)
-        sql = "INSERT INTO message VALUES(NULL,'%s','%s', datetime('now'));" % (name, content)
-        cursor().execute(sql)
+        markdown = sqlFilter(content)
+        html = MarkdownModel.renderMarkdown(markdown)
+        sql = "INSERT INTO message VALUES(NULL, ?, ?, ?, datetime('now'));" 
+        params = (name, markdown, html)
+        cursor().execute(sql, params)
         return True
     except Exception as e:
         PhosLog.log(e)
