@@ -5,13 +5,16 @@
     </head>
     <body>
         <script>
+            InterfaceTest("/blog/login", {'username' : 'Phosphophyllite', 'password' : '123456'})
+            InterfaceTest("/article/save", {'username' : 'Phosphophyllite', 'id': 1, 'title' : 'Phosphophyllite', 'content' : '# Phosphophyllite'})
             InterfaceTest("/article/count", {})
             InterfaceTest("/article/get_id_by_order", {order : -1})
-            InterfaceTest("/article/title", {'id': 0})
-            InterfaceTest("/article/date", {'id': 0})
-            InterfaceTest("/article/reading_count", {'id': 0})
-            InterfaceTest("/article/content", {'id': 0})
-            InterfaceTest("/article/total", {'id': 0})
+            InterfaceTest("/article/title", {'id': 1})
+            InterfaceTest("/article/date", {'id': 1})
+            InterfaceTest("/article/reading_count", {'id': 1})
+            InterfaceTest("/article/content", {'id': 1})
+            InterfaceTest("/article/total", {'id': 1})
+            
         </script>
     </body>
 </html>

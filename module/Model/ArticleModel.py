@@ -2,6 +2,7 @@ import math
 import sqlite3
 from ..Phos import PhosLog 
 from ..Phos.common import sqlCheck , sqlFilter
+from . import MarkdownModel
 
 def cursor() :
     db = sqlite3.connect("./private/phosphophyllite.db", isolation_level=None)
@@ -19,7 +20,7 @@ def getCount() :
         return 0
 
 # 列名，做sql语句校验
-columns = ("id", "title", "content", "date", "reading")
+columns = ("id", "title", "markdown", "html", "date", "reading", "category")
 
 
 # 根据id查找
@@ -94,14 +95,17 @@ def isExist(id) :
 def save(title, content, id=None) :
     try :
         title = sqlFilter(title)
-        content = sqlFilter(content)
-        sql = ""
+        markdown = sqlFilter(content)
+        html = MarkdownModel.renderMarkdown(markdown)
+
         if id == None or not isExist(int(id)):
-            sql = "INSERT INTO article VALUES(NULL, '%s', '%s', datetime('now'), 0);" % (title, content)
+            sql = "INSERT INTO article VALUES(NULL, ?, ?, ?, datetime('now'), 0, 0);"
+            params = (title, markdown, html)
         else :
-            sql = "UPDATE article SET title='%s',content='%s' WHERE id=%d;" % (title, content, int(id)) 
-        print(sql)
-        cursor().execute(sql)
+            sql = "UPDATE article SET title=?, markdown=?, html=? WHERE id=?;" 
+            params = (title, markdown, html, id) 
+
+        cursor().execute(sql, params)
         return True
     except Exception as e:
         PhosLog.log(e)

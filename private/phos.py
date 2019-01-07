@@ -51,6 +51,21 @@ def init_blog_table(cursor) :
         cursor.execute(sql)
         print("'blog'表重置。")
 
+def init_category_table(cursor) :    
+    # 检查是否已经有字段
+    sql = "select count(*) from category"
+    length = cursor.execute(sql).fetchone()[0]
+    
+    # 没有字段，初始化
+    if length == 0 :
+        sql = "INSERT INTO category VALUES(0, 'undefined')"
+        cursor.execute(sql)
+        print("'category'表写入初始值。")
+    else :
+        sql = "UPDATE category set name='undefined' WHERE id=0"
+        cursor.execute(sql)
+        print("'category'表重置。")
+
 # blog表的列
 blog_table = [
     ["id" , "INTEGER PRIMARY KEY"],
@@ -62,20 +77,30 @@ blog_table = [
     ["visiting" , "INT DEFAULT 0"],
 ]
 
+# category表的列
+category_table = [
+    ["id" , "INTEGER PRIMARY KEY AUTOINCREMENT"],
+    ["name" , "VARCHAR(512)"],
+]
+
 # article表的列
 article_table = [
     ["id" , "INTEGER PRIMARY KEY AUTOINCREMENT"],
     ["title" , "VARCHAR(512)"],
-    ["content" , "TEXT"],
+    ["markdown" , "TEXT"],
+    ["html" , "TEXT"],
     ["date" , "DATETIME DEFAULT (datetime('now')) NOT NULL"],
     ["reading" , "INT DEFAULT 0 NOT NULL"],
+    ["category", "INT"],
+    ["FOREIGN KEY(category) REFERENCES category(id)",""]
 ]
 
 # message表的列
 message_table = [
     ["id" , "INTEGER PRIMARY KEY AUTOINCREMENT"],
     ["name" , "VARCHAR(512)"],
-    ["content" , "TEXT"],
+    ["markdown" , "TEXT"],
+    ["html" , "TEXT"],
     ["date" , "DATETIME DEFAULT (DATETIME('now')) NOT NULL"],
 ]
 
@@ -85,9 +110,11 @@ def phos_init(cursor, argv) :
         return False
         
     create_table(cursor, "blog", blog_table)
+    create_table(cursor, "category", category_table)
     create_table(cursor, "article", article_table)
     create_table(cursor, "message", message_table)
     init_blog_table(cursor)
+    init_category_table(cursor)
     print("初始化完成")
     return True
 

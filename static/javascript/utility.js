@@ -9,7 +9,11 @@ utility.load = function(html, dir)
     {
         document.querySelector('body').innerHTML = request.responseText
         BlogInterface.refresh()
-        ArticleInterface.refresh()
+        ArticleInterface.showCount()
+        ArticleInterface.showTitle(8)
+        ArticleInterface.showDate(8)
+        ArticleInterface.showReading(8)
+        ArticleInterface.showContent(8)
         MessageInterface.refresh()
     })
 }
