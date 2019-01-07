@@ -40,7 +40,8 @@ articleInterfaceList = [
     ['/article/title',                  ArticleInterface.title],
     ['/article/date',                   ArticleInterface.date],
     ['/article/reading_count',          ArticleInterface.readingCount],
-    ['/article/content',                ArticleInterface.content],
+    ['/article/markdown',               ArticleInterface.markdown],
+    ['/article/html',                   ArticleInterface.html],
     ['/article/total',                  ArticleInterface.total],
     ['/article/modify/reading_count',   ArticleInterface.modifyReadingCount],
     ['/article/save',                   ArticleInterface.save],
@@ -58,10 +59,11 @@ messageInterfaceList = [
     ['/message/count',                  MessageInterface.count],
     ['/message/get_id_by_order',        MessageInterface.getIdByOrder],
     ['/message/date',                   MessageInterface.date],
-    ['/message/content',                MessageInterface.content],
+    ['/message/markdown',               MessageInterface.markdown],
+    ['/message/html',                   MessageInterface.html],
     ['/message/total',                  MessageInterface.total],
     ['/message/save',                   MessageInterface.save],
-    ['/message/delete',                 MessageInterface.delete],
+    ['/message/delete',                 MessageInterface.delete], 
 ]
 
 for route in messageInterfaceList :

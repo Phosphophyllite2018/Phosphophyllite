@@ -1,55 +1,67 @@
 var BlogInterface = {}
 
 /* 显示博客标题 */
-BlogInterface.refreshTitle = function(json) 
+BlogInterface.showTitle = function(label_selector)
 {
-    var elements = document.querySelectorAll('.blog_title');
-    for(let i = 0; i < elements.length; i++)
+    label_selector = label_selector ? label_selector : '.blog_title'
+    AsyncJsonPost('/blog/username', {}, function(json) 
     {
-        if(json['state'] == true)
+        var elements = document.querySelectorAll(label_selector);
+        for(let i = 0; i < elements.length; i++)
         {
-            elements[i].innerText = json['username']
+            if(json['state'] == true)
+            {
+                elements[i].innerText = json['username']
+            }
+            else
+            {
+                alert(json['error'])
+            }
         }
-        else
-        {
-            alert(json['error'])
-        }
-    }
+    })
 }
 
 /* 显示运行天数 */
-BlogInterface.refreshRunDays = function(json) 
+BlogInterface.showDays = function(label_selector)
 {
-    var elements = document.querySelectorAll('.running_days');
-    for(let i = 0; i < elements.length; i++)
+    label_selector = label_selector ? label_selector : '.running_days'
+    AsyncJsonPost('/blog/running_days', {}, function(json) 
     {
-        if(json['state'] == true)
+        var elements = document.querySelectorAll(label_selector);
+        for(let i = 0; i < elements.length; i++)
         {
-            elements[i].innerText = json['days']
+            if(json['state'] == true)
+            {
+                elements[i].innerText = json['days']
+            }
+            else
+            {
+                alert(json['error'])
+            }
         }
-        else
-        {
-            alert(json['error'])
-        }
-    }
+    })
 }
 
 
 /* 显示访问总量 */
-BlogInterface.refreshVisitingCount = function(json) 
+BlogInterface.showVisiting = function(label_selector)
 {
-    var elements = document.querySelectorAll('.visiting_count');
-    for(let i = 0; i < elements.length; i++)
+    label_selector = label_selector ? label_selector : '.visiting_count'
+    AsyncJsonPost('/blog/visiting_count', {}, function(json) 
     {
-        if(json['state'] == true)
+        var elements = document.querySelectorAll(label_selector);
+        for(let i = 0; i < elements.length; i++)
         {
-            elements[i].innerText = json['count']
+            if(json['state'] == true)
+            {
+                elements[i].innerText = json['count']
+            }
+            else
+            {
+                alert(json['error'])
+            }
         }
-        else
-        {
-            alert(json['error'])
-        }
-    }
+    })
 }
 
 

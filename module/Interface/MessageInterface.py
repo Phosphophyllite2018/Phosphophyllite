@@ -70,12 +70,28 @@ def date() :
 
 
 # 留言内容
-def content() :
+def markdown() :
     returnJsonData = {}
 
     try :
         id = request.json['id']
-        returnJsonData['content'] = MessageModel.getByOrder('content',id)
+        returnJsonData['markdown'] = MessageModel.getByOrder('markdown',id)
+        returnJsonData['state'] = True
+
+    except Exception as e:
+        returnJsonData['state'] = False
+        returnJsonData['error'] = str(e)
+        PhosLog.log(e)
+        
+    return json.dumps(returnJsonData, ensure_ascii=False)
+
+# 留言内容
+def html() :
+    returnJsonData = {}
+
+    try :
+        id = request.json['id']
+        returnJsonData['html'] = MessageModel.getByOrder('html',id)
         returnJsonData['state'] = True
 
     except Exception as e:
@@ -94,7 +110,8 @@ def total() :
         id = request.json['id']
         returnJsonData['name'] = MessageModel.getByOrder('name',id)
         returnJsonData['date'] = MessageModel.getByOrder('date',id)
-        returnJsonData['content'] = MessageModel.getByOrder('content',id)
+        returnJsonData['markdown'] = MessageModel.getByOrder('markdown',id)
+        returnJsonData['html'] = MessageModel.getByOrder('html',id)
         returnJsonData['state'] = True
 
     except Exception as e:

@@ -69,6 +69,22 @@ def date() :
         
     return json.dumps(returnJsonData, ensure_ascii=False)
 
+# 文章分类
+def category() :
+    returnJsonData = {}
+
+    try :
+        id = request.json['id']
+        returnJsonData['category'] = ArticleModel.getById('category', id)
+        returnJsonData['state'] = True
+
+    except Exception as e:
+        returnJsonData['state'] = False
+        returnJsonData['error'] = str(e)
+        PhosLog.log(e)
+        
+    return json.dumps(returnJsonData, ensure_ascii=False)
+
 
 # 文章阅读量
 def readingCount() : 
@@ -87,13 +103,30 @@ def readingCount() :
     return json.dumps(returnJsonData, ensure_ascii=False)
 
 
-# 文章内容
-def content():
+# 文章内容Markdown
+def markdown():
     returnJsonData = {}
 
     try :
         id = request.json['id']
-        returnJsonData['content'] = ArticleModel.getById('content', id)
+        returnJsonData['markdown'] = ArticleModel.getById('markdown', id)
+        returnJsonData['state'] = True
+
+    except Exception as e:
+        returnJsonData['state'] = False
+        returnJsonData['error'] = str(e)
+        PhosLog.log(e)
+        
+    return json.dumps(returnJsonData, ensure_ascii=False)
+
+
+# 文章内容HTML
+def html():
+    returnJsonData = {}
+
+    try :
+        id = request.json['id']
+        returnJsonData['html'] = ArticleModel.getById('html', id)
         returnJsonData['state'] = True
 
     except Exception as e:
@@ -111,8 +144,10 @@ def total():
         id = request.json['id']
         returnJsonData['title'] = ArticleModel.getById('title', id)
         returnJsonData['date'] = ArticleModel.getById('date', id)
+        returnJsonData['category'] = ArticleModel.getById('category', id)
         returnJsonData['reading'] = ArticleModel.getById('reading', id)
-        returnJsonData['content'] = ArticleModel.getById('content', id)
+        returnJsonData['markdown'] = ArticleModel.getById('markdown', id)
+        returnJsonData['html'] = ArticleModel.getById('html', id)
         returnJsonData['state'] = True
 
     except Exception as e:
@@ -146,7 +181,7 @@ def modifyReadingCount():
 
 
 
-# 修改文章内容
+# 保存
 def save():
     returnJsonData = {}
 

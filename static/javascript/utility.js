@@ -8,12 +8,14 @@ utility.load = function(html, dir)
     AsyncGet(url, null, function(request)
     {
         document.querySelector('body').innerHTML = request.responseText
-        BlogInterface.refresh()
+        BlogInterface.showTitle()
+        BlogInterface.showDays()
+        BlogInterface.showVisiting()
         ArticleInterface.showCount()
         ArticleInterface.showTitle(8)
         ArticleInterface.showDate(8)
         ArticleInterface.showReading(8)
         ArticleInterface.showContent(8)
-        MessageInterface.refresh()
+        MessageInterface.showCount()
     })
 }

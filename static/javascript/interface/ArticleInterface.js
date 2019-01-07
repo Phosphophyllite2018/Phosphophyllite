@@ -92,14 +92,14 @@ ArticleInterface.showReading = function(article_id, label_selector)
 ArticleInterface.showContent = function(article_id, label_selector)
 {
     label_selector = label_selector ? label_selector : '.article_content'
-    AsyncJsonPost('/article/content', {'id' : article_id}, function(json)
+    AsyncJsonPost('/article/html', {'id' : article_id}, function(json)
     {
         var elements = document.querySelectorAll(label_selector);
         for(let i = 0; i < elements.length; i++)
         {
             if(json['state'] == true)
             {
-                elements[i].innerText = json['content']
+                elements[i].innerText = json['html']
             }
             else
             {
