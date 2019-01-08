@@ -23,10 +23,10 @@ ArticleInterface.showCount = function(label_selector)
 
 
 /* 显示文章标题 */
-ArticleInterface.showTitle = function(article_id, label_selector)
+ArticleInterface.showTitle = function(params, label_selector)
 {
     label_selector = label_selector ? label_selector : '.article_title'
-    AsyncJsonPost('/article/title', {'id' : article_id}, function(json)
+    AsyncJsonPost('/article/title', params, function(json)
     {
         var elements = document.querySelectorAll(label_selector);
         for(let i = 0; i < elements.length; i++)
@@ -45,10 +45,10 @@ ArticleInterface.showTitle = function(article_id, label_selector)
 
 
 /* 显示文章日期 */
-ArticleInterface.showDate = function(article_id, label_selector)
+ArticleInterface.showDate = function(params, label_selector)
 {
     label_selector = label_selector ? label_selector : '.article_date'
-    AsyncJsonPost('/article/date', {'id' : article_id}, function(json)
+    AsyncJsonPost('/article/date', params, function(json)
     {
         var elements = document.querySelectorAll(label_selector);
         for(let i = 0; i < elements.length; i++)
@@ -67,10 +67,10 @@ ArticleInterface.showDate = function(article_id, label_selector)
 
 
 /* 显示文章阅读量 */
-ArticleInterface.showReading = function(article_id, label_selector)
+ArticleInterface.showReading = function(params, label_selector)
 {
     label_selector = label_selector ? label_selector : '.article_reading'
-    AsyncJsonPost('/article/reading_count', {'id' : article_id}, function(json)
+    AsyncJsonPost('/article/reading_count', params, function(json)
     {
         var elements = document.querySelectorAll(label_selector);
         for(let i = 0; i < elements.length; i++)
@@ -89,10 +89,10 @@ ArticleInterface.showReading = function(article_id, label_selector)
 
 
 /* 显示文章正文内容 */
-ArticleInterface.showContent = function(article_id, label_selector)
+ArticleInterface.showContent = function(params, label_selector)
 {
     label_selector = label_selector ? label_selector : '.article_content'
-    AsyncJsonPost('/article/html', {'id' : article_id}, function(json)
+    AsyncJsonPost('/article/html', params, function(json)
     {
         var elements = document.querySelectorAll(label_selector);
         for(let i = 0; i < elements.length; i++)
