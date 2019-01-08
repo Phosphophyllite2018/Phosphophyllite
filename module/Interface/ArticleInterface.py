@@ -41,9 +41,17 @@ def title() :
     returnJsonData = {}
 
     try :
-        id = request.json['id']
-        returnJsonData['title'] = ArticleModel.getById('title', id)
-        returnJsonData['state'] = True
+        if 'id' in request.json :
+            id = request.json['id']
+            returnJsonData['title'] = ArticleModel.getById('title', id)
+            returnJsonData['state'] = True
+        elif 'order' in request.json :
+            order = request.json['order']
+            returnJsonData['title'] = ArticleModel.getByOrder('title', order)
+            returnJsonData['state'] = True
+        else :
+            returnJsonData['state'] = False
+            returnJsonData['error'] = 'no id or order'
 
     except Exception as e:
         returnJsonData['state'] = False
@@ -58,9 +66,17 @@ def date() :
     returnJsonData = {}
 
     try :
-        id = request.json['id']
-        returnJsonData['date'] = ArticleModel.getById('date', id)
-        returnJsonData['state'] = True
+        if 'id' in request.json :
+            id = request.json['id']
+            returnJsonData['date'] = ArticleModel.getById('date', id)
+            returnJsonData['state'] = True
+        elif 'order' in request.json :
+            order = request.json['order']
+            returnJsonData['date'] = ArticleModel.getByOrder('date', order)
+            returnJsonData['state'] = True
+        else :
+            returnJsonData['state'] = False
+            returnJsonData['error'] = 'no id or order'
 
     except Exception as e:
         returnJsonData['state'] = False
@@ -74,9 +90,17 @@ def category() :
     returnJsonData = {}
 
     try :
-        id = request.json['id']
-        returnJsonData['category'] = ArticleModel.getById('category', id)
-        returnJsonData['state'] = True
+        if 'id' in request.json :
+            id = request.json['id']
+            returnJsonData['category'] = ArticleModel.getById('category', id)
+            returnJsonData['state'] = True
+        elif 'order' in request.json :
+            order = request.json['order']
+            returnJsonData['category'] = ArticleModel.getByOrder('category', order)
+            returnJsonData['state'] = True
+        else :
+            returnJsonData['state'] = False
+            returnJsonData['error'] = 'no id or order'
 
     except Exception as e:
         returnJsonData['state'] = False
@@ -91,9 +115,17 @@ def readingCount() :
     returnJsonData = {}
 
     try :
-        id = request.json['id']
-        returnJsonData['reading'] = ArticleModel.getById('reading', id)
-        returnJsonData['state'] = True
+        if 'id' in request.json :
+            id = request.json['id']
+            returnJsonData['reading'] = ArticleModel.getById('reading', id)
+            returnJsonData['state'] = True
+        elif 'order' in request.json :
+            order = request.json['order']
+            returnJsonData['reading'] = ArticleModel.getByOrder('reading', order)
+            returnJsonData['state'] = True
+        else :
+            returnJsonData['state'] = False
+            returnJsonData['error'] = 'no id or order'
 
     except Exception as e:
         returnJsonData['state'] = False
@@ -108,9 +140,17 @@ def markdown():
     returnJsonData = {}
 
     try :
-        id = request.json['id']
-        returnJsonData['markdown'] = ArticleModel.getById('markdown', id)
-        returnJsonData['state'] = True
+        if 'id' in request.json :
+            id = request.json['id']
+            returnJsonData['markdown'] = ArticleModel.getById('markdown', id)
+            returnJsonData['state'] = True
+        elif 'order' in request.json :
+            order = request.json['order']
+            returnJsonData['markdown'] = ArticleModel.getByOrder('markdown', order)
+            returnJsonData['state'] = True
+        else :
+            returnJsonData['state'] = False
+            returnJsonData['error'] = 'no id or order'
 
     except Exception as e:
         returnJsonData['state'] = False
@@ -125,9 +165,17 @@ def html():
     returnJsonData = {}
 
     try :
-        id = request.json['id']
-        returnJsonData['html'] = ArticleModel.getById('html', id)
-        returnJsonData['state'] = True
+        if 'id' in request.json :
+            id = request.json['id']
+            returnJsonData['html'] = ArticleModel.getById('html', id)
+            returnJsonData['state'] = True
+        elif 'order' in request.json :
+            order = request.json['order']
+            returnJsonData['html'] = ArticleModel.getByOrder('html', order)
+            returnJsonData['state'] = True
+        else :
+            returnJsonData['state'] = False
+            returnJsonData['error'] = 'no id or order'
 
     except Exception as e:
         returnJsonData['state'] = False
@@ -141,14 +189,29 @@ def total():
     returnJsonData = {}
 
     try :
-        id = request.json['id']
-        returnJsonData['title'] = ArticleModel.getById('title', id)
-        returnJsonData['date'] = ArticleModel.getById('date', id)
-        returnJsonData['category'] = ArticleModel.getById('category', id)
-        returnJsonData['reading'] = ArticleModel.getById('reading', id)
-        returnJsonData['markdown'] = ArticleModel.getById('markdown', id)
-        returnJsonData['html'] = ArticleModel.getById('html', id)
-        returnJsonData['state'] = True
+        if 'id' in request.json :
+            id = request.json['id']
+            returnJsonData['id'] = id
+            returnJsonData['title'] = ArticleModel.getById('title', id)
+            returnJsonData['date'] = ArticleModel.getById('date', id)
+            returnJsonData['category'] = ArticleModel.getById('category', id)
+            returnJsonData['reading'] = ArticleModel.getById('reading', id)
+            returnJsonData['markdown'] = ArticleModel.getById('markdown', id)
+            returnJsonData['html'] = ArticleModel.getById('html', id)
+            returnJsonData['state'] = True
+        elif 'order' in request.json :
+            order = request.json['order']
+            returnJsonData['id'] = ArticleModel.getByOrder('id', order)
+            returnJsonData['title'] = ArticleModel.getByOrder('title', order)
+            returnJsonData['date'] = ArticleModel.getByOrder('date', order)
+            returnJsonData['category'] = ArticleModel.getByOrder('category', order)
+            returnJsonData['reading'] = ArticleModel.getByOrder('reading', order)
+            returnJsonData['markdown'] = ArticleModel.getByOrder('markdown', order)
+            returnJsonData['html'] = ArticleModel.getByOrder('html', order)
+            returnJsonData['state'] = True
+        else :
+            returnJsonData['state'] = False
+            returnJsonData['error'] = 'no id or order'
 
     except Exception as e:
         returnJsonData['state'] = False
