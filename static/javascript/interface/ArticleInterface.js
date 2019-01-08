@@ -99,7 +99,7 @@ ArticleInterface.showContent = function(params, label_selector)
         {
             if(json['state'] == true)
             {
-                elements[i].innerText = json['html']
+                elements[i].innerHTML = json['html']
             }
             else
             {
