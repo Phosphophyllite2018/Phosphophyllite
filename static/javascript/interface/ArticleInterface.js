@@ -88,8 +88,8 @@ ArticleInterface.showReading = function(params, label_selector)
 }
 
 
-/* 显示文章正文内容 */
-ArticleInterface.showContent = function(params, label_selector)
+/* 显示文章正文内容HTML */
+ArticleInterface.showHTML = function(params, label_selector)
 {
     label_selector = label_selector ? label_selector : '.article_content'
     AsyncJsonPost('/article/html', params, function(json)
@@ -97,9 +97,31 @@ ArticleInterface.showContent = function(params, label_selector)
         var elements = document.querySelectorAll(label_selector);
         for(let i = 0; i < elements.length; i++)
         {
-            if(json['state'] == true)
+            if(json['state'] == true && json['html'] != null)
             {
                 elements[i].innerHTML = json['html']
+            }
+            else
+            {
+                ArticleInterface.showMarkdown(params)
+            }
+        }
+    })
+}
+
+
+/* 显示文章正文内容Markdown */
+ArticleInterface.showMarkdown = function(params, label_selector)
+{
+    label_selector = label_selector ? label_selector : '.article_content'
+    AsyncJsonPost('/article/markdown', params, function(json)
+    {
+        var elements = document.querySelectorAll(label_selector);
+        for(let i = 0; i < elements.length; i++)
+        {
+            if(json['state'] == true)
+            {
+                elements[i].innerText = json['markdown']
             }
             else
             {
