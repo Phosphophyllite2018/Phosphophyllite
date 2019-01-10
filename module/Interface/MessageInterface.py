@@ -121,6 +121,29 @@ def total() :
         
     return json.dumps(returnJsonData, ensure_ascii=False)
 
+
+# 留言列表
+def list() :
+    returnJsonData = {}
+
+    try :
+        start = request.json['start'] or 1
+        count = request.json['count']
+        
+        returnJsonData['name'] = MessageModel.getByOrder('name',id)
+        returnJsonData['date'] = MessageModel.getByOrder('date',id)
+        returnJsonData['markdown'] = MessageModel.getByOrder('markdown',id)
+        returnJsonData['html'] = MessageModel.getByOrder('html',id)
+        returnJsonData['state'] = True
+
+    except Exception as e:
+        returnJsonData['state'] = False
+        returnJsonData['error'] = str(e)
+        PhosLog.log(e)
+        
+    return json.dumps(returnJsonData, ensure_ascii=False)
+
+
 # 留言保存
 def save() :
     returnJsonData = {}

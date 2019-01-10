@@ -58,10 +58,12 @@ for route in articleInterfaceList :
 messageInterfaceList = [
     ['/message/count',                  MessageInterface.count],
     ['/message/get_id_by_order',        MessageInterface.getIdByOrder],
+    ['/message/visitor_name',           MessageInterface.visitorName],
     ['/message/date',                   MessageInterface.date],
     ['/message/markdown',               MessageInterface.markdown],
     ['/message/html',                   MessageInterface.html],
     ['/message/total',                  MessageInterface.total],
+    ['/message/list',                   MessageInterface.list],
     ['/message/save',                   MessageInterface.save],
     ['/message/delete',                 MessageInterface.delete], 
 ]
