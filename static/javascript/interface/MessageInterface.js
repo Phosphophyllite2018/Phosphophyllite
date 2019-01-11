@@ -98,7 +98,7 @@ MessageInterface.showHTML = function(label_selector)
         {
             if(json['state'] == true)
             {
-                elements[i].innerText = json['html']
+                elements[i].innerHTML = json['html']
             }
             else
             {
@@ -113,14 +113,36 @@ MessageInterface.showHTML = function(label_selector)
 MessageInterface.showAside = function(label_selector)
 {
     label_selector = label_selector ? label_selector : '.recent_message'
-    AsyncJsonPost('/message/list', {}, function(json) 
+    AsyncJsonPost('/message/list', {count : 10}, function(json) 
     {
         var elements = document.querySelectorAll(label_selector);
         for(let i = 0; i < elements.length; i++)
         {
             if(json['state'] == true)
             {
-                elements[i].innerText = json['html']
+                for(let j = 0; j < json['message'].length; j++)
+                {
+                    let m = json['message'][j]
+
+                    let div = document.createElement("div")
+
+                    let name = document.createElement("span")
+                    name.className = 'visitor_name'
+                    name.innerText = '[' + m['name'] + ']'
+                    div.appendChild(name)
+
+                    let date = document.createElement("span")
+                    date.className = 'message_date'
+                    date.innerText = '(' + m['date'] + ')'
+                    div.appendChild(date)
+
+                    let content = document.createElement('p')
+                    content.className = 'message_content'
+                    content.innerHTML = m['html']
+                    div.appendChild(content)
+                    
+                    elements[i].appendChild(div)
+                }
             }
             else
             {

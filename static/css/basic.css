@@ -115,7 +115,7 @@ th,td {
 }
 
 /* 段落开头空2格 */
-p {
+article p {
 	text-indent: 2em;
 }
 	
@@ -261,7 +261,6 @@ a:hover {
 	float: right;
 	color: salmon;
 	font-weight: normal;
-	margin-right: 2em;
 }
 
 .subtitle > a:hover {
