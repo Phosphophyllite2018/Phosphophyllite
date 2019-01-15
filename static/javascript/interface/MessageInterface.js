@@ -98,7 +98,7 @@ MessageInterface.showHTML = function(label_selector)
         {
             if(json['state'] == true)
             {
-                elements[i].innerText = json['html']
+                elements[i].innerHTML = json['html']
             }
             else
             {
@@ -113,19 +113,99 @@ MessageInterface.showHTML = function(label_selector)
 MessageInterface.showAside = function(label_selector)
 {
     label_selector = label_selector ? label_selector : '.recent_message'
-    AsyncJsonPost('/message/list', {}, function(json) 
+    AsyncJsonPost('/message/list', {count : 10}, function(json) 
     {
         var elements = document.querySelectorAll(label_selector);
         for(let i = 0; i < elements.length; i++)
         {
             if(json['state'] == true)
             {
-                elements[i].innerText = json['html']
+                for(let j = 0; j < json['message'].length; j++)
+                {
+                    let m = json['message'][j]
+
+                    let div = document.createElement("div")
+
+                    let name = document.createElement("span")
+                    name.className = 'visitor_name'
+                    name.innerText = '[' + m['name'] + ']'
+                    div.appendChild(name)
+
+                    let date = document.createElement("span")
+                    date.className = 'message_date'
+                    date.innerText = '(' + m['date'] + ')'
+                    div.appendChild(date)
+
+                    let content = document.createElement('p')
+                    content.className = 'message_content'
+                    content.innerHTML = m['html']
+                    div.appendChild(content)
+                    
+                    elements[i].appendChild(div)
+                }
             }
             else
             {
                 alert(json['error'])
             }
         }
+    })
+}
+
+
+/* 留言板显示最近1024条留言 */
+MessageInterface.showMain = function(label_selector)
+{
+    label_selector = label_selector ? label_selector : '.message_board'
+    AsyncJsonPost('/message/list', {count : 1024}, function(json) 
+    {
+        var elements = document.querySelectorAll(label_selector);
+        for(let i = 0; i < elements.length; i++)
+        {
+            if(json['state'] == true)
+            {
+                for(let j = 0; j < json['message'].length; j++)
+                {
+                    let m = json['message'][j]
+
+                    let div = document.createElement("div")
+
+                    let name = document.createElement("span")
+                    name.className = 'visitor_name'
+                    name.innerText = '[' + m['name'] + ']'
+                    div.appendChild(name)
+
+                    let date = document.createElement("span")
+                    date.className = 'message_date'
+                    date.innerText = '(' + m['date'] + ')'
+                    div.appendChild(date)
+
+                    let content = document.createElement('p')
+                    content.className = 'message_content'
+                    content.innerHTML = m['html']
+                    div.appendChild(content)
+                    
+                    elements[i].appendChild(div)
+                }
+            }
+            else
+            {
+                alert(json['error'])
+            }
+        }
+    })
+}
+
+/* 跳转到留言板页面 */
+MessageInterface.jump = function()
+{
+    utility.load('message.html', function()
+    {
+        BlogInterface.showTitle()
+        BlogInterface.showDays()
+        BlogInterface.showVisiting()
+        ArticleInterface.showCount()
+        MessageInterface.showCount()
+        MessageInterface.showMain()
     })
 }

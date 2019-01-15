@@ -123,17 +123,17 @@ def total() :
 
 
 # 留言列表
-def list() :
+def getList() :
     returnJsonData = {}
 
     try :
-        start = request.json['start'] or 1
+        if 'start' in request.json :
+            start = request.json['start']
+        else :
+            start = 0
         count = request.json['count']
         
-        returnJsonData['name'] = MessageModel.getByOrder('name',id)
-        returnJsonData['date'] = MessageModel.getByOrder('date',id)
-        returnJsonData['markdown'] = MessageModel.getByOrder('markdown',id)
-        returnJsonData['html'] = MessageModel.getByOrder('html',id)
+        returnJsonData['message'] = MessageModel.getList(start, count)
         returnJsonData['state'] = True
 
     except Exception as e:

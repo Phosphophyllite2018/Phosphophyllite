@@ -17,7 +17,11 @@ def getCount() :
     try :
         sql = "SELECT count(*) FROM message;"
         result = cursor().execute(sql)
-        return result.fetchone()[0]
+        output = result.fetchone()
+        if output == None :
+            raise RuntimeError('SELECT count(*) failed')
+        else :
+            return output[0]
     except Exception as e:
         PhosLog.log(e)
         return 0
@@ -26,9 +30,14 @@ def getCount() :
 def getById(key, id) :
     try :
         sqlCheck(columns, key)
-        sql = "SELECT %s FROM message where id=%d;" % (key, id)
-        result = cursor().execute(sql)
-        return result.fetchone()[0]
+        sql = "SELECT ? FROM message where id=?;"
+        params = (key, id)
+        result = cursor().execute(sql, params)
+        output = result.fetchone()
+        if output == None :
+            raise RuntimeError("SELECT %s FROM message where id=%d;" % params)
+        else :
+            return output[0]
     except Exception as e:
         PhosLog.log(e)
         return None
@@ -45,7 +54,11 @@ def getByOrder(key, num) :
             sql = "SELECT %s FROM message ORDER BY id DESC LIMIT %d,1;" % (key, abs(num)-1)
             
         result = cursor().execute(sql)
-        return result.fetchone()[0]
+        output = result.fetchone()
+        if output == None :
+            raise RuntimeError("SELECT %s FROM message where id=%d;" % params)
+        else :
+            return output[0]
     except Exception as e:
         PhosLog.log(e)
         return None
@@ -76,19 +89,20 @@ def delete(id) :
         PhosLog.log(e)
         return False
 
-# 返回最近的n条留言
-def getRecentMessage(n) :
+# 返回最近的start条留言
+def getList(start, count) :
     recent_message = []
 
-    if getCount() < n :
-        n = getCount()
+    if getCount() < start + count :
+        count = getCount()
 
-    for i in range(1, n + 1) :
+    for i in range(1, count + 1) :
         recent_message.append({
-            "id"        : getByOrder("id", -i),
-            "name"      : getByOrder("name", -i),
-            "birthday"  : getByOrder("birthday", -i),
-            "content"   : getByOrder("content", -i)
+            "id"        : getByOrder("id", -(start+i)),
+            "name"      : getByOrder("name", -(start+i)),
+            "date"      : getByOrder("date", -(start+i)),
+            "markdown"  : getByOrder("markdown", -(start+i)),
+            "html"      : getByOrder("html", -(start+i))
         })
 
     return recent_message
