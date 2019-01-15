@@ -94,6 +94,14 @@ footer {
 	border-radius: 10px;
 }
 
+.recent_article {
+	margin: 0 2em;
+}
+
+.recent_message {
+	margin: 0 2em;
+}
+
  /* 标题和前面空一定的距离 */
 h1, h2, h3, h4, h5, h6 {
 	padding-top: 15px;
