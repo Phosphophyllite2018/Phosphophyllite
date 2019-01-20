@@ -68,11 +68,10 @@ def append(name, content) :
     try :
         if name.strip() == "" :
             name = "匿名"  
-        name = sqlFilter(name)
-        markdown = sqlFilter(content)
-        html = MarkdownModel.renderMarkdown(markdown)
+
+        html = MarkdownModel.renderMarkdown(content)
         sql = "INSERT INTO message VALUES(NULL, ?, ?, ?, datetime('now'));" 
-        params = (name, markdown, html)
+        params = (name, content, html)
         cursor().execute(sql, params)
         return True
     except Exception as e:

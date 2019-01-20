@@ -2,7 +2,7 @@
 
 <header id='header_div'> 
     <h1 class="header_title blog_title"> {{ blog_title }} </h1>
-    <a class="header_choice" href="javascript:void(0);" onclick="utility.load('home.html')">首页</a>
+    <a class="header_choice" href="javascript:void(0);" onclick="ArticleInterface.homepage()">首页</a>
     <a class="header_choice" href="javascript:void(0);" onclick="utility.load('admin.html')">管理</a>
 </header>
 <div id='header_space'></div>
@@ -33,6 +33,12 @@
 
 <article id='article_div'> 
     <h1 class='article_title'>留言板</h1>
+    <hr/>
+    <textarea id="message_content" class="editor big_editor" spellcheck="false" placeholder="给我留言(支持Markdown，限150字以内。)"></textarea>
+    <div class="combo_box">
+        <input id="message_name" type="text" class="line_editor big_name" placeholder="你的名字" autocomplete="off"/>
+        <input type="button" class="commit" value="提交" onclick="MessageInterface.save()"/>
+    </div>
     <hr/>
     <div class='message_board'>
 

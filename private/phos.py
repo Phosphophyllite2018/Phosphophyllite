@@ -43,7 +43,7 @@ def init_blog_table(cursor) :
     
     # 没有字段，初始化
     if length == 0 :
-        sql = "INSERT INTO blog VALUES(0, NULL, NULL, NULL, NULL, datetime('now'), 0)"
+        sql = "INSERT INTO blog VALUES(0, NULL, NULL, NULL, NULL, datetime('now','utc'), 0)"
         cursor.execute(sql)
         print("'blog'表写入初始值。")
     else :
@@ -73,7 +73,7 @@ blog_table = [
     ["password" , "VARCHAR(512)"],
     ["git_name" , "VARCHAR(512)"],
     ["git_pass" , "VARCHAR(512)"],
-    ["birthday" , "DATETIME DEFAULT (datetime('now')) NOT NULL"],
+    ["birthday" , "DATETIME DEFAULT (datetime('now','utc')) NOT NULL"],
     ["visiting" , "INT DEFAULT 0"],
 ]
 
@@ -89,7 +89,7 @@ article_table = [
     ["title" , "VARCHAR(512)"],
     ["markdown" , "TEXT"],
     ["html" , "TEXT"],
-    ["date" , "DATETIME DEFAULT (datetime('now')) NOT NULL"],
+    ["date" , "DATETIME DEFAULT (datetime('now','utc')) NOT NULL"],
     ["reading" , "INT DEFAULT 0 NOT NULL"],
     ["category", "INT"],
     ["FOREIGN KEY(category) REFERENCES category(id)",""]
@@ -101,7 +101,7 @@ message_table = [
     ["name" , "VARCHAR(512)"],
     ["markdown" , "TEXT"],
     ["html" , "TEXT"],
-    ["date" , "DATETIME DEFAULT (DATETIME('now')) NOT NULL"],
+    ["date" , "DATETIME DEFAULT (datetime('now','utc')) NOT NULL"],
 ]
 
 # 初始化

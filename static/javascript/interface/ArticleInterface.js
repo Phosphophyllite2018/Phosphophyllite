@@ -111,7 +111,7 @@ ArticleInterface.showHTML = function(params, label_selector)
 
 
 /* 显示文章正文内容Markdown */
-ArticleInterface.showMarkdown = function(params, label_selector)
+showMarkdown = function(params, label_selector)
 {
     label_selector = label_selector ? label_selector : '.article_content'
     AsyncJsonPost('/article/markdown', params, function(json)
@@ -128,5 +128,23 @@ ArticleInterface.showMarkdown = function(params, label_selector)
                 alert(json['error'])
             }
         }
+    })
+}
+
+/* 主页 */
+ArticleInterface.homepage = function()
+{
+    utility.load('article.html', function()
+    {
+        BlogInterface.showTitle()
+        BlogInterface.showDays()
+        BlogInterface.showVisiting()
+        ArticleInterface.showCount()
+        ArticleInterface.showTitle({'order' : -1})
+        ArticleInterface.showDate({'order' : -1})
+        ArticleInterface.showReading({'order' : -1})
+        ArticleInterface.showHTML({'order' : -1})
+        MessageInterface.showCount()
+        MessageInterface.showAside()
     })
 }
