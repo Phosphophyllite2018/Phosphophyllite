@@ -138,7 +138,7 @@ MessageInterface.showAside = function(label_selector)
 
                     let content = document.createElement('p')
                     content.className = 'message_content'
-                    if(m['html'] == null)
+                    if(m['html'] != null)
                     {
                         content.innerHTML = m['html']
                     }
@@ -190,7 +190,7 @@ MessageInterface.showMain = function(label_selector)
 
                     let content = document.createElement('div')
                     content.className = 'message_content'
-                    if(m['html'] == null)
+                    if(m['html'] != null)
                     {
                         content.innerHTML = m['html']
                     }
