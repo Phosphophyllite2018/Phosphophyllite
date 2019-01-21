@@ -145,7 +145,7 @@
 |`count`    | int     | 成功时   | 访问量   |
 
 
-### 增加量修改  
+### 访问量修改  
 * URL : `/blog/visiting_modify`
 * 参数列表 : 无
 

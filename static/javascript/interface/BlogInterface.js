@@ -89,10 +89,15 @@ BlogInterface.showVisiting = function(label_selector)
 }
 
 
-/* 刷新全部数据 */
-BlogInterface.refresh = function()
+/* 访问量加一 */
+BlogInterface.addVisiting = function()
 {
-    AsyncJsonPost('/blog/username', {}, BlogInterface.refreshTitle);
-    AsyncJsonPost('/blog/running_days', {}, BlogInterface.refreshRunDays)
-    AsyncJsonPost('/blog/visiting_count', {}, BlogInterface.refreshVisitingCount)
+    AsyncJsonPost('/blog/visiting_modify', {}, function(json) 
+    {
+        if(json['state'] == false)
+        {
+            console.log("BlogInterface.addVisiting return false")
+            return false
+        }
+    })
 }
