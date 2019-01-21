@@ -111,7 +111,7 @@ ArticleInterface.showHTML = function(params, label_selector)
 
 
 /* 显示文章正文内容Markdown */
-showMarkdown = function(params, label_selector)
+ArticleInterface.showMarkdown = function(params, label_selector)
 {
     label_selector = label_selector ? label_selector : '.article_content'
     AsyncJsonPost('/article/markdown', params, function(json)
