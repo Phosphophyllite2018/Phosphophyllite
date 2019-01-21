@@ -123,9 +123,9 @@ th,td {
 }
 
 /* 段落开头空2格 */
-article p {
+/* article p {
 	text-indent: 2em;
-}
+} */
 	
 /* 让li标签能够显示圆点 */
 ol, ul {
