@@ -23,6 +23,7 @@ blogInterfaceList = [
     ['/blog/is_login',          BlogInterface.isLogin],
     ['/blog/login',             BlogInterface.login],
     ['/blog/username',          BlogInterface.getUsername],
+    ['/blog/avatar',            BlogInterface.getAvatar],
     ['/blog/running_days',      BlogInterface.getRunDays],
     ['/blog/visiting_count',    BlogInterface.getVisitingCount],
     ['/blog/visiting_modify',   BlogInterface.addVisitingCount],

@@ -137,6 +137,7 @@ ArticleInterface.homepage = function()
     utility.load('article.html', function()
     {
         BlogInterface.showTitle()
+        BlogInterface.showAvatar()
         BlogInterface.showDays()
         BlogInterface.showVisiting()
         ArticleInterface.showCount()

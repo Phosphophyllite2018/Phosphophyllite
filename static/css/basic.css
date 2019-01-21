@@ -25,7 +25,7 @@ header {
 /* aside和atcile在同一行 */
 aside {
 	float: left;
-	max-width: 30%;
+	width: 25%;
 	overflow: hidden;
 	min-height: 100%;
 	margin-left: 10px;
@@ -34,7 +34,7 @@ aside {
 article {
 	float: left;
 	margin-left: 5%;
-	width: 60%;
+	width: 65%;
 }
 
 /* 清除float */
@@ -200,14 +200,13 @@ a:hover {
 }
 
 /* 头像显示为圆形 */
-#photo {
+#avatar {
 	width: 200px;
 	height: 200px;
 	display: block;
 	margin: 20px auto;
 	border-radius: 50%;
-	border: 1px solid rgb(221,240,237);
-	background-color: aquamarine;
+	border: 1px solid aqua;
 }
   
   

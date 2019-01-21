@@ -217,6 +217,7 @@ MessageInterface.jump = function()
     utility.load('message.html', function()
     {
         BlogInterface.showTitle()
+        BlogInterface.showAvatar()
         BlogInterface.showDays()
         BlogInterface.showVisiting()
         ArticleInterface.showCount()

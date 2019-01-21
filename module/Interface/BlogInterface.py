@@ -43,6 +43,23 @@ def login() :
 
     return json.dumps(returnJsonData, ensure_ascii=False)
 
+# 获取头像
+def getAvatar() :
+    returnJsonData = {}
+    try :
+
+        returnJsonData['avatar'] = BlogModel.getAvatar()
+        returnJsonData['state'] = True
+
+
+    except Exception as e:
+        returnJsonData['state'] = False
+        returnJsonData['error'] = str(e)
+        PhosLog.log(e)
+
+    return json.dumps(returnJsonData, ensure_ascii=False)
+
+
 # 获取用户名
 def getUsername() :
     returnJsonData = {}

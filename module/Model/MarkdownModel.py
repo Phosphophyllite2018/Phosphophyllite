@@ -1,4 +1,5 @@
 import sqlite3
+from . import BlogModel
 from ..Phos import PhosLog
 from ..Phos.common import textFilter
 import requests
@@ -15,32 +16,14 @@ def loadArticle(id) :
 def saveArticle(data) :
     pass
 
-def getGitName() :
-    try :
-        sql = "SELECT git_name FROM blog;"
-        result = cursor().execute(sql)
-        return result.fetchone()[0]
-    except Exception as e:
-        PhosLog.log(e)
-        return None
-
-def getGitPass() :
-    try :
-        sql = "SELECT git_pass FROM blog;"
-        result = cursor().execute(sql)
-        return result.fetchone()[0]
-    except Exception as e:
-        PhosLog.log(e)
-        return None
-
 def renderMarkdown(md_text, timeout=15) :
     try :
         if md_text == None :
             return None
         
         # 获取用户名密码
-        gitname = getGitName()
-        gitpass = getGitPass()
+        gitname = BlogModel.getGitName()
+        gitpass = BlogModel.getGitPass()
 
         # 请求信息
         payload = {"text" : md_text, "mode" : "gfm", "context" : "https://github.com/Phosphophyllite2018/Phosphophyllite"}
