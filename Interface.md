@@ -96,7 +96,7 @@
 |`state`    | bool    | 总是     | 是否成功 |
 |`error`    | string  | 失败时   | 错误消息 |
 
-### 用户名  
+### 用户头像  
 * URL : `/blog/avatar`
 * 参数列表 : 无  
 
