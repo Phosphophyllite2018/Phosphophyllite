@@ -119,13 +119,13 @@ ArticleInterface.showMarkdown = function(params, label_selector)
         var elements = document.querySelectorAll(label_selector);
         for(let i = 0; i < elements.length; i++)
         {
-            if(json['state'] == true)
+            if(json['state'] == true && json['markdown'] != null)
             {
                 elements[i].innerText = json['markdown']
             }
             else
             {
-                alert(json['error'])
+                utility.load('404.html', null, '/static/html/template/', 'article')
             }
         }
     })
@@ -147,5 +147,22 @@ ArticleInterface.homepage = function()
         ArticleInterface.showHTML({'order' : -1})
         MessageInterface.showCount()
         MessageInterface.showAside()
+    })
+}
+
+
+/* 404 */
+ArticleInterface.page404 = function()
+{
+    utility.load('article.html', function()
+    {
+        BlogInterface.showTitle()
+        BlogInterface.showAvatar()
+        BlogInterface.showDays()
+        BlogInterface.showVisiting()
+        ArticleInterface.showCount()
+        MessageInterface.showCount()
+        MessageInterface.showAside()
+        utility.load('404.html', null, '/static/html/template/', 'article')
     })
 }

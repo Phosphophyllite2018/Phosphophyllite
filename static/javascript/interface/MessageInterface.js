@@ -126,10 +126,11 @@ MessageInterface.showAside = function(label_selector)
                     let m = json['message'][j]
 
                     let div = document.createElement("div")
+                    div.className = 'message_block'
 
                     let name = document.createElement("span")
                     name.className = 'visitor_name'
-                    name.innerText = '[' + m['name'] + ']'
+                    name.innerText = ' [ ' + m['name'] + ' ] '
                     div.appendChild(name)
 
                     let date = document.createElement("span")
@@ -178,10 +179,16 @@ MessageInterface.showMain = function(label_selector)
                     let m = json['message'][j]
 
                     let div = document.createElement("div")
+                    div.className = 'message_block'
+
+                    let floor = document.createElement("span")
+                    floor.className = "message_floor"
+                    floor.innerText = "#" + m['id']
+                    div.appendChild(floor)
 
                     let name = document.createElement("span")
                     name.className = 'visitor_name'
-                    name.innerText = '[' + m['name'] + ']'
+                    name.innerText = ' [ ' + m['name'] + ' ] '
                     div.appendChild(name)
 
                     let date = document.createElement("span")
@@ -200,6 +207,9 @@ MessageInterface.showMain = function(label_selector)
                         content.innerText = m['markdown']
                     } 
                     div.appendChild(content)
+
+                    let hr = document.createElement('hr')
+                    div.appendChild(hr)
                     
                     elements[i].appendChild(div)
                 }
