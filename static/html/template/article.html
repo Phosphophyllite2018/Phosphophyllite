@@ -22,13 +22,24 @@
     </table>
 
     <hr/>
-    <div class='recent_article'>
+    <div>
         <p class="subtitle">最近文章 <a href="javascript:void(0);" onclick="">更多</a> </p>
+        <div class='recent_article'>
+            
+        </div>
     </div>
     
     <hr/>
-    <div class='recent_message'>
+    <div>
         <p class="subtitle">最近留言 <a href="javascript:void(0);" onclick="MessageInterface.jump()">更多</a> </p>
+        <div class='recent_message'>
+            
+        </div>
+    </div>
+    <textarea id="message_content" class="editor mini_editor" spellcheck="false" placeholder="给我留言(支持Markdown)"></textarea>
+    <div class="combo_box">
+        <input id="message_name" type="text" class="line_editor big_name" placeholder="你的名字" autocomplete="off"/>
+        <input type="button" id="message_commit" class="commit" value="提交" onclick="MessageInterface.save(true, false)"/>
     </div>
 </aside>
 

@@ -143,7 +143,16 @@ pre {
 	border-radius: 15px;
 	margin: 15px;
 	padding: 15px;
-	overflow-y:scroll;
+	overflow:auto;
+}
+
+aside pre {
+	max-height : 500px;
+	background-color: #f2fff4;
+	border-radius: 15px;
+	margin: 15px;
+	padding: 15px;
+	overflow:auto;
 }
 
 /* 行内代码视觉增强 */
