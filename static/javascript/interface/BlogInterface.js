@@ -21,6 +21,30 @@ BlogInterface.showTitle = function(label_selector)
     })
 }
 
+/* 显示博客头像 */
+BlogInterface.showAvatar = function(label_selector)
+{
+    label_selector = label_selector ? label_selector : '#avatar'
+    var element = document.querySelector(label_selector);
+    if(BlogInterface.avatar)
+    {
+        element.src = BlogInterface.avatar
+        return true
+    }
+    AsyncJsonPost('/blog/avatar', {}, function(json) 
+    {
+        if(json['state'] == true)
+        {
+            element.src = json['avatar']
+            BlogInterface.avatar = json['avatar']
+        }
+        else
+        {
+            alert(json['error'])
+        }
+    })
+}
+
 /* 显示运行天数 */
 BlogInterface.showDays = function(label_selector)
 {
@@ -65,10 +89,15 @@ BlogInterface.showVisiting = function(label_selector)
 }
 
 
-/* 刷新全部数据 */
-BlogInterface.refresh = function()
+/* 访问量加一 */
+BlogInterface.addVisiting = function()
 {
-    AsyncJsonPost('/blog/username', {}, BlogInterface.refreshTitle);
-    AsyncJsonPost('/blog/running_days', {}, BlogInterface.refreshRunDays)
-    AsyncJsonPost('/blog/visiting_count', {}, BlogInterface.refreshVisitingCount)
+    AsyncJsonPost('/blog/visiting_modify', {}, function(json) 
+    {
+        if(json['state'] == false)
+        {
+            console.log("BlogInterface.addVisiting return false")
+            return false
+        }
+    })
 }

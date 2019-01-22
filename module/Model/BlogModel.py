@@ -1,6 +1,8 @@
 import sqlite3
 import hashlib
 import time
+import requests
+from bs4 import BeautifulSoup
 from flask import session
 from ..Phos import PhosLog
 
@@ -8,6 +10,34 @@ def cursor() :
     db = sqlite3.connect("./private/phosphophyllite.db", isolation_level=None)
     cursor = db.cursor()
     return cursor
+
+def getGitName() :
+    try :
+        sql = "SELECT git_name FROM blog;"
+        result = cursor().execute(sql)
+        return result.fetchone()[0]
+    except Exception as e:
+        PhosLog.log(e)
+        return None
+
+def getGitPass() :
+    try :
+        sql = "SELECT git_pass FROM blog;"
+        result = cursor().execute(sql)
+        return result.fetchone()[0]
+    except Exception as e:
+        PhosLog.log(e)
+        return None
+
+def getAvatar() :
+    url = "https://github.com/%s" % getGitName() 
+    response = requests.get(url)
+    if response.status_code != 200 :
+        return None
+        
+    soup = BeautifulSoup(response.text, 'html.parser')
+    avatar = soup.find("meta", property="og:image")
+    return avatar.attrs['content']
 
 def getUsername() :
     try :
