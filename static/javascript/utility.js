@@ -1,15 +1,24 @@
 var utility = {}
 
 /* 页面内容切换 */
-utility.load = function(html, callback, dir)
+utility.load = function(html, callback, dir, label_selector)
 {
+    label_selector = label_selector ? label_selector : 'body'
     dir = dir ? dir : '/static/html/template/'
     url = dir + html 
 
     AsyncGet(url, null, function(request)
     {
-        document.querySelector('body').innerHTML = request.responseText
-        callback()
+        if(request.status == 200)
+        {
+            document.querySelector(label_selector).innerHTML = request.responseText
+            callback()
+        }
+        else
+        {
+            ArticleInterface.page404()
+        }
+        
     })
 }
 

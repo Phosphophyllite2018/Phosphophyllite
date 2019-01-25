@@ -120,15 +120,17 @@ MessageInterface.showAside = function(label_selector)
         {
             if(json['state'] == true)
             {
+                elements[i].innerHTML = "" // 清空
                 for(let j = 0; j < json['message'].length; j++)
                 {
                     let m = json['message'][j]
 
                     let div = document.createElement("div")
+                    div.className = 'message_block'
 
                     let name = document.createElement("span")
                     name.className = 'visitor_name'
-                    name.innerText = '[' + m['name'] + ']'
+                    name.innerText = ' [ ' + m['name'] + ' ] '
                     div.appendChild(name)
 
                     let date = document.createElement("span")
@@ -177,10 +179,16 @@ MessageInterface.showMain = function(label_selector)
                     let m = json['message'][j]
 
                     let div = document.createElement("div")
+                    div.className = 'message_block'
+
+                    let floor = document.createElement("span")
+                    floor.className = "message_floor"
+                    floor.innerText = "#" + m['id']
+                    div.appendChild(floor)
 
                     let name = document.createElement("span")
                     name.className = 'visitor_name'
-                    name.innerText = '[' + m['name'] + ']'
+                    name.innerText = ' [ ' + m['name'] + ' ] '
                     div.appendChild(name)
 
                     let date = document.createElement("span")
@@ -199,6 +207,9 @@ MessageInterface.showMain = function(label_selector)
                         content.innerText = m['markdown']
                     } 
                     div.appendChild(content)
+
+                    let hr = document.createElement('hr')
+                    div.appendChild(hr)
                     
                     elements[i].appendChild(div)
                 }
@@ -228,10 +239,11 @@ MessageInterface.jump = function()
 
 
 /* 添加留言 */
-MessageInterface.save = function()
+MessageInterface.save = function(showAside, showMain)
 {
     name_inpiut = document.querySelector('#message_name')
     content_input = document.querySelector('#message_content')
+    commit = document.querySelector("#message_commit")
 
     // 留言内容去除空格内容为空
     if(content_input.value.replace(/\s+/g,"").length == 0)
@@ -244,22 +256,36 @@ MessageInterface.save = function()
         name : name_inpiut.value,
         content : content_input.value 
     }
-    name_inpiut.value = ""
-    content_input.value = ""
+
     AsyncJsonPost('/message/save', params, function(json) 
     {
         if(json['state'] == true)
         {
             // 刷新
             MessageInterface.showCount()
-            MessageInterface.showMain()
+            if(showAside)
+            {
+                MessageInterface.showAside()
+            }
+
+            if(showMain)
+            {
+                MessageInterface.showMain()
+            }
+            
         }
         else
         {
             alert(json['error'])
         }
-        
+
+        commit.disabled = false;
+        commit.value = "提交"
     })
 
+    commit.disabled = true;
+    commit.value = "提交中"
+    name_inpiut.value = ""
+    content_input.value = ""
     return true
 }

@@ -28,7 +28,7 @@
 }
 
 .line_editor {
-    width: 80%;
+    width: 78%;
     border: 1px dodgerblue solid;
     padding: 0 1em;
     border-radius: 20px;
@@ -36,7 +36,7 @@
 }
 
 .commit {
-    width: 18%;
+    width: 20%;
     color: white;
     background-color: royalblue; 
     border: 1px #2e6da4 solid;
