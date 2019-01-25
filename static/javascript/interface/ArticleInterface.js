@@ -131,6 +131,49 @@ ArticleInterface.showMarkdown = function(params, label_selector)
     })
 }
 
+/* 保存文章 */
+ArticleInterface.save = function()
+{
+    title_inpiut = document.querySelector('#article_title')
+    content_input = document.querySelector('#article_content')
+    commit = document.querySelector("#article_commit")
+
+    if(title_inpiut.value.replace(/\s+/g,"").length == 0 || content_input.value.replace(/\s+/g,"").length == 0)
+    {
+        alert("文章标题和内容不能为空")
+        return false
+    }
+
+    params = {
+        "id" : 0,
+        "username" : BlogInterface.user,
+        "title" : title_inpiut.value,
+        "category-id" : 0,
+        "content" : content_input.value 
+    }
+
+    AsyncJsonPost('/article/save', params, function(json) 
+    {
+        if(json['state'] == true)
+        {
+            // 刷新
+            ArticleInterface.showCount()
+            alert("文章保存成功")
+        }
+        else
+        {
+            alert(json['error'])
+        }
+
+        commit.disabled = false;
+        commit.value = "提交"
+    })
+
+    commit.disabled = true;
+    commit.value = "提交中"
+    return true
+}
+
 /* 主页 */
 ArticleInterface.homepage = function()
 {

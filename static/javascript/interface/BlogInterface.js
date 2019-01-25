@@ -1,5 +1,26 @@
 var BlogInterface = {}
 
+/* 登录 */
+BlogInterface.login = function(username, password)
+{
+    params = {
+        "username" : username,
+        "password" : password
+    }
+    AsyncJsonPost('/blog/login', params, function(json) 
+    {
+        if(json['state'] == true)
+        {
+            alert("登陆成功")
+            BlogInterface.user = username
+        }
+        else
+        {
+            alert(json['error'])
+        }
+    })
+}
+
 /* 显示博客标题 */
 BlogInterface.showTitle = function(label_selector)
 {

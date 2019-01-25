@@ -34,8 +34,6 @@ def login() :
             returnJsonData['state'] = False
             returnJsonData['error'] = "error password"
 
-        returnJsonData['state'] = True
-
     except Exception as e:
         returnJsonData['state'] = False
         returnJsonData['error'] = str(e)
