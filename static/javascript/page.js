@@ -16,6 +16,7 @@ Page.home = function()
         ArticleInterface.showHTML({'order' : -1})
         MessageInterface.showCount()
         MessageInterface.showAside()
+        ArticleInterface.showAside()
     })
 }
 

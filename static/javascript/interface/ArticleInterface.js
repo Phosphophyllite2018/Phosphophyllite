@@ -23,10 +23,10 @@ ArticleInterface.showCount = function(label_selector)
 
 
 /* 显示文章标题 */
-ArticleInterface.showTitle = function(params, label_selector)
+ArticleInterface.showTitle = function(id, label_selector)
 {
     label_selector = label_selector ? label_selector : '.article_title'
-    AsyncJsonPost('/article/title', params, function(json)
+    AsyncJsonPost('/article/title', {"id" : id}, function(json)
     {
         var elements = document.querySelectorAll(label_selector);
         for(let i = 0; i < elements.length; i++)
@@ -45,10 +45,10 @@ ArticleInterface.showTitle = function(params, label_selector)
 
 
 /* 显示文章日期 */
-ArticleInterface.showDate = function(params, label_selector)
+ArticleInterface.showDate = function(id, label_selector)
 {
     label_selector = label_selector ? label_selector : '.article_date'
-    AsyncJsonPost('/article/date', params, function(json)
+    AsyncJsonPost('/article/date', {"id" : id}, function(json)
     {
         var elements = document.querySelectorAll(label_selector);
         for(let i = 0; i < elements.length; i++)
@@ -67,10 +67,10 @@ ArticleInterface.showDate = function(params, label_selector)
 
 
 /* 显示文章阅读量 */
-ArticleInterface.showReading = function(params, label_selector)
+ArticleInterface.showReading = function(id, label_selector)
 {
     label_selector = label_selector ? label_selector : '.article_reading'
-    AsyncJsonPost('/article/reading_count', params, function(json)
+    AsyncJsonPost('/article/reading_count', {"id" : id}, function(json)
     {
         var elements = document.querySelectorAll(label_selector);
         for(let i = 0; i < elements.length; i++)
@@ -89,10 +89,10 @@ ArticleInterface.showReading = function(params, label_selector)
 
 
 /* 显示文章正文内容HTML */
-ArticleInterface.showHTML = function(params, label_selector)
+ArticleInterface.showHTML = function(id, label_selector)
 {
     label_selector = label_selector ? label_selector : '.article_content'
-    AsyncJsonPost('/article/html', params, function(json)
+    AsyncJsonPost('/article/html', {"id" : id}, function(json)
     {
         var elements = document.querySelectorAll(label_selector);
         for(let i = 0; i < elements.length; i++)
@@ -103,7 +103,7 @@ ArticleInterface.showHTML = function(params, label_selector)
             }
             else
             {
-                ArticleInterface.showMarkdown(params)
+                ArticleInterface.showMarkdown(id)
             }
         }
     })
@@ -111,10 +111,10 @@ ArticleInterface.showHTML = function(params, label_selector)
 
 
 /* 显示文章正文内容Markdown */
-ArticleInterface.showMarkdown = function(params, label_selector)
+ArticleInterface.showMarkdown = function(id, label_selector)
 {
     label_selector = label_selector ? label_selector : '.article_content'
-    AsyncJsonPost('/article/markdown', params, function(json)
+    AsyncJsonPost('/article/markdown', {"id" : id}, function(json)
     {
         var elements = document.querySelectorAll(label_selector);
         for(let i = 0; i < elements.length; i++)
@@ -208,4 +208,55 @@ ArticleInterface.page404 = function()
         MessageInterface.showAside()
         utility.load('404.html', null, '/static/html/template/', 'article')
     })
+}
+
+
+/* 显示侧边栏列表 */
+ArticleInterface.showAside = function(label_selector)
+{
+    label_selector = label_selector ? label_selector : '.recent_article'
+    AsyncJsonPost('/article/aside', {}, function(json)
+    {
+        var elements = document.querySelectorAll(label_selector);
+        for(let i = 0; i < elements.length; i++)
+        {
+            elements[i].innerHTML = "" // 清空
+            for(let j = 0; j < json['article'].length; j++)
+            {
+                let m = json['article'][j]
+
+                let p = document.createElement("p")
+
+                let link = document.createElement("a")
+                link.className = 'article_link'
+                link.href =  "#article/id/" + m['id'] 
+                link.innerText = m['title']
+                link.onclick = ArticleInterface.showByUrl
+                p.appendChild(link)
+
+                // let date = document.createElement("span")
+                // date.innerText = "(" + m['date'] + ")"
+                // p.appendChild(date)
+                
+                elements[i].appendChild(p)
+            }
+        }
+    })
+}
+
+
+/* 显示文章 */
+ArticleInterface.showById = function(id)
+{
+    ArticleInterface.showTitle(id)
+    ArticleInterface.showDate(id)
+    ArticleInterface.showReading(id)
+    ArticleInterface.showHTML(id)
+}
+
+/* 显示文章 */
+ArticleInterface.showByUrl = function()
+{
+    let id = parseInt(location.hash.replace("#article/id/",""))
+    ArticleInterface.showById(id)
 }
