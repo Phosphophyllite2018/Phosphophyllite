@@ -26,7 +26,7 @@ def login() :
     try :
         username = request.json['username']
         password = request.json['password']
-        if(BlogModel.checkPassword(password)) :
+        if(BlogModel.checkPassword(username, password)) : 
             session[username] = True
             returnJsonData['state'] = True
         else :

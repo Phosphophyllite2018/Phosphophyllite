@@ -51,13 +51,14 @@ def getUsername() :
 def isLogin(username) :
     return (username in session) and (session[username] == True)
 
-def checkPassword(pswd) :
+def checkPassword(user, pswd) :
     try :
         sha256 = hashlib.sha256()
         sha256.update(pswd.encode('utf-8'))
         pswd = sha256.hexdigest()
-        sql = "SELECT password FROM blog WHERE id = 0;"
-        result = cursor().execute(sql)
+        sql = "SELECT password FROM blog WHERE username=?;"
+        params = (user,)
+        result = cursor().execute(sql, params)
         if pswd == result.fetchone()[0] :
             return True
         else :

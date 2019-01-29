@@ -47,6 +47,149 @@ def setById(key, id, value) :
         PhosLog.log(e)
         return None
 
+# 根据id查标题
+def getTitleById(id) :
+    try :
+        sql = "SELECT title FROM article where id=?;" 
+        params = (id,)
+        result = cursor().execute(sql, params)
+        return result.fetchone()[0]
+    except Exception as e:
+        PhosLog.log(e)
+        return None
+
+# 根据id查Markdown
+def getMarkdownById(id) :
+    try :
+        sql = "SELECT markdown FROM article where id=?;" 
+        params = (id,)
+        result = cursor().execute(sql, params)
+        return result.fetchone()[0]
+    except Exception as e:
+        PhosLog.log(e)
+        return None
+
+# 根据id查HTML
+def getHtmlById(id) :
+    try :
+        sql = "SELECT html FROM article where id=?;" 
+        params = (id,)
+        result = cursor().execute(sql, params)
+        return result.fetchone()[0]
+    except Exception as e:
+        PhosLog.log(e)
+        return None
+
+# 根据id查日期
+def getDateById(id) :
+    try :
+        sql = "SELECT date FROM article where id=?;" 
+        params = (id,)
+        result = cursor().execute(sql, params)
+        return result.fetchone()[0]
+    except Exception as e:
+        PhosLog.log(e)
+        return None
+
+# 根据id查阅读量
+def getReadingById(id) :
+    try :
+        sql = "SELECT reading FROM article where id=?;" 
+        params = (id,)
+        result = cursor().execute(sql, params)
+        return result.fetchone()[0]
+    except Exception as e:
+        PhosLog.log(e)
+        return None
+
+# 根据id查分类
+def getCategoryById(id) :
+    try :
+        sql = "SELECT category FROM article where id=?;" 
+        params = (id,)
+        result = cursor().execute(sql, params)
+        return result.fetchone()[0]
+    except Exception as e:
+        PhosLog.log(e)
+        return None
+
+# 根据排序查ID
+def getIdByOrder(order) :
+    try :
+        sql = "SELECT id FROM article ORDER BY id DESC LIMIT ?,1;" 
+        params = (order,)
+        result = cursor().execute(sql, params)
+        return result.fetchone()[0]
+    except Exception as e:
+        PhosLog.log(e)
+        return None
+
+# 根据排序查标题
+def getTitleByOrder(order) :
+    try :
+        sql = "SELECT title FROM article ORDER BY id DESC LIMIT ?,1;" 
+        params = (order,)
+        result = cursor().execute(sql, params)
+        return result.fetchone()[0]
+    except Exception as e:
+        PhosLog.log(e)
+        return None
+
+# 根据排序查Markdown
+def getMarkdownByOrder(order) :
+    try :
+        sql = "SELECT markdown FROM article ORDER BY id DESC LIMIT ?,1;" 
+        params = (order,)
+        result = cursor().execute(sql, params)
+        return result.fetchone()[0]
+    except Exception as e:
+        PhosLog.log(e)
+        return None
+
+# 根据排序查HTML
+def getHtmlByOrder(order) :
+    try :
+        sql = "SELECT html FROM article ORDER BY id DESC LIMIT ?,1;" 
+        params = (order,)
+        result = cursor().execute(sql, params)
+        return result.fetchone()[0]
+    except Exception as e:
+        PhosLog.log(e)
+        return None
+
+# 根据排序查日期
+def getDateByOrder(order) :
+    try :
+        sql = "SELECT date FROM article ORDER BY id DESC LIMIT ?,1;" 
+        params = (order,)
+        result = cursor().execute(sql, params)
+        return result.fetchone()[0]
+    except Exception as e:
+        PhosLog.log(e)
+        return None
+
+# 根据排序查阅读量
+def getReadingByOrder(order) :
+    try :
+        sql = "SELECT reading FROM article ORDER BY id DESC LIMIT ?,1;" 
+        params = (order,)
+        result = cursor().execute(sql, params)
+        return result.fetchone()[0]
+    except Exception as e:
+        PhosLog.log(e)
+        return None
+
+# 根据排序查分类
+def getCategoryByOrder(order) :
+    try :
+        sql = "SELECT category FROM article ORDER BY id DESC LIMIT ?,1;" 
+        params = (order,)
+        result = cursor().execute(sql, params)
+        return result.fetchone()[0]
+    except Exception as e:
+        PhosLog.log(e)
+        return None
+
 # 根据排序查找
 # 整数正序，负数逆序
 def getByOrder(key, num) :
@@ -132,19 +275,21 @@ def addVisiting(id, n=1) :
         return False
 
 # 返回最近的n篇文章
-def getRecentArticle(n) :
+def getRecentArticle(n = 10) :
     recent_article = []
 
     if getCount() < n :
         n = getCount()
         
-    for i in range(1, n + 1) :
+    for i in range(0, n) :
         recent_article.append({
-            "id"         : getByOrder("id", -i),
-            "title"      : getByOrder("title", -i),
-            "birthday"   : getByOrder("birthday", -i),
-            "content"    : getByOrder("content", -i),
-            "visiting"   : getByOrder("visiting", -i)
+            "id"         : getIdByOrder(i),
+            "title"      : getTitleByOrder(i),
+            "date"       : getDateByOrder(i),
+            "reading"    : getReadingByOrder(i),
+            # "category"   : getCategoryByOrder(i)
+            # "markdown"   : getMarkdownByOrder(i),
+            # "html"       : getHtmlByOrder(i)
         })
 
     return recent_article
@@ -155,19 +300,22 @@ def getArticleList(num_start, num_end) :
     if getCount() < num_start :
         num_start = getCount()
     if getCount() < num_end :
-        num_end = getCount() + 1
+        num_end = getCount()
     for i in range(num_start, num_end) :
         article_list.append({
-            "id"         : getByOrder("id", -i),
-            "title"      : getByOrder("title", -i),
-            "birthday"   : getByOrder("birthday", -i),
-            "visiting"   : getByOrder("visiting", -i)
+            "id"         : getIdByOrder(i),
+            "title"      : getTitleByOrder(i),
+            # "date"       : getDateByOrder(i),
+            # "reading"    : getReadingByOrder(i),
+            # "category"   : getCategoryByOrder(i)
+            # "markdown"   : getMarkdownByOrder(i),
+            # "html"       : getHtmlByOrder(i)
         })
         
     return article_list
 
 # 按页获取文章列表， page从1开始
-def getArticleListPage(page, perpage) :
+def getPage(page, perpage=20) :
     num_start = (perpage * (page-1) + 1)
     num_end   = (perpage * page + 1)
 
@@ -175,5 +323,5 @@ def getArticleListPage(page, perpage) :
 
 
 # 获取总页数
-def getPages(perpage) : 
+def getPages(perpage=20) : 
     return math.ceil(getCount() / perpage)

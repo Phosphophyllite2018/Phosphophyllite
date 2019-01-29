@@ -275,7 +275,7 @@ def delete() :
 
     try :
         id = request.json['id']
-        username =request.json['username']
+        username = request.json['username']
         if not BlogModel.isLogin(username) :
             returnJsonData['state'] = False
             returnJsonData['error'] = 'please-login'
@@ -284,6 +284,38 @@ def delete() :
         else :
             returnJsonData['state'] = False
             returnJsonData['error'] = 'update database failed'
+
+    except Exception as e:
+        returnJsonData['state'] = False
+        returnJsonData['error'] = str(e)
+        PhosLog.log(e)
+        
+    return json.dumps(returnJsonData, ensure_ascii=False)
+
+
+# 获取最近文章列表显示到侧边栏
+def aside() :
+    returnJsonData = {}
+
+    try :
+        returnJsonData['article'] = ArticleModel.getRecentArticle()
+        returnJsonData['state'] = True
+
+    except Exception as e:
+        returnJsonData['state'] = False
+        returnJsonData['error'] = str(e)
+        PhosLog.log(e)
+        
+    return json.dumps(returnJsonData, ensure_ascii=False)
+
+# 获取文章列表显示到目录
+def list() : 
+    returnJsonData = {}
+
+    try :
+        page = request.json['page']
+        returnJsonData['article'] = ArticleModel.getPage(0)
+        returnJsonData['state'] = True
 
     except Exception as e:
         returnJsonData['state'] = False

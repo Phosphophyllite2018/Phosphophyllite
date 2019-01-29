@@ -45,6 +45,8 @@ articleInterfaceList = [
     ['/article/markdown',               ArticleInterface.markdown],
     ['/article/html',                   ArticleInterface.html],
     ['/article/total',                  ArticleInterface.total],
+    ['/article/aside',                  ArticleInterface.aside],
+    ['/article/list',                   ArticleInterface.list],
     ['/article/modify/reading_count',   ArticleInterface.modifyReadingCount],
     ['/article/save',                   ArticleInterface.save],
     ['/article/delete',                 ArticleInterface.delete],

@@ -286,14 +286,18 @@ a:hover {
 }
 
 /* 文章列表 */
-.article_href a {
+.article_link a {
 	color: #009999;
 	text-decoration: none;
 	
 }
 
-.article_href a:hover {
+.article_link a:hover {
 	color: #009999;
 	background-color: unset;
 	text-decoration: underline;
+}
+
+.article_link{
+	white-space:nowrap; 
 }
