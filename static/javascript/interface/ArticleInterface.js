@@ -231,7 +231,7 @@ ArticleInterface.showAside = function(label_selector)
                 link.className = 'article_link'
                 link.href =  "#article/id/" + m['id'] 
                 link.innerText = m['title']
-                link.onclick = ArticleInterface.showByUrl
+                link.onclick = ArticleInterface.goto(link.href)
                 p.appendChild(link)
 
                 // let date = document.createElement("span")
@@ -259,4 +259,16 @@ ArticleInterface.showByUrl = function()
 {
     let id = parseInt(location.hash.replace("#article/id/",""))
     ArticleInterface.showById(id)
+}
+
+
+/* 打开文章 */
+ArticleInterface.goto = function(url)
+{
+    return function(){
+        location.href = url;
+        ArticleInterface.showByUrl()
+        return true
+    }
+    
 }
