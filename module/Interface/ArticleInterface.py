@@ -314,7 +314,7 @@ def list() :
 
     try :
         page = request.json['page']
-        returnJsonData['article'] = ArticleModel.getPage(0)
+        returnJsonData['article'] = ArticleModel.getPage(page)
         returnJsonData['state'] = True
 
     except Exception as e:
