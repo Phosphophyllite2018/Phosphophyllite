@@ -125,7 +125,7 @@ ArticleInterface.showMarkdown = function(id, label_selector)
             }
             else
             {
-                utility.load('404.html', null, '/static/html/template/', 'article')
+                Page.page404()
             }
         }
     })
@@ -174,41 +174,7 @@ ArticleInterface.save = function()
     return true
 }
 
-/* 主页 */
-ArticleInterface.homepage = function()
-{
-    utility.load('article.html', function()
-    {
-        BlogInterface.showTitle()
-        BlogInterface.showAvatar()
-        BlogInterface.showDays()
-        BlogInterface.showVisiting()
-        ArticleInterface.showCount()
-        ArticleInterface.showTitle({'order' : -1})
-        ArticleInterface.showDate({'order' : -1})
-        ArticleInterface.showReading({'order' : -1})
-        ArticleInterface.showHTML({'order' : -1})
-        MessageInterface.showCount()
-        MessageInterface.showAside()
-    })
-}
 
-
-/* 404 */
-ArticleInterface.page404 = function()
-{
-    utility.load('article.html', function()
-    {
-        BlogInterface.showTitle()
-        BlogInterface.showAvatar()
-        BlogInterface.showDays()
-        BlogInterface.showVisiting()
-        ArticleInterface.showCount()
-        MessageInterface.showCount()
-        MessageInterface.showAside()
-        utility.load('404.html', null, '/static/html/template/', 'article')
-    })
-}
 
 
 /* 显示侧边栏列表 */
@@ -245,13 +211,91 @@ ArticleInterface.showAside = function(label_selector)
 }
 
 
+/* 显示目录列表 */
+ArticleInterface.showList = function(page, label_selector)
+{
+    label_selector = label_selector ? label_selector : '.article_content'
+    AsyncJsonPost('/article/list', {"page" : page}, function(json)
+    {
+        var elements = document.querySelectorAll(label_selector);
+        for(let i = 0; i < elements.length; i++)
+        {
+            elements[i].innerHTML = "" // 清空
+            for(let j = 0; j < json['article'].length; j++)
+            {
+                let m = json['article'][j]
+
+                let h1 = document.createElement("h1")
+
+                let link = document.createElement("a")
+                link.className = 'article_link'
+                link.href =  "#article/id/" + m['id'] 
+                link.innerText = m['title']
+                link.onclick = ArticleInterface.goto(link.href)
+                h1.appendChild(link)
+
+
+
+                let p = document.createElement("p")
+                p.innerText = "日期 : " + utility.localtime(m['date']) + " 阅读量 : " + m['reading']
+
+                elements[i].appendChild(h1)
+                elements[i].appendChild(p)
+                
+            }
+
+            elements[i].appendChild(document.createElement("hr"))
+
+            /* 下一页 */
+            if(page > 0)
+            {
+                let prev_page = document.createElement("a")
+                prev_page.onclick = function(){ArticleInterface.showList(page - 1)}
+                prev_page.href = "javascript:void(0);"
+                prev_page.innerText = "上一页"
+                elements[i].appendChild(prev_page)
+
+                let space = document.createElement("span")
+                space.innerText = "   "
+                elements[i].appendChild(space)
+            }
+
+            /* 上一页 */
+            AsyncJsonPost('/article/pages', {}, function(json)
+            {
+                if(json['pages'] > page + 1)
+                {
+                    let next_page = document.createElement("a")
+                    next_page.onclick = function(){ArticleInterface.showList(page + 1)}
+                    next_page.href = "javascript:void(0);"
+                    next_page.innerText = "下一页"
+                    elements[i].appendChild(next_page)
+                }
+            })
+            
+        }
+    })
+}
+
+
 /* 显示文章 */
 ArticleInterface.showById = function(id)
 {
-    ArticleInterface.showTitle(id)
-    ArticleInterface.showDate(id)
-    ArticleInterface.showReading(id)
-    ArticleInterface.showHTML(id)
+    Page.load('article', 'article/content.html', function()
+    {
+        // BlogInterface.showTitle()
+        // BlogInterface.showAvatar()
+        // BlogInterface.showDays()
+        // BlogInterface.showVisiting()
+        // ArticleInterface.showCount()
+        // MessageInterface.showCount()
+        // MessageInterface.showAside()
+        // ArticleInterface.showAside()
+        ArticleInterface.showTitle(id)
+        ArticleInterface.showDate(id)
+        ArticleInterface.showReading(id)
+        ArticleInterface.showHTML(id)
+    })
 }
 
 /* 显示文章 */

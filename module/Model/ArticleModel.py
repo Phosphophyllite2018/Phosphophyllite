@@ -285,8 +285,8 @@ def getRecentArticle(n = 10) :
         recent_article.append({
             "id"         : getIdByOrder(i),
             "title"      : getTitleByOrder(i),
-            "date"       : getDateByOrder(i),
-            "reading"    : getReadingByOrder(i),
+            # "date"       : getDateByOrder(i),
+            # "reading"    : getReadingByOrder(i),
             # "category"   : getCategoryByOrder(i)
             # "markdown"   : getMarkdownByOrder(i),
             # "html"       : getHtmlByOrder(i)
@@ -305,8 +305,8 @@ def getArticleList(num_start, num_end) :
         article_list.append({
             "id"         : getIdByOrder(i),
             "title"      : getTitleByOrder(i),
-            # "date"       : getDateByOrder(i),
-            # "reading"    : getReadingByOrder(i),
+            "date"       : getDateByOrder(i),
+            "reading"    : getReadingByOrder(i),
             # "category"   : getCategoryByOrder(i)
             # "markdown"   : getMarkdownByOrder(i),
             # "html"       : getHtmlByOrder(i)
@@ -316,8 +316,8 @@ def getArticleList(num_start, num_end) :
 
 # 按页获取文章列表， page从1开始
 def getPage(page, perpage=20) :
-    num_start = (perpage * (page-1) + 1)
-    num_end   = (perpage * page + 1)
+    num_start = (perpage * page)
+    num_end   = (perpage * (page+1))
 
     return getArticleList(num_start, num_end)
 

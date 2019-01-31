@@ -1,0 +1,8 @@
+<h1>文章编辑</h1>
+<hr/>
+<div class="combo_box">
+    <input id="article_title" type="text" spellcheck="false" class="line_editor big_name" placeholder="文章标题" autocomplete="off"/>
+    <input id="article_commit" type="button" class="commit" value="提交" onclick="ArticleInterface.save()" article-id="{{ article_id }}"/>
+</div>
+<br/>
+<textarea id="article_content" spellcheck="false" class="editor big_editor" placeholder="文章内容(采用GitHub Flavored Markdown)"></textarea>
