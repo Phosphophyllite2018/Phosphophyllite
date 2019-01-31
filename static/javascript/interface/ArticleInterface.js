@@ -125,7 +125,7 @@ ArticleInterface.showMarkdown = function(id, label_selector)
             }
             else
             {
-                Page.load('article', 'article/404.html', function(){})
+                Page.page404()
             }
         }
     })
@@ -212,9 +212,9 @@ ArticleInterface.showAside = function(label_selector)
 
 
 /* 显示目录列表 */
-ArticleInterface.showIndex = function(page, label_selector)
+ArticleInterface.showList = function(page, label_selector)
 {
-    label_selector = label_selector ? label_selector : 'article'
+    label_selector = label_selector ? label_selector : '.article_content'
     AsyncJsonPost('/article/list', {"page" : page}, function(json)
     {
         var elements = document.querySelectorAll(label_selector);
@@ -238,11 +238,41 @@ ArticleInterface.showIndex = function(page, label_selector)
 
                 let p = document.createElement("p")
                 p.innerText = "日期 : " + utility.localtime(m['date']) + " 阅读量 : " + m['reading']
-                
-                
+
                 elements[i].appendChild(h1)
                 elements[i].appendChild(p)
+                
             }
+
+            elements[i].appendChild(document.createElement("hr"))
+
+            /* 下一页 */
+            if(page > 0)
+            {
+                let prev_page = document.createElement("a")
+                prev_page.onclick = function(){ArticleInterface.showList(page - 1)}
+                prev_page.href = "javascript:void(0);"
+                prev_page.innerText = "上一页"
+                elements[i].appendChild(prev_page)
+
+                let space = document.createElement("span")
+                space.innerText = "   "
+                elements[i].appendChild(space)
+            }
+
+            /* 上一页 */
+            AsyncJsonPost('/article/pages', {}, function(json)
+            {
+                if(json['pages'] > page + 1)
+                {
+                    let next_page = document.createElement("a")
+                    next_page.onclick = function(){ArticleInterface.showList(page + 1)}
+                    next_page.href = "javascript:void(0);"
+                    next_page.innerText = "下一页"
+                    elements[i].appendChild(next_page)
+                }
+            })
+            
         }
     })
 }

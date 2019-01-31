@@ -47,6 +47,7 @@ articleInterfaceList = [
     ['/article/total',                  ArticleInterface.total],
     ['/article/aside',                  ArticleInterface.aside],
     ['/article/list',                   ArticleInterface.list],
+    ['/article/pages',                  ArticleInterface.pages],
     ['/article/modify/reading_count',   ArticleInterface.modifyReadingCount],
     ['/article/save',                   ArticleInterface.save],
     ['/article/delete',                 ArticleInterface.delete],

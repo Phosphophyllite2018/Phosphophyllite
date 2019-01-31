@@ -1,10 +1,19 @@
 var Page = {}
 
+Page.cache = {}
 
 Page.load = function(element, html, callback)
 {
     dir = '/static/html/template/'
     url = dir + html 
+
+    /* 如果没有改变，则不重新加载 */
+    if(Page.cache[element] == html)
+    {
+        callback()
+        return 0
+    }
+    Page.cache[element] = html
 
     AsyncGet(url, null, function(request)
     {
@@ -15,10 +24,16 @@ Page.load = function(element, html, callback)
         }
         else
         {
-            ArticleInterface.page404()
+            Page.page404()
         }
         
     })
+}
+
+/* 404页面 */
+Page.page404 = function()
+{
+    Page.load('article', 'article/404.html', function(){})
 }
 
 /* 主页 */
@@ -44,6 +59,34 @@ Page.home = function()
     Page.load('article', 'article/content.html', function()
     {
         ArticleInterface.showByUrl()
+    })
+
+    Page.load('footer', 'footer/footer.html', function(){})
+}
+
+/* 文章目录 */
+Page.list = function(page)
+{
+    Page.load('header', 'header/header.html', function()
+    {
+        BlogInterface.showTitle()
+    })
+
+    Page.load('aside', 'aside/main.html', function()
+    {
+        BlogInterface.showTitle()
+        BlogInterface.showAvatar()
+        BlogInterface.showDays()
+        BlogInterface.showVisiting()
+        ArticleInterface.showCount()
+        MessageInterface.showCount()
+        MessageInterface.showAside()
+        ArticleInterface.showAside()
+    })
+
+    Page.load('article', 'article/list.html', function()
+    {
+        ArticleInterface.showList(page)
     })
 
     Page.load('footer', 'footer/footer.html', function(){})

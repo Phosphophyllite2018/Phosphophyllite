@@ -323,3 +323,17 @@ def list() :
         PhosLog.log(e)
         
     return json.dumps(returnJsonData, ensure_ascii=False)
+
+def pages() :
+    returnJsonData = {}
+
+    try :
+        returnJsonData['pages'] = ArticleModel.getPages()
+        returnJsonData['state'] = True
+
+    except Exception as e:
+        returnJsonData['state'] = False
+        returnJsonData['error'] = str(e)
+        PhosLog.log(e)
+        
+    return json.dumps(returnJsonData, ensure_ascii=False)
