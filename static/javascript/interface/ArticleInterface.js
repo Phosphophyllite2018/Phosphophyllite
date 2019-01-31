@@ -305,6 +305,15 @@ ArticleInterface.showByUrl = function()
     ArticleInterface.showById(id)
 }
 
+/* 显示最新的文章 */
+ArticleInterface.showLatest = function()
+{
+    AsyncJsonPost('/article/latest', {}, function(json)
+    {
+        ArticleInterface.showById(json['id'])
+    })
+}
+
 
 /* 打开文章 */
 ArticleInterface.goto = function(url)

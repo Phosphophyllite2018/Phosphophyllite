@@ -337,3 +337,17 @@ def pages() :
         PhosLog.log(e)
         
     return json.dumps(returnJsonData, ensure_ascii=False)
+
+def latest() :
+    returnJsonData = {}
+
+    try :
+        returnJsonData['id'] = ArticleModel.getIdByOrder(0)
+        returnJsonData['state'] = True
+
+    except Exception as e:
+        returnJsonData['state'] = False
+        returnJsonData['error'] = str(e)
+        PhosLog.log(e)
+        
+    return json.dumps(returnJsonData, ensure_ascii=False)

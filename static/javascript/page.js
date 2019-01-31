@@ -58,7 +58,7 @@ Page.home = function()
 
     Page.load('article', 'article/content.html', function()
     {
-        ArticleInterface.showByUrl()
+        ArticleInterface.showLatest()
     })
 
     Page.load('footer', 'footer/footer.html', function(){})
