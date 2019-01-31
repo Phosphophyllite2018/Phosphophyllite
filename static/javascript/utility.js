@@ -1,26 +1,6 @@
 var utility = {}
 
-/* 页面内容切换 已经弃用 */
-// utility.load = function(html, callback, dir, label_selector)
-// {
-//     label_selector = label_selector ? label_selector : 'body'
-//     dir = dir ? dir : '/static/html/template/'
-//     url = dir + html 
 
-//     AsyncGet(url, null, function(request)
-//     {
-//         if(request.status == 200)
-//         {
-//             document.querySelector(label_selector).innerHTML = request.responseText
-//             callback()
-//         }
-//         else
-//         {
-//             ArticleInterface.page404()
-//         }
-        
-//     })
-// }
 
 /* 时区转换 */
 utility.localtime = function(utc_time)

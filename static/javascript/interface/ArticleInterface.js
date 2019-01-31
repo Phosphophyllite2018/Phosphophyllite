@@ -125,7 +125,7 @@ ArticleInterface.showMarkdown = function(id, label_selector)
             }
             else
             {
-                utility.load('404.html', null, '/static/html/template/', 'article')
+                Page.load('article', 'article/404.html', function(){})
             }
         }
     })
@@ -174,41 +174,7 @@ ArticleInterface.save = function()
     return true
 }
 
-/* 主页 */
-ArticleInterface.homepage = function()
-{
-    utility.load('article.html', function()
-    {
-        BlogInterface.showTitle()
-        BlogInterface.showAvatar()
-        BlogInterface.showDays()
-        BlogInterface.showVisiting()
-        ArticleInterface.showCount()
-        ArticleInterface.showTitle({'order' : -1})
-        ArticleInterface.showDate({'order' : -1})
-        ArticleInterface.showReading({'order' : -1})
-        ArticleInterface.showHTML({'order' : -1})
-        MessageInterface.showCount()
-        MessageInterface.showAside()
-    })
-}
 
-
-/* 404 */
-ArticleInterface.page404 = function()
-{
-    utility.load('article.html', function()
-    {
-        BlogInterface.showTitle()
-        BlogInterface.showAvatar()
-        BlogInterface.showDays()
-        BlogInterface.showVisiting()
-        ArticleInterface.showCount()
-        MessageInterface.showCount()
-        MessageInterface.showAside()
-        utility.load('404.html', null, '/static/html/template/', 'article')
-    })
-}
 
 
 /* 显示侧边栏列表 */

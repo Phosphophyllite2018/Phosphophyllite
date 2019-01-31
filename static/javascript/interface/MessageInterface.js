@@ -222,20 +222,7 @@ MessageInterface.showMain = function(label_selector)
     })
 }
 
-/* 跳转到留言板页面 */
-MessageInterface.jump = function()
-{
-    utility.load('message.html', function()
-    {
-        BlogInterface.showTitle()
-        BlogInterface.showAvatar()
-        BlogInterface.showDays()
-        BlogInterface.showVisiting()
-        ArticleInterface.showCount()
-        MessageInterface.showCount()
-        MessageInterface.showMain()
-    })
-}
+
 
 
 /* 添加留言 */
