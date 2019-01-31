@@ -120,9 +120,8 @@ Page.messageBoard = function()
     Page.load('footer', 'footer/footer.html', function(){})
 }
 
-
-/* 管理页面 */
-Page.admin = function()
+/* 登录页面 */
+Page.login = function()
 {
     Page.load('header', 'header/header.html', function()
     {
@@ -139,30 +138,63 @@ Page.admin = function()
         MessageInterface.showCount()
     })
 
-    Page.load('article', 'article/admin.html', function(){})
+    Page.load('article', 'article/login.html', function(){})
 
     Page.load('footer', 'footer/footer.html', function(){})
+}
+
+
+/* 管理页面 */
+Page.admin = function()
+{
+    BlogInterface.isLogin(function()
+    {
+        Page.load('header', 'header/header.html', function()
+        {
+            BlogInterface.showTitle()
+        })
+
+        Page.load('aside', 'aside/admin.html', function()
+        {
+            BlogInterface.showTitle()
+            BlogInterface.showAvatar()
+            BlogInterface.showDays()
+            BlogInterface.showVisiting()
+            ArticleInterface.showCount()
+            MessageInterface.showCount()
+        })
+
+        Page.load('article', 'article/admin.html', function(){})
+
+        Page.load('footer', 'footer/footer.html', function(){})
+
+    }, Page.login)
 }
 
 /* 文章编辑 */
 Page.editor = function()
 {
-    Page.load('header', 'header/header.html', function()
+    BlogInterface.isLogin(function()
     {
-        BlogInterface.showTitle()
-    })
+        Page.load('header', 'header/header.html', function()
+        {
+            BlogInterface.showTitle()
+        })
 
-    Page.load('aside', 'aside/admin.html', function()
-    {
-        BlogInterface.showTitle()
-        BlogInterface.showAvatar()
-        BlogInterface.showDays()
-        BlogInterface.showVisiting()
-        ArticleInterface.showCount()
-        MessageInterface.showCount()
-    })
+        Page.load('aside', 'aside/admin.html', function()
+        {
+            BlogInterface.showTitle()
+            BlogInterface.showAvatar()
+            BlogInterface.showDays()
+            BlogInterface.showVisiting()
+            ArticleInterface.showCount()
+            MessageInterface.showCount()
+        })
 
-    Page.load('article', 'article/editor.html', function(){})
+        Page.load('article', 'article/editor.html', function(){})
 
-    Page.load('footer', 'footer/footer.html', function(){})
+        Page.load('footer', 'footer/footer.html', function(){})
+        
+    }, Page.login)
+    
 }
