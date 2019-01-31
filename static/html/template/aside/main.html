@@ -1,0 +1,31 @@
+<div>
+    <img id="avatar" onerror="imageLoadError(this)" src=''/>
+</div>
+<h1 id="name" class="blog_title"> Phosphophyllite </h1>
+<table id="statistics">
+    <tr><td class="statistic">运行时间 : </td><td class="value running_days"> 0 </td> <td>天</td></tr>
+    <tr><td class="statistic">总访问量 : </td><td class="value visiting_count"> 0 </td> <td>次</td></tr>
+    <tr><td class="statistic">文章总数 : </td><td class="value artcile_count"> 0 </td> <td>篇</td></tr>
+    <tr><td class="statistic">留言总数 : </td><td class="value message_count"> 0 </td> <td>条</td></tr>
+</table>
+
+<hr/>
+<div>
+    <p class="subtitle">最近文章 <a href="javascript:void(0);" onclick="ArticleInterface.showIndex(0)">更多</a> </p>
+    <div class='recent_article'>
+        
+    </div>
+</div>
+
+<hr/>
+<div>
+    <p class="subtitle">最近留言 <a href="javascript:void(0);" onclick="Page.messageBoard()">更多</a> </p>
+    <div class='recent_message'>
+        
+    </div>
+</div>
+<textarea id="message_content" class="editor mini_editor" spellcheck="false" placeholder="给我留言(支持Markdown)"></textarea>
+<div class="combo_box">
+    <input id="message_name" type="text" class="line_editor big_name" placeholder="你的名字" autocomplete="off"/>
+    <input type="button" id="message_commit" class="commit" value="提交" onclick="MessageInterface.save(true, false)"/>
+</div>
