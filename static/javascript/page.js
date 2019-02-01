@@ -37,7 +37,7 @@ Page.page404 = function()
 }
 
 /* 主页 */
-Page.home = function()
+Page.article = function()
 {
     Page.load('header', 'header/header.html', function()
     {
@@ -58,10 +58,25 @@ Page.home = function()
 
     Page.load('article', 'article/content.html', function()
     {
-        ArticleInterface.showByUrl()
+        if(location.hash == '#' || location.hash == '')
+        {
+            ArticleInterface.showLatest()
+        }
+        else
+        {
+            ArticleInterface.showByUrl()
+        }
     })
 
     Page.load('footer', 'footer/footer.html', function(){})
+}
+
+
+/* 回到首页 */
+Page.home = function()
+{
+    location.hash='#'
+    Page.article()
 }
 
 /* 文章目录 */
@@ -120,9 +135,8 @@ Page.messageBoard = function()
     Page.load('footer', 'footer/footer.html', function(){})
 }
 
-
-/* 管理页面 */
-Page.admin = function()
+/* 登录页面 */
+Page.login = function()
 {
     Page.load('header', 'header/header.html', function()
     {
@@ -139,30 +153,138 @@ Page.admin = function()
         MessageInterface.showCount()
     })
 
-    Page.load('article', 'article/admin.html', function(){})
+    Page.load('article', 'article/login.html', function(){})
 
     Page.load('footer', 'footer/footer.html', function(){})
 }
 
-/* 文章编辑 */
-Page.editor = function()
+
+/* 管理页面 */
+Page.admin = function()
 {
-    Page.load('header', 'header/header.html', function()
+    BlogInterface.isLogin(function()
     {
-        BlogInterface.showTitle()
-    })
+        Page.load('header', 'header/header.html', function()
+        {
+            BlogInterface.showTitle()
+        })
 
-    Page.load('aside', 'aside/admin.html', function()
+        Page.load('aside', 'aside/admin.html', function()
+        {
+            BlogInterface.showTitle()
+            BlogInterface.showAvatar()
+            BlogInterface.showDays()
+            BlogInterface.showVisiting()
+            ArticleInterface.showCount()
+            MessageInterface.showCount()
+        })
+
+        Page.load('article', 'article/admin.html', function(){})
+
+        Page.load('footer', 'footer/footer.html', function(){})
+
+    }, Page.login)
+}
+
+/* 文章编辑 */
+Page.editor = function(id)
+{
+    id = id ? id : 0
+    BlogInterface.isLogin(function()
     {
-        BlogInterface.showTitle()
-        BlogInterface.showAvatar()
-        BlogInterface.showDays()
-        BlogInterface.showVisiting()
-        ArticleInterface.showCount()
-        MessageInterface.showCount()
-    })
+        Page.load('header', 'header/header.html', function()
+        {
+            BlogInterface.showTitle()
+        })
 
-    Page.load('article', 'article/editor.html', function(){})
+        Page.load('aside', 'aside/admin.html', function()
+        {
+            BlogInterface.showTitle()
+            BlogInterface.showAvatar()
+            BlogInterface.showDays()
+            BlogInterface.showVisiting()
+            ArticleInterface.showCount()
+            MessageInterface.showCount()
+        })
 
-    Page.load('footer', 'footer/footer.html', function(){})
+        Page.load('article', 'article/editor.html', function(){
+            location.href = "#edit/id/" + id
+            if(id != 0)
+            {
+                AsyncJsonPost('/article/title', {"id" : id}, function(json){
+                    let title = document.querySelector("#article_title")
+                    title.value = json['title']
+                })
+
+                AsyncJsonPost('/article/markdown', {"id" : id}, function(json){
+                    let title = document.querySelector("#article_content")
+                    title.value = json['title']
+                })
+            }
+        })
+
+        Page.load('footer', 'footer/footer.html', function(){})
+        
+    }, Page.login)
+    
+}
+
+
+/* 文章管理 */
+Page.manager = function()
+{
+    BlogInterface.isLogin(function()
+    {
+        Page.load('header', 'header/header.html', function()
+        {
+            BlogInterface.showTitle()
+        })
+
+        Page.load('aside', 'aside/admin.html', function()
+        {
+            BlogInterface.showTitle()
+            BlogInterface.showAvatar()
+            BlogInterface.showDays()
+            BlogInterface.showVisiting()
+            ArticleInterface.showCount()
+            MessageInterface.showCount()
+        })
+
+        Page.load('article', 'article/article_manager.html', function(){
+            ArticleInterface.showManager(0)
+        })
+
+        Page.load('footer', 'footer/footer.html', function(){})
+        
+    }, Page.login)
+}
+
+
+/* 文章管理 */
+Page.messageManager = function()
+{
+    BlogInterface.isLogin(function()
+    {
+        Page.load('header', 'header/header.html', function()
+        {
+            BlogInterface.showTitle()
+        })
+
+        Page.load('aside', 'aside/admin.html', function()
+        {
+            BlogInterface.showTitle()
+            BlogInterface.showAvatar()
+            BlogInterface.showDays()
+            BlogInterface.showVisiting()
+            ArticleInterface.showCount()
+            MessageInterface.showCount()
+        })
+
+        Page.load('article', 'article/message_manager.html', function(){
+            MessageInterface.showManager(0)
+        })
+
+        Page.load('footer', 'footer/footer.html', function(){})
+        
+    }, Page.login)
 }

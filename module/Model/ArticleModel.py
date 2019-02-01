@@ -75,7 +75,11 @@ def getHtmlById(id) :
         sql = "SELECT html FROM article where id=?;" 
         params = (id,)
         result = cursor().execute(sql, params)
-        return result.fetchone()[0]
+        output = result.fetchone()
+        if output[0] == None :
+            return refreshHtml(id)
+        else:
+            return output[0]
     except Exception as e:
         PhosLog.log(e)
         return None
@@ -152,7 +156,11 @@ def getHtmlByOrder(order) :
         sql = "SELECT html FROM article ORDER BY id DESC LIMIT ?,1;" 
         params = (order,)
         result = cursor().execute(sql, params)
-        return result.fetchone()[0]
+        output = result.fetchone()
+        if output[0] == None :
+            return refreshHtml(getIdByOrder(order))
+        else:
+            return output[0]
     except Exception as e:
         PhosLog.log(e)
         return None
@@ -189,6 +197,13 @@ def getCategoryByOrder(order) :
     except Exception as e:
         PhosLog.log(e)
         return None
+
+# 修改HTML
+def setHtmlById(id, html) :
+    sql = "UPDATE article SET html=? WHERE id=?;"
+    params = (html,id)
+    cursor().execute(sql, params)
+    print('setHtmlById')
 
 # 根据排序查找
 # 整数正序，负数逆序
@@ -325,3 +340,15 @@ def getPage(page, perpage=20) :
 # 获取总页数
 def getPages(perpage=20) : 
     return math.ceil(getCount() / perpage)
+
+# 刷新html
+def refreshHtml(id) :
+    try:
+        md = getMarkdownById(id)
+        html = MarkdownModel.renderMarkdown(md)
+        if html != None :
+            setHtmlById(id, html)
+            return html
+    except Exception as e:
+        PhosLog.log(e)
+        return None

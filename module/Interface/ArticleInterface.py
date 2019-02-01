@@ -26,7 +26,7 @@ def getIdByOrder() :
 
     try :
         order = request.json['order']
-        returnJsonData['id'] = ArticleModel.getByOrder('id',order)
+        returnJsonData['id'] = ArticleModel.getIdByOrder(order)
         returnJsonData['state'] = True
 
     except Exception as e:
@@ -43,11 +43,11 @@ def title() :
     try :
         if 'id' in request.json :
             id = request.json['id']
-            returnJsonData['title'] = ArticleModel.getById('title', id)
+            returnJsonData['title'] = ArticleModel.getTitleById( id)
             returnJsonData['state'] = True
         elif 'order' in request.json :
             order = request.json['order']
-            returnJsonData['title'] = ArticleModel.getByOrder('title', order)
+            returnJsonData['title'] = ArticleModel.getTitleByOrder(order)
             returnJsonData['state'] = True
         else :
             returnJsonData['state'] = False
@@ -68,11 +68,11 @@ def date() :
     try :
         if 'id' in request.json :
             id = request.json['id']
-            returnJsonData['date'] = ArticleModel.getById('date', id)
+            returnJsonData['date'] = ArticleModel.getDateById(id)
             returnJsonData['state'] = True
         elif 'order' in request.json :
             order = request.json['order']
-            returnJsonData['date'] = ArticleModel.getByOrder('date', order)
+            returnJsonData['date'] = ArticleModel.getDateByOrder(order)
             returnJsonData['state'] = True
         else :
             returnJsonData['state'] = False
@@ -92,11 +92,11 @@ def category() :
     try :
         if 'id' in request.json :
             id = request.json['id']
-            returnJsonData['category'] = ArticleModel.getById('category', id)
+            returnJsonData['category'] = ArticleModel.getCategoryById(id)
             returnJsonData['state'] = True
         elif 'order' in request.json :
             order = request.json['order']
-            returnJsonData['category'] = ArticleModel.getByOrder('category', order)
+            returnJsonData['category'] = ArticleModel.getCategoryByOrder(order)
             returnJsonData['state'] = True
         else :
             returnJsonData['state'] = False
@@ -117,11 +117,11 @@ def readingCount() :
     try :
         if 'id' in request.json :
             id = request.json['id']
-            returnJsonData['reading'] = ArticleModel.getById('reading', id)
+            returnJsonData['reading'] = ArticleModel.getReadingById(id)
             returnJsonData['state'] = True
         elif 'order' in request.json :
             order = request.json['order']
-            returnJsonData['reading'] = ArticleModel.getByOrder('reading', order)
+            returnJsonData['reading'] = ArticleModel.getReadingByOrder(order)
             returnJsonData['state'] = True
         else :
             returnJsonData['state'] = False
@@ -142,11 +142,11 @@ def markdown():
     try :
         if 'id' in request.json :
             id = request.json['id']
-            returnJsonData['markdown'] = ArticleModel.getById('markdown', id)
+            returnJsonData['markdown'] = ArticleModel.getMarkdownById(id)
             returnJsonData['state'] = True
         elif 'order' in request.json :
             order = request.json['order']
-            returnJsonData['markdown'] = ArticleModel.getByOrder('markdown', order)
+            returnJsonData['markdown'] = ArticleModel.getMarkdownByOrder(order)
             returnJsonData['state'] = True
         else :
             returnJsonData['state'] = False
@@ -167,11 +167,11 @@ def html():
     try :
         if 'id' in request.json :
             id = request.json['id']
-            returnJsonData['html'] = ArticleModel.getById('html', id)
+            returnJsonData['html'] = ArticleModel.getHtmlById(id)
             returnJsonData['state'] = True
         elif 'order' in request.json :
             order = request.json['order']
-            returnJsonData['html'] = ArticleModel.getByOrder('html', order)
+            returnJsonData['html'] = ArticleModel.getHtmlByOrder(order)
             returnJsonData['state'] = True
         else :
             returnJsonData['state'] = False
@@ -192,22 +192,22 @@ def total():
         if 'id' in request.json :
             id = request.json['id']
             returnJsonData['id'] = id
-            returnJsonData['title'] = ArticleModel.getById('title', id)
-            returnJsonData['date'] = ArticleModel.getById('date', id)
-            returnJsonData['category'] = ArticleModel.getById('category', id)
-            returnJsonData['reading'] = ArticleModel.getById('reading', id)
-            returnJsonData['markdown'] = ArticleModel.getById('markdown', id)
-            returnJsonData['html'] = ArticleModel.getById('html', id)
+            returnJsonData['title'] = ArticleModel.getTitleById(id)
+            returnJsonData['date'] = ArticleModel.getDateById(id)
+            returnJsonData['category'] = ArticleModel.getCategoryById(id)
+            returnJsonData['reading'] = ArticleModel.getReadingById(id)
+            returnJsonData['markdown'] = ArticleModel.getMarkdownById(id)
+            returnJsonData['html'] = ArticleModel.getHtmlById(id)
             returnJsonData['state'] = True
         elif 'order' in request.json :
             order = request.json['order']
-            returnJsonData['id'] = ArticleModel.getByOrder('id', order)
-            returnJsonData['title'] = ArticleModel.getByOrder('title', order)
-            returnJsonData['date'] = ArticleModel.getByOrder('date', order)
-            returnJsonData['category'] = ArticleModel.getByOrder('category', order)
-            returnJsonData['reading'] = ArticleModel.getByOrder('reading', order)
-            returnJsonData['markdown'] = ArticleModel.getByOrder('markdown', order)
-            returnJsonData['html'] = ArticleModel.getByOrder('html', order)
+            returnJsonData['id'] = ArticleModel.getIdByOrder(order)
+            returnJsonData['title'] = ArticleModel.getTitleByOrder(order)
+            returnJsonData['date'] = ArticleModel.getDateByOrder(order)
+            returnJsonData['category'] = ArticleModel.getCategoryByOrder(order)
+            returnJsonData['reading'] = ArticleModel.getReadingByOrder(order)
+            returnJsonData['markdown'] = ArticleModel.getMarkdownByOrder(order)
+            returnJsonData['html'] = ArticleModel.getHtmlByOrder(order)
             returnJsonData['state'] = True
         else :
             returnJsonData['state'] = False
@@ -329,6 +329,20 @@ def pages() :
 
     try :
         returnJsonData['pages'] = ArticleModel.getPages()
+        returnJsonData['state'] = True
+
+    except Exception as e:
+        returnJsonData['state'] = False
+        returnJsonData['error'] = str(e)
+        PhosLog.log(e)
+        
+    return json.dumps(returnJsonData, ensure_ascii=False)
+
+def latest() :
+    returnJsonData = {}
+
+    try :
+        returnJsonData['id'] = ArticleModel.getIdByOrder(0)
         returnJsonData['state'] = True
 
     except Exception as e:

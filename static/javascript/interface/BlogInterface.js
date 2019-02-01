@@ -13,10 +13,38 @@ BlogInterface.login = function(username, password)
         {
             alert("登陆成功")
             BlogInterface.user = username
+            Page.admin()
         }
         else
         {
             alert(json['error'])
+        }
+    })
+}
+
+/* 登录 */
+BlogInterface.login2 = function()
+{
+    username = document.querySelector('#username').value
+    password = document.querySelector('#password').value
+    BlogInterface.login(username, password)
+}
+
+/* 检查登录状态 */
+BlogInterface.isLogin = function(trueCall, falseCall)
+{
+    params = {
+        "username" : BlogInterface.user
+    }
+    AsyncJsonPost('/blog/is_login', params, function(json) 
+    {
+        if(json['state'] == true)
+        {
+            trueCall()
+        }
+        else
+        {
+            falseCall()
         }
     })
 }

@@ -26,7 +26,7 @@ def getIdByOrder() :
 
     try :
         order = request.json['order']
-        returnJsonData['id'] = MessageModel.getByOrder('id',order)
+        returnJsonData['id'] = MessageModel.getIdByOrderDesc(order)
         returnJsonData['state'] = True
 
     except Exception as e:
@@ -42,7 +42,7 @@ def visitorName() :
 
     try :
         id = request.json['id']
-        returnJsonData['name'] = MessageModel.getByOrder('name',id)
+        returnJsonData['name'] = MessageModel.getNameById(id)
         returnJsonData['state'] = True
 
     except Exception as e:
@@ -58,7 +58,7 @@ def date() :
 
     try :
         id = request.json['id']
-        returnJsonData['date'] = MessageModel.getByOrder('date',id)
+        returnJsonData['date'] = MessageModel.getDateById(id)
         returnJsonData['state'] = True
 
     except Exception as e:
@@ -75,7 +75,7 @@ def markdown() :
 
     try :
         id = request.json['id']
-        returnJsonData['markdown'] = MessageModel.getByOrder('markdown',id)
+        returnJsonData['markdown'] = MessageModel.getMarkdownById(id)
         returnJsonData['state'] = True
 
     except Exception as e:
@@ -91,7 +91,7 @@ def html() :
 
     try :
         id = request.json['id']
-        returnJsonData['html'] = MessageModel.getByOrder('html',id)
+        returnJsonData['html'] = MessageModel.getHtmlById(id)
         returnJsonData['state'] = True
 
     except Exception as e:
@@ -108,10 +108,10 @@ def total() :
 
     try :
         id = request.json['id']
-        returnJsonData['name'] = MessageModel.getByOrder('name',id)
-        returnJsonData['date'] = MessageModel.getByOrder('date',id)
-        returnJsonData['markdown'] = MessageModel.getByOrder('markdown',id)
-        returnJsonData['html'] = MessageModel.getByOrder('html',id)
+        returnJsonData['name'] = MessageModel.getNameById(id)
+        returnJsonData['date'] = MessageModel.getDateById(id)
+        returnJsonData['markdown'] = MessageModel.getMarkdownById(id)
+        returnJsonData['html'] = MessageModel.getHtmlById(id)
         returnJsonData['state'] = True
 
     except Exception as e:
@@ -121,20 +121,44 @@ def total() :
         
     return json.dumps(returnJsonData, ensure_ascii=False)
 
+# 获取页数
+def pages() :
+    returnJsonData = {}
+
+    try :
+        returnJsonData['pages'] = MessageModel.getPageCount()
+        returnJsonData['state'] = True
+
+    except Exception as e:
+        returnJsonData['state'] = False
+        returnJsonData['error'] = str(e)
+        PhosLog.log(e)
+        
+    return json.dumps(returnJsonData, ensure_ascii=False)
 
 # 留言列表
 def getList() :
     returnJsonData = {}
 
     try :
-        if 'start' in request.json :
-            start = request.json['start']
-        else :
-            start = 0
-        count = request.json['count']
+        page = request.json['page']
         
-        returnJsonData['message'] = MessageModel.getList(start, count)
+        returnJsonData['message'] = MessageModel.getMessagePage(page)
         returnJsonData['state'] = True
+
+    except Exception as e:
+        returnJsonData['state'] = False
+        returnJsonData['error'] = str(e)
+        PhosLog.log(e)
+        
+    return json.dumps(returnJsonData, ensure_ascii=False)
+
+# 侧边栏留言
+def getAside() :
+    returnJsonData = {}
+    try :
+        returnJsonData['message'] = MessageModel.getList(0, 10)
+        returnJsonData['state'] = True 
 
     except Exception as e:
         returnJsonData['state'] = False

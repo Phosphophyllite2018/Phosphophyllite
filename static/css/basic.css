@@ -109,15 +109,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* 表格隔行双色 */
-tbody tr:nth-child(odd) {
+.article_content tbody tr:nth-child(odd) {
 	background-color:#cbe0ffe3;
 }
 
-tbody tr:nth-child(even) {
+.article_content tbody tr:nth-child(even) {
 	background-color:white;
 }
 
-th,td {
+.article_content th,.article_content td {
 	padding: 0 10px;
 	border: 2px dodgerblue solid;
 }
@@ -128,17 +128,17 @@ th,td {
 } */
 	
 /* 让li标签能够显示圆点 */
-ol, ul {
+.article_content ol, .article_content ul {
 	margin-left: 4em; 
 }
 
 /* 内层ul缩进2格即可 */
-ol ol, ul ul {
+.article_content ol ol, .article_content ul ul {
 	margin-left: 2em; 
 }
 
 /* 代码块显示浅灰色圆角矩形底色 */
-pre {
+.article_content pre {
 	background-color: #f2fff4;
 	border-radius: 15px;
 	margin: 15px 0;
@@ -155,8 +155,16 @@ aside pre {
 	overflow: auto;
 }
 
+.message_board pre {
+	background-color: #f2fff4;
+	border-radius: 15px;
+	margin: 15px 0;
+	padding: 15px;
+	overflow: auto;
+}
+
 /* 行内代码视觉增强 */
-code {
+.article_content code, aside code {
 	color: dodgerblue;
 	background-color: #f2fff4;
     border-radius: 3px;

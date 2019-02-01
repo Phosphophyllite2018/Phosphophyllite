@@ -72,7 +72,10 @@ def getHtmlById(id) :
     params = (id,)
     result = cursor().execute(sql, params)
     output = result.fetchone()
-    return output[0]
+    if output[0] == None :
+        return refreshHtml(id)
+    else:
+        return output[0]
 
 # 根据排序查询id属性
 def getIdByOrderDesc(order) :
@@ -112,7 +115,16 @@ def getHtmlByOrderDesc(order) :
     params = (order,)
     result = cursor().execute(sql, params)
     output = result.fetchone()
-    return output[0]
+    if output[0] == None :
+        return refreshHtml(getIdByOrderDesc(order))
+    else:
+        return output[0]
+
+# 修改HTML属性
+def setHtmlById(id,html) :
+    sql = "UPDATE message SET html=? WHERE id=?;"
+    params = (html,id)
+    cursor().execute(sql, params)
 
 # 添加Message
 def append(name, content) :
@@ -130,12 +142,16 @@ def append(name, content) :
         return False
 
 # 刷新渲染HTML
-def represhHtml(id) :
+def refreshHtml(id) :
     try:
-        pass
+        md = getMarkdownById(id)
+        html = MarkdownModel.renderMarkdown(md)
+        if html != None :
+            setHtmlById(id, html)
+            return html
     except Exception as e:
         PhosLog.log(e)
-        return False
+        return None
 
 # 删除留言
 def delete(id) :
@@ -148,35 +164,31 @@ def delete(id) :
         return False
 
 # 返回最近的start条留言
-def getList(start, count) :
+def getList(start, end) :
     recent_message = []
 
-    if getCount() < start + count :
-        count = getCount()
+    if getCount() < end :
+        end = getCount()
 
-    for i in range(count) :
-        recent_message.append({
-            "id"        : getIdByOrderDesc(start + i),
-            "name"      : getNameByOrderDesc(start + i),
-            "date"      : getDateByOrderDesc(start + i),
-            "markdown"  : getMarkdownByOrderDesc(start + i),
-            "html"      : getHtmlByOrderDesc(start + i)
-        })
+    for i in range(start, end) :
+        data = {
+            "id"        : getIdByOrderDesc(i),
+            "name"      : getNameByOrderDesc(i),
+            "date"      : getDateByOrderDesc(i),
+            "markdown"  : getMarkdownByOrderDesc(i),
+            "html"      : getHtmlByOrderDesc(i)
+        }
+
+        recent_message.append(data)
+         
 
     return recent_message
 
-def getPageCount(perpage) :
+def getPageCount(perpage=40) :
     return math.ceil(getCount() / perpage)
 
 # 返回第n页留言
-def getMessagePage(page, perpage=20) :
+def getMessagePage(page, perpage=40) :
     recent_message = []
-    if page == 1 :
-        start = 0
-    else :
-        start = perpage * page + 1
-    n = perpage * page 
-    if getCount() < n :
-        n = getCount()
 
-    return getList(start, n)
+    return getList(perpage * page, perpage * (page+1))
