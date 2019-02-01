@@ -2,7 +2,8 @@
 `Phosphophyllite`是一个基于`Flask`开发的小型博客程序，采用`Markdown`作为文章编辑语法。  
 
 ## Markdown语法  
-完全采用[GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/)
+* 完全采用[GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/)
+* 请确保运行环境能够正常请求GitHub API
 
 ## 初始化
 * 打开终端，进入`private`目录下。  
