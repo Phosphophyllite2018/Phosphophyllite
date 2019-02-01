@@ -218,7 +218,7 @@ Page.editor = function(id)
 
                 AsyncJsonPost('/article/markdown', {"id" : id}, function(json){
                     let title = document.querySelector("#article_content")
-                    title.value = json['title']
+                    title.value = json['markdown']
                 })
             }
         })

@@ -8,7 +8,6 @@ from module.Interface import *
 app = flask.Flask(__name__, template_folder="./static/html")
 app.config['SECRET_KEY'] = os.urandom(24)
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=30)
-app.config['SEND_FILE_MAX_AGE_DEFAULT']  = timedelta(seconds=1)
 
 @app.route('/', methods=["GET", "POST"])
 def index() :
