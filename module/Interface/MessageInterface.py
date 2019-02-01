@@ -26,7 +26,7 @@ def getIdByOrder() :
 
     try :
         order = request.json['order']
-        returnJsonData['id'] = MessageModel.getByOrder('id',order)
+        returnJsonData['id'] = MessageModel.getIdByOrderDesc(order)
         returnJsonData['state'] = True
 
     except Exception as e:
@@ -42,7 +42,7 @@ def visitorName() :
 
     try :
         id = request.json['id']
-        returnJsonData['name'] = MessageModel.getByOrder('name',id)
+        returnJsonData['name'] = MessageModel.getNameById(id)
         returnJsonData['state'] = True
 
     except Exception as e:
@@ -58,7 +58,7 @@ def date() :
 
     try :
         id = request.json['id']
-        returnJsonData['date'] = MessageModel.getByOrder('date',id)
+        returnJsonData['date'] = MessageModel.getDateById(id)
         returnJsonData['state'] = True
 
     except Exception as e:
@@ -75,7 +75,7 @@ def markdown() :
 
     try :
         id = request.json['id']
-        returnJsonData['markdown'] = MessageModel.getByOrder('markdown',id)
+        returnJsonData['markdown'] = MessageModel.getMarkdownById(id)
         returnJsonData['state'] = True
 
     except Exception as e:
@@ -91,7 +91,7 @@ def html() :
 
     try :
         id = request.json['id']
-        returnJsonData['html'] = MessageModel.getByOrder('html',id)
+        returnJsonData['html'] = MessageModel.getHtmlById(id)
         returnJsonData['state'] = True
 
     except Exception as e:
@@ -108,10 +108,10 @@ def total() :
 
     try :
         id = request.json['id']
-        returnJsonData['name'] = MessageModel.getByOrder('name',id)
-        returnJsonData['date'] = MessageModel.getByOrder('date',id)
-        returnJsonData['markdown'] = MessageModel.getByOrder('markdown',id)
-        returnJsonData['html'] = MessageModel.getByOrder('html',id)
+        returnJsonData['name'] = MessageModel.getNameById(id)
+        returnJsonData['date'] = MessageModel.getDateById(id)
+        returnJsonData['markdown'] = MessageModel.getMarkdownById(id)
+        returnJsonData['html'] = MessageModel.getHtmlById(id)
         returnJsonData['state'] = True
 
     except Exception as e:
