@@ -113,7 +113,7 @@ MessageInterface.showHTML = function(label_selector)
 MessageInterface.showAside = function(label_selector)
 {
     label_selector = label_selector ? label_selector : '.recent_message'
-    AsyncJsonPost('/message/list', {count : 10}, function(json) 
+    AsyncJsonPost('/message/aside', {}, function(json) 
     {
         var elements = document.querySelectorAll(label_selector);
         for(let i = 0; i < elements.length; i++)
@@ -162,11 +162,13 @@ MessageInterface.showAside = function(label_selector)
 }
 
 
-/* 留言板显示最近1024条留言 */
-MessageInterface.showMain = function(label_selector)
+/* 留言板显示最近40条留言 */
+MessageInterface.showMain = function(page, label_selector)
 {
     label_selector = label_selector ? label_selector : '.message_board'
-    AsyncJsonPost('/message/list', {count : 1024}, function(json) 
+    page = page ? page : 0
+
+    AsyncJsonPost('/message/list', {'page' : page}, function(json) 
     {
         var elements = document.querySelectorAll(label_selector);
         for(let i = 0; i < elements.length; i++)
@@ -213,6 +215,33 @@ MessageInterface.showMain = function(label_selector)
                     
                     elements[i].appendChild(div)
                 }
+
+                /* 上一页 */
+                if(page > 0)
+                {
+                    let prev_page = document.createElement("a")
+                    prev_page.onclick = function(){MessageInterface.showMain(page - 1)}
+                    prev_page.href = "javascript:void(0);"
+                    prev_page.innerText = "上一页"
+                    elements[i].appendChild(prev_page)
+
+                    let space = document.createElement("span")
+                    space.innerText = "   "
+                    elements[i].appendChild(space)
+                }
+
+                /* 下一页 */
+                AsyncJsonPost('/message/pages', {}, function(json)
+                {
+                    if(json['pages'] > page + 1)
+                    {
+                        let next_page = document.createElement("a")
+                        next_page.onclick = function(){MessageInterface.showMain(page + 1)}
+                        next_page.href = "javascript:void(0);"
+                        next_page.innerText = "下一页"
+                        elements[i].appendChild(next_page)
+                    }
+                })
             }
             else
             {

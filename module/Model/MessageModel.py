@@ -148,19 +148,19 @@ def delete(id) :
         return False
 
 # 返回最近的start条留言
-def getList(start, count) :
+def getList(start, end) :
     recent_message = []
 
-    if getCount() < start + count :
-        count = getCount()
+    if getCount() < end :
+        end = getCount()
 
-    for i in range(count) :
+    for i in range(start, end) :
         recent_message.append({
-            "id"        : getIdByOrderDesc(start + i),
-            "name"      : getNameByOrderDesc(start + i),
-            "date"      : getDateByOrderDesc(start + i),
-            "markdown"  : getMarkdownByOrderDesc(start + i),
-            "html"      : getHtmlByOrderDesc(start + i)
+            "id"        : getIdByOrderDesc(i),
+            "name"      : getNameByOrderDesc(i),
+            "date"      : getDateByOrderDesc(i),
+            "markdown"  : getMarkdownByOrderDesc(i),
+            "html"      : getHtmlByOrderDesc(i)
         })
 
     return recent_message
@@ -171,12 +171,5 @@ def getPageCount(perpage=40) :
 # 返回第n页留言
 def getMessagePage(page, perpage=40) :
     recent_message = []
-    if page == 1 :
-        start = 0
-    else :
-        start = perpage * page + 1
-    n = perpage * page 
-    if getCount() < n :
-        n = getCount()
 
-    return getList(start, n)
+    return getList(perpage * page, perpage * (page+1))

@@ -69,7 +69,9 @@ messageInterfaceList = [
     ['/message/markdown',               MessageInterface.markdown],
     ['/message/html',                   MessageInterface.html],
     ['/message/total',                  MessageInterface.total],
+    ['/message/pages',                  MessageInterface.pages],
     ['/message/list',                   MessageInterface.getList],
+    ['/message/aside',                  MessageInterface.getAside],
     ['/message/save',                   MessageInterface.save],
     ['/message/delete',                 MessageInterface.delete], 
 ]

@@ -155,6 +155,14 @@ aside pre {
 	overflow: auto;
 }
 
+.message_board pre {
+	background-color: #f2fff4;
+	border-radius: 15px;
+	margin: 15px 0;
+	padding: 15px;
+	overflow: auto;
+}
+
 /* 行内代码视觉增强 */
 .article_content code, aside code {
 	color: dodgerblue;

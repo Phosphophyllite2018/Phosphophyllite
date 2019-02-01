@@ -121,20 +121,44 @@ def total() :
         
     return json.dumps(returnJsonData, ensure_ascii=False)
 
+# 获取页数
+def pages() :
+    returnJsonData = {}
+
+    try :
+        returnJsonData['pages'] = MessageModel.getPageCount()
+        returnJsonData['state'] = True
+
+    except Exception as e:
+        returnJsonData['state'] = False
+        returnJsonData['error'] = str(e)
+        PhosLog.log(e)
+        
+    return json.dumps(returnJsonData, ensure_ascii=False)
 
 # 留言列表
 def getList() :
     returnJsonData = {}
 
     try :
-        if 'start' in request.json :
-            start = request.json['start']
-        else :
-            start = 0
-        count = request.json['count']
+        page = request.json['page']
         
-        returnJsonData['message'] = MessageModel.getList(start, count)
+        returnJsonData['message'] = MessageModel.getMessagePage(page)
         returnJsonData['state'] = True
+
+    except Exception as e:
+        returnJsonData['state'] = False
+        returnJsonData['error'] = str(e)
+        PhosLog.log(e)
+        
+    return json.dumps(returnJsonData, ensure_ascii=False)
+
+# 侧边栏留言
+def getAside() :
+    returnJsonData = {}
+    try :
+        returnJsonData['message'] = MessageModel.getList(0, 10)
+        returnJsonData['state'] = True 
 
     except Exception as e:
         returnJsonData['state'] = False

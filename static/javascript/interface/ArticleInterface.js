@@ -248,7 +248,7 @@ ArticleInterface.showList = function(page, label_selector)
 
             elements[i].appendChild(document.createElement("hr"))
 
-            /* 下一页 */
+            /* 上一页 */
             if(page > 0)
             {
                 let prev_page = document.createElement("a")
@@ -262,7 +262,7 @@ ArticleInterface.showList = function(page, label_selector)
                 elements[i].appendChild(space)
             }
 
-            /* 上一页 */
+            /* 下一页 */
             AsyncJsonPost('/article/pages', {}, function(json)
             {
                 if(json['pages'] > page + 1)
@@ -351,7 +351,7 @@ ArticleInterface.showManager = function(page, label_selector)
 
             elements[i].appendChild(document.createElement("hr"))
 
-            /* 下一页 */
+            /* 上一页 */
             if(page > 0)
             {
                 let prev_page = document.createElement("a")
@@ -365,7 +365,7 @@ ArticleInterface.showManager = function(page, label_selector)
                 elements[i].appendChild(space)
             }
 
-            /* 上一页 */
+            /* 下一页 */
             AsyncJsonPost('/article/pages', {}, function(json)
             {
                 if(json['pages'] > page + 1)

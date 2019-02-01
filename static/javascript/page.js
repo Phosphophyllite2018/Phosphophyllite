@@ -59,6 +59,10 @@ Page.home = function()
     Page.load('article', 'article/content.html', function()
     {
         ArticleInterface.showLatest()
+        if(location.hash != "#")
+        {
+            location.hash = "#"
+        }
     })
 
     Page.load('footer', 'footer/footer.html', function(){})
