@@ -247,3 +247,33 @@ Page.manager = function()
         
     }, Page.login)
 }
+
+
+/* 文章管理 */
+Page.messageManager = function()
+{
+    BlogInterface.isLogin(function()
+    {
+        Page.load('header', 'header/header.html', function()
+        {
+            BlogInterface.showTitle()
+        })
+
+        Page.load('aside', 'aside/admin.html', function()
+        {
+            BlogInterface.showTitle()
+            BlogInterface.showAvatar()
+            BlogInterface.showDays()
+            BlogInterface.showVisiting()
+            ArticleInterface.showCount()
+            MessageInterface.showCount()
+        })
+
+        Page.load('article', 'article/message_manager.html', function(){
+            MessageInterface.showManager(0)
+        })
+
+        Page.load('footer', 'footer/footer.html', function(){})
+        
+    }, Page.login)
+}
