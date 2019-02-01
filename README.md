@@ -1,16 +1,8 @@
 # Phosphophyllite
 `Phosphophyllite`是一个基于`Flask`开发的小型博客程序，采用`Markdown`作为文章编辑语法。  
-* 此分支用于进行重构
 
-## 重构目标
-* 采用Ajax进行通信，使前后端完全分离。
-* 前后端通信的[接口定义](Interface.md)
-
-
-## Markdown语法   
-:octocat::octocat::octocat::octocat::octocat::octocat::octocat::octocat::octocat:  
-使用 GitHub API ( [https://developer.github.com/v3/markdown/](https://developer.github.com/v3/markdown/) ) 来渲染Markdown，因此支持的语法与GitHub一致。  
-* 请确保搭建博客所用的服务器能够正常请求GitHub API，请求GitHub API的速度会影响网站的加载速度。 
+## Markdown语法  
+完全采用[GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/)
 
 ## 初始化
 * 打开终端，进入`private`目录下。  
@@ -24,7 +16,7 @@
 ./phos.py password "l!Q'gLu&K0T66Vm*"
 ```
 
-* 运行`phos.py`脚本，绑定GitHub(由于使用GitHub API渲染Markdown，需要进行身份验证，否则每小时只能请求60次。建议注册一个不使用的GitHub账号以免密码泄露。) :
+* 运行`phos.py`脚本，绑定GitHub(由于使用GitHub API渲染Markdown，需要进行身份验证，否则每小时只能请求60次。) :
 ```bash
 ./phos.py git-name "gituser2018"
 ./phos.py git-pass "!k'GLu4^%0V86xY*q"
@@ -36,6 +28,7 @@
 import flask
 import requests
 import sqlite3
+import bs4
 
 import os
 import sys
@@ -52,10 +45,11 @@ import hashlib
 * 由于GitHub API的限制，文章的大小不能超过`400KB`(约10万字)。  
 * 出于安全性考虑，GitHub API会过滤掉大部分html标签。  
 * 如果没有设置GitHub账号密码，每小时最多只能向GitHub API发起60次请求。  
-  * 身份验证后为每小时6000次
-  * 设置的GitHub密码以 ***明文*** 保存在数据库中，请注意安全(建议单独[注册](https://github.com/join)一个账号)。  
-  * 执行`./phos.py init`可以清除数据库中保存的GitHub用户名密码
-
+  * 身份验证后为每小时6000次  
+  * 如果保存时Markdown染失败，加载显示时会尝试重新渲染。
+  * 设置的GitHub密码以 ***明文*** 保存在数据库中，请注意安全(可以单独[注册](https://github.com/join)一个账号)。  
+  * 执行`./phos.py init`可以清除数据库中保存的GitHub用户名密码  
+  
 
 ## Markdown测试  
 
