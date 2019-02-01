@@ -16,11 +16,16 @@ header {
 	background-color: #009999;
 }
 
+#header_space {
+	height: 50px;
+	width: 100%;
+	margin-bottom: 20px;
+}
+
 /* aside和atcile在同一行 */
 aside {
 	float: left;
-	width: 20%;
-	margin-top: 50px;
+	width: 25%;
 	overflow: hidden;
 	min-height: 100%;
 	margin-left: 10px;
@@ -28,9 +33,8 @@ aside {
 
 article {
 	float: left;
-	margin-top: 50px;
 	margin-left: 5%;
-	width: 70%;
+	width: 65%;
 }
 
 /* 清除float */
@@ -90,6 +94,14 @@ footer {
 	border-radius: 10px;
 }
 
+.recent_article {
+	margin: 0 2em;
+}
+
+.recent_message {
+	margin: 0 2em;
+}
+
  /* 标题和前面空一定的距离 */
 h1, h2, h3, h4, h5, h6 {
 	padding-top: 15px;
@@ -97,44 +109,62 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* 表格隔行双色 */
-tbody tr:nth-child(odd) {
+.article_content tbody tr:nth-child(odd) {
 	background-color:#cbe0ffe3;
 }
 
-tbody tr:nth-child(even) {
+.article_content tbody tr:nth-child(even) {
 	background-color:white;
 }
 
-th,td {
+.article_content th,.article_content td {
 	padding: 0 10px;
 	border: 2px dodgerblue solid;
 }
 
 /* 段落开头空2格 */
-p {
+/* article p {
 	text-indent: 2em;
-}
+} */
 	
 /* 让li标签能够显示圆点 */
-ol, ul {
+.article_content ol, .article_content ul {
 	margin-left: 4em; 
 }
 
 /* 内层ul缩进2格即可 */
-ol ol, ul ul {
+.article_content ol ol, .article_content ul ul {
 	margin-left: 2em; 
 }
 
 /* 代码块显示浅灰色圆角矩形底色 */
-pre {
+.article_content pre {
 	background-color: #f2fff4;
 	border-radius: 15px;
-	margin: 15px;
+	margin: 15px 0;
 	padding: 15px;
+	overflow: auto;
+}
+
+aside pre {
+	max-height : 500px;
+	background-color: #f2fff4;
+	border-radius: 15px;
+	margin: 15px 0;
+	padding: 15px;
+	overflow: auto;
+}
+
+.message_board pre {
+	background-color: #f2fff4;
+	border-radius: 15px;
+	margin: 15px 0;
+	padding: 15px;
+	overflow: auto;
 }
 
 /* 行内代码视觉增强 */
-code {
+.article_content code, aside code {
 	color: dodgerblue;
 	background-color: #f2fff4;
     border-radius: 3px;
@@ -187,14 +217,13 @@ a:hover {
 }
 
 /* 头像显示为圆形 */
-#photo {
+#avatar {
 	width: 200px;
 	height: 200px;
 	display: block;
 	margin: 20px auto;
 	border-radius: 50%;
-	border: 1px solid rgb(221,240,237);
-	background-color: aquamarine;
+	border: 1px solid aqua;
 }
   
   
@@ -257,7 +286,6 @@ a:hover {
 	float: right;
 	color: salmon;
 	font-weight: normal;
-	margin-right: 2em;
 }
 
 .subtitle > a:hover {
@@ -266,14 +294,18 @@ a:hover {
 }
 
 /* 文章列表 */
-.article_href a {
+.article_link a {
 	color: #009999;
 	text-decoration: none;
 	
 }
 
-.article_href a:hover {
+.article_link a:hover {
 	color: #009999;
 	background-color: unset;
 	text-decoration: underline;
+}
+
+.article_link{
+	white-space:nowrap; 
 }

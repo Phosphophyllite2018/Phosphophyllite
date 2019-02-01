@@ -62,78 +62,89 @@ function AsyncPost(url, params, callback)
     request.send(data)
     
     /* 设置回调 */
-    request.onreadystatechange = function() {callback(request)}
+    request.onreadystatechange = function() {
+        if(request.readyState != 4)
+        {
+            return false
+        }
+        
+        callback(request)
+    }
 }
 
-/* 添加留言 */
-function addMessage()
+
+/* 异步Get请求 */
+function AsyncGet(url, params, callback)
 {
-    params = {}
-    params['name'] = document.querySelector("#message_name").value
-    params['content'] = document.querySelector("#message_content").value
-    if(params['content'].replace(/^\s*|\s*$/g,"") == "") // 去除空格后为空
+    let request = new XMLHttpRequest();
+    request.open("get", url, true)
+    let data = ""
+    for(let key in params)
     {
-        alert("请写点什么。")
-        return false
+        data += key + "=" + params[key] + "&"
     }
-
-    if(params['name'].length > 15) // 去除空格后为空
-    {
-        alert("名字太长了。")
-        return false
+    request.setRequestHeader("Content-Type","application/x-www-form-urlencoded;");
+    request.send(data)
+    
+    /* 设置回调 */
+    request.onreadystatechange = function() {
+        if(request.readyState != 4)
+        {
+            return false
+        }
+        
+        callback(request)
     }
-
-    if(params['content'].length > 150) // 去除空格后为空
-    {
-        alert("留言内容太长了。")
-        return false
-    }
-
-    httpPost("/interface/add_message", params)
 }
 
-/* 保存文章 */
-function saveArticle(button)
+
+/* 异步Post发送JSON */
+function AsyncJsonPost(url, json, callback)
 {
-    params = {}
-    id = button.getAttribute("article-id")
-    if(Number.isInteger(Number(id)))
+    switch(typeof(json))
     {
-        params['id'] = id
+        case "object" : 
+            json = JSON.stringify(json)
+            break;
+
+        case "string" :
+            break;
+
+        default :
+            console.log("json param is invalid type (" + typeof(json) + ")")
+            return false
+
     }
-    else
-    {
-        params['id'] = 0
-    }
-    params['title'] = document.querySelector("#article_title").value
-    params['content'] = document.querySelector("#article_content").value
-    if(params['title'].replace(/^\s*|\s*$/g,"") == "") // 去除空格后为空
-    {
-        alert("请填写标题")
-        return false
+    let request = new XMLHttpRequest();
+    request.open("post", url, true)
+    request.setRequestHeader("Content-Type","application/json;");
+    request.send(json)
+    
+    /* 设置回调 */
+    request.onreadystatechange = function() {
+        if(request.readyState != 4)
+        {
+            return false
+        }
+        
+        callback(JSON.parse(request.responseText))
     }
 
-    if(params['content'].replace(/^\s*|\s*$/g,"") == "") // 去除空格后为空
-    {
-        alert("请编辑文章")
-        return false
-    }
-
-    httpPost("/interface/save_article", params)
+    return true
 }
 
-/* 删除文章 */
-function deleteArticle(link)
+/* 接口测试打印 */
+function InterfacePrint(json)
 {
-    params = {}
-    params['id'] = link.getAttribute("article-id")
-    httpPost("/interface/delete_article", params)
+    let p = document.createElement("p")
+    p.innerText = String(JSON.stringify(json))
+    document.body.appendChild(p)
 }
 
-/* 删除留言 */
-function deleteMessage(link)
+/* 接口测试函数 */
+function InterfaceTest(url, params)
 {
-    params = {}
-    params['id'] = link.getAttribute("message-id")
-    httpPost("/interface/delete_message", params)
+    let json = params
+    AsyncJsonPost(url, json, InterfacePrint)
 }
+

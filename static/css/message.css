@@ -1,0 +1,41 @@
+/* 灰色楼层号 */
+.message_floor {
+    color: gray;
+}
+
+/* 访客名加粗 */
+.visitor_name {
+	font-weight: bold;
+}
+
+/* 留言日期加细 */
+.message_date {
+	font-weight: lighter;
+}
+
+.message_block:nth-child(5n+1) > .visitor_name,
+.message_block:nth-child(5n+1) > .message_date {
+    color: red;
+}
+
+.message_block:nth-child(5n+2) > .visitor_name,
+.message_block:nth-child(5n+2) > .message_date {
+    color: orange;
+}
+
+.message_block:nth-child(5n+3) > .visitor_name,
+.message_block:nth-child(5n+3) > .message_date {
+    color: #009999;
+}
+
+.message_block:nth-child(5n+4) > .visitor_name,
+.message_block:nth-child(5n+4) > .message_date {
+    color: dodgerblue;
+}
+
+.message_block:nth-child(5n+5) > .visitor_name,
+.message_block:nth-child(5n+5) > .message_date {
+    color: slateblue;
+}
+
+

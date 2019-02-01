@@ -3,103 +3,90 @@
 import os
 from datetime import timedelta
 import flask
-from module import Page , AdminPage
-from module.Model import ArticleModel
-from module.Interface import MessageInterface , AuthInterface , ArticleInterface
+from module.Interface import *
 
 app = flask.Flask(__name__, template_folder="./static/html")
 app.config['SECRET_KEY'] = os.urandom(24)
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=30)
 
-
-
-# 基本页面
-
-@app.route('/')
+@app.route('/', methods=["GET", "POST"])
 def index() :
-    if ArticleModel.getCount() == 0 :
-        return Page.DemoPage.renderPage()
-    else :
-        return Page.ArticlePage.renderPage()
+    return flask.redirect('/static/html/index.html')
 
-@app.route('/message')
-def message() :
-    page = flask.request.args.get('page', type=int)
-    return Page.MessagePage.renderPage(page)
+@app.route('/test', methods=["GET", "POST"])
+def test() :
+    return flask.redirect('/static/test/index.html')
 
-@app.route('/readme')
-def readme() :
-    return Page.DemoPage.renderPage()
+# 博客数据接口
+blogInterfaceList = [
+    ['/blog/is_login',          BlogInterface.isLogin],
+    ['/blog/login',             BlogInterface.login],
+    ['/blog/username',          BlogInterface.getUsername],
+    ['/blog/avatar',            BlogInterface.getAvatar],
+    ['/blog/running_days',      BlogInterface.getRunDays],
+    ['/blog/visiting_count',    BlogInterface.getVisitingCount],
+    ['/blog/visiting_modify',   BlogInterface.addVisitingCount],
+]
 
-@app.route('/login')
-def login() :
-    return Page.LoginPage.renderPage()
-
-@app.route('/article')
-def article() :
-    id = flask.request.args.get('id', type=int)
-    return Page.ArticlePage.renderPage(id)
-
-@app.route('/article_list')
-def articleList() :
-    page = flask.request.args.get('page', type=int)
-    return Page.ArticleListPage.renderPage(page)
+for route in blogInterfaceList :
+    app.add_url_rule(route[0], endpoint=route[0], view_func=route[1], methods=['POST'])
 
 
 
 
-# 后台页面 
+# 文章数据接口
+articleInterfaceList = [
+    ['/article/count',                  ArticleInterface.count],
+    ['/article/get_id_by_order',        ArticleInterface.getIdByOrder],
+    ['/article/title',                  ArticleInterface.title],
+    ['/article/date',                   ArticleInterface.date],
+    ['/article/reading_count',          ArticleInterface.readingCount],
+    ['/article/markdown',               ArticleInterface.markdown],
+    ['/article/html',                   ArticleInterface.html],
+    ['/article/total',                  ArticleInterface.total],
+    ['/article/aside',                  ArticleInterface.aside],
+    ['/article/list',                   ArticleInterface.list],
+    ['/article/pages',                  ArticleInterface.pages],
+    ['/article/latest',                 ArticleInterface.latest],
+    ['/article/modify/reading_count',   ArticleInterface.modifyReadingCount],
+    ['/article/save',                   ArticleInterface.save],
+    ['/article/delete',                 ArticleInterface.delete],
+    ['/article/add_reading',            ArticleInterface.addReading],
+]
 
-@app.route('/admin')
-def admin():
-    return AdminPage.AdminPage.renderPage()
-    
-@app.route('/admin/edit')
-def edit():
-    return AdminPage.EditorPage.renderPage()
-
-@app.route('/admin/article_list')
-def admin_article_list() :
-    page = flask.request.args.get('page', type=int)
-    return AdminPage.ArticleListPage.renderPage(page)
-
-@app.route('/admin/message')
-def admin_message() :
-    page = flask.request.args.get('page', type=int)
-    return AdminPage.MessagePage.renderPage(page)
+for route in articleInterfaceList :
+    app.add_url_rule(route[0], endpoint=route[0], view_func=route[1], methods=['POST'])
 
 
 
 
-# 接口
+# 留言数据接口
+messageInterfaceList = [
+    ['/message/count',                  MessageInterface.count],
+    ['/message/get_id_by_order',        MessageInterface.getIdByOrder],
+    ['/message/visitor_name',           MessageInterface.visitorName],
+    ['/message/date',                   MessageInterface.date],
+    ['/message/markdown',               MessageInterface.markdown],
+    ['/message/html',                   MessageInterface.html],
+    ['/message/total',                  MessageInterface.total],
+    ['/message/pages',                  MessageInterface.pages],
+    ['/message/list',                   MessageInterface.getList],
+    ['/message/aside',                  MessageInterface.getAside],
+    ['/message/save',                   MessageInterface.save],
+    ['/message/delete',                 MessageInterface.delete], 
+]
 
-@app.route('/interface/add_message', methods=["POST"])
-def addMessage() :
-    return MessageInterface.addMessage() 
+for route in messageInterfaceList :
+    app.add_url_rule(route[0], endpoint=route[0], view_func=route[1], methods=['POST'])
 
-@app.route('/interface/delete_message', methods=["POST"])
-def deleteMessage() :
-    return MessageInterface.deleteMessage() 
 
-@app.route('/interface/save_article', methods=["POST"])
-def saveArticle() :
-    return ArticleInterface.save() 
+# Markdown接口
+markdownInterfaceList = [
+    ['/markdown/render',                MarkdownInterface.render],
+]
 
-@app.route('/interface/delete_article', methods=["POST"])
-def deleteArticle() :
-    return ArticleInterface.delete() 
-
-@app.route('/interface/auth', methods=["POST"])
-def auth() :
-    if AuthInterface.checkPassword() :
-        return flask.redirect('/admin')
-    else :
-        return flask.redirect('/login')
-
-@app.route('/interface/article_json', methods=["POST"])
-def articleJson() :
-    return ArticleInterface.content() 
-
+for route in markdownInterfaceList :
+    app.add_url_rule(route[0], endpoint=route[0], view_func=route[1], methods=['POST'])
 
     
 if __name__ == "__main__" :

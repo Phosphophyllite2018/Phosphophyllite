@@ -2,6 +2,7 @@ import sqlite3
 import math
 from ..Phos import PhosLog
 from ..Phos.common import sqlFilter , sqlCheck
+from . import MarkdownModel
 
 def cursor() :
     db = sqlite3.connect("./private/phosphophyllite.db", isolation_level=None)
@@ -9,14 +10,18 @@ def cursor() :
     return cursor
 
 # 列名，做sql语句校验
-columns = ("id", "name", "content", "birthday")
+columns = ("id", "name", "markdown", "html", "date")
 
 # 返回行数
 def getCount() :
     try :
         sql = "SELECT count(*) FROM message;"
         result = cursor().execute(sql)
-        return result.fetchone()[0]
+        output = result.fetchone()
+        if output == None :
+            raise RuntimeError('SELECT count(*) failed')
+        else :
+            return output[0]
     except Exception as e:
         PhosLog.log(e)
         return 0
@@ -25,43 +30,128 @@ def getCount() :
 def getById(key, id) :
     try :
         sqlCheck(columns, key)
-        sql = "SELECT %s FROM message where id=%d;" % (key, id)
-        result = cursor().execute(sql)
-        return result.fetchone()[0]
+        sql = "SELECT ? FROM message where id=?;"
+        params = (key, id)
+        result = cursor().execute(sql, params)
+        output = result.fetchone()
+        if output == None :
+            raise RuntimeError("SELECT %s FROM message where id=%d;" % params)
+        else :
+            return output[0]
     except Exception as e:
         PhosLog.log(e)
         return None
 
-# 根据排序查找
-# 整数正序，负数逆序
-def getByOrder(key, num) :
-    try :
-        sqlCheck(columns, key)
-        sql = ""
-        if num > 0 :
-            sql = "SELECT %s FROM message ORDER BY id LIMIT %d,1;" % (key, num-1)
-        else :
-            sql = "SELECT %s FROM message ORDER BY id DESC LIMIT %d,1;" % (key, abs(num)-1)
-            
-        result = cursor().execute(sql)
-        return result.fetchone()[0]
-    except Exception as e:
-        PhosLog.log(e)
-        return None
+# 根据id查询name属性
+def getNameById(id) :
+    sql = "SELECT name FROM message WHERE id=?;"
+    params = (id,)
+    result = cursor().execute(sql, params)
+    output = result.fetchone()
+    return output[0]
+
+# 根据id查询date属性
+def getDateById(id) :
+    sql = "SELECT date FROM message WHERE id=?;"
+    params = (id,)
+    result = cursor().execute(sql, params)
+    output = result.fetchone()
+    return output[0]
+
+# 根据id查询markdown属性
+def getMarkdownById(id) :
+    sql = "SELECT markdown FROM message WHERE id=?;"
+    params = (id,)
+    result = cursor().execute(sql, params)
+    output = result.fetchone()
+    return output[0]
+
+# 根据id查询html属性
+def getHtmlById(id) :
+    sql = "SELECT html FROM message WHERE id=?;"
+    params = (id,)
+    result = cursor().execute(sql, params)
+    output = result.fetchone()
+    if output[0] == None :
+        return refreshHtml(id)
+    else:
+        return output[0]
+
+# 根据排序查询id属性
+def getIdByOrderDesc(order) :
+    sql = "SELECT id FROM message ORDER BY id DESC LIMIT ?,1;"
+    params = (order,)
+    result = cursor().execute(sql, params)
+    output = result.fetchone()
+    return output[0]
+
+# 根据排序查询name属性
+def getNameByOrderDesc(order) :
+    sql = "SELECT name FROM message ORDER BY id DESC LIMIT ?,1;"
+    params = (order,)
+    result = cursor().execute(sql, params)
+    output = result.fetchone()
+    return output[0]
+
+# 根据排序查询date属性
+def getDateByOrderDesc(order) :
+    sql = "SELECT date FROM message ORDER BY id DESC LIMIT ?,1;"
+    params = (order,)
+    result = cursor().execute(sql, params)
+    output = result.fetchone()
+    return output[0]
+
+# 根据排序查询markdown属性
+def getMarkdownByOrderDesc(order) :
+    sql = "SELECT markdown FROM message ORDER BY id DESC LIMIT ?,1;"
+    params = (order,)
+    result = cursor().execute(sql, params)
+    output = result.fetchone()
+    return output[0]
+
+# 根据排序查询html属性
+def getHtmlByOrderDesc(order) :
+    sql = "SELECT html FROM message ORDER BY id DESC LIMIT ?,1;"
+    params = (order,)
+    result = cursor().execute(sql, params)
+    output = result.fetchone()
+    if output[0] == None :
+        return refreshHtml(getIdByOrderDesc(order))
+    else:
+        return output[0]
+
+# 修改HTML属性
+def setHtmlById(id,html) :
+    sql = "UPDATE message SET html=? WHERE id=?;"
+    params = (html,id)
+    cursor().execute(sql, params)
 
 # 添加Message
 def append(name, content) :
     try :
         if name.strip() == "" :
             name = "匿名"  
-        name = sqlFilter(name)
-        content = sqlFilter(content)
-        sql = "INSERT INTO message VALUES(NULL,'%s','%s', datetime('now'));" % (name, content)
-        cursor().execute(sql)
+
+        html = MarkdownModel.renderMarkdown(content)
+        sql = "INSERT INTO message VALUES(NULL, ?, ?, ?, datetime('now'));" 
+        params = (name, content, html)
+        cursor().execute(sql, params)
         return True
     except Exception as e:
         PhosLog.log(e)
         return False
+
+# 刷新渲染HTML
+def refreshHtml(id) :
+    try:
+        md = getMarkdownById(id)
+        html = MarkdownModel.renderMarkdown(md)
+        if html != None :
+            setHtmlById(id, html)
+            return html
+    except Exception as e:
+        PhosLog.log(e)
+        return None
 
 # 删除留言
 def delete(id) :
@@ -73,43 +163,32 @@ def delete(id) :
         PhosLog.log(e)
         return False
 
-# 返回最近的n条留言
-def getRecentMessage(n) :
+# 返回最近的start条留言
+def getList(start, end) :
     recent_message = []
 
-    if getCount() < n :
-        n = getCount()
+    if getCount() < end :
+        end = getCount()
 
-    for i in range(1, n + 1) :
-        recent_message.append({
-            "id"        : getByOrder("id", -i),
-            "name"      : getByOrder("name", -i),
-            "birthday"  : getByOrder("birthday", -i),
-            "content"   : getByOrder("content", -i)
-        })
+    for i in range(start, end) :
+        data = {
+            "id"        : getIdByOrderDesc(i),
+            "name"      : getNameByOrderDesc(i),
+            "date"      : getDateByOrderDesc(i),
+            "markdown"  : getMarkdownByOrderDesc(i),
+            "html"      : getHtmlByOrderDesc(i)
+        }
+
+        recent_message.append(data)
+         
 
     return recent_message
 
-def getPages(perpage) :
+def getPageCount(perpage=40) :
     return math.ceil(getCount() / perpage)
 
 # 返回第n页留言
-def getMessages(page, perpage=20) :
+def getMessagePage(page, perpage=40) :
     recent_message = []
-    if page == 1 :
-        start = 1
-    else :
-        start = perpage * (page-1) + 1
-    n = perpage * page 
-    if getCount() < n :
-        n = getCount()
 
-    for i in range(start, n + 1) :
-        recent_message.append({
-            "id"        : getByOrder("id", -i),
-            "name"      : getByOrder("name", -i),
-            "birthday"  : getByOrder("birthday", -i),
-            "content"   : getByOrder("content", -i)
-        })
-
-    return recent_message
+    return getList(perpage * page, perpage * (page+1))
