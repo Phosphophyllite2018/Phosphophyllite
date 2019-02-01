@@ -55,7 +55,7 @@ ArticleInterface.showDate = function(id, label_selector)
         {
             if(json['state'] == true)
             {
-                elements[i].innerText = json['date']
+                elements[i].innerText = utility.localtime(json['date'])
             }
             else
             {
