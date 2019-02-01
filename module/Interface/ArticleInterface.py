@@ -351,3 +351,18 @@ def latest() :
         PhosLog.log(e)
         
     return json.dumps(returnJsonData, ensure_ascii=False)
+
+def addReading() :
+    returnJsonData = {}
+
+    try :
+        id = request.json['id']
+        ArticleModel.addReading(id)
+        returnJsonData['state'] = True
+
+    except Exception as e:
+        returnJsonData['state'] = False
+        returnJsonData['error'] = str(e)
+        PhosLog.log(e)
+        
+    return json.dumps(returnJsonData, ensure_ascii=False)

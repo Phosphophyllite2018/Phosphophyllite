@@ -52,6 +52,7 @@ articleInterfaceList = [
     ['/article/modify/reading_count',   ArticleInterface.modifyReadingCount],
     ['/article/save',                   ArticleInterface.save],
     ['/article/delete',                 ArticleInterface.delete],
+    ['/article/add_reading',            ArticleInterface.addReading],
 ]
 
 for route in articleInterfaceList :

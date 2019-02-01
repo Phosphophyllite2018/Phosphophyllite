@@ -55,7 +55,7 @@ ArticleInterface.showDate = function(id, label_selector)
         {
             if(json['state'] == true)
             {
-                elements[i].innerText = json['date']
+                elements[i].innerText = utility.localtime(json['date'])
             }
             else
             {
@@ -129,6 +129,11 @@ ArticleInterface.showMarkdown = function(id, label_selector)
             }
         }
     })
+}
+
+ArticleInterface.addReading = function(id)
+{
+    AsyncJsonPost('/article/add_reading', {"id" : id}, function(json){})
 }
 
 /* 保存文章 */
@@ -416,6 +421,7 @@ ArticleInterface.showById = function(id)
         // MessageInterface.showCount()
         // MessageInterface.showAside()
         // ArticleInterface.showAside()
+        ArticleInterface.addReading(id)
         ArticleInterface.showTitle(id)
         ArticleInterface.showDate(id)
         ArticleInterface.showReading(id)
