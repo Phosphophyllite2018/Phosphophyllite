@@ -167,11 +167,11 @@ def html():
     try :
         if 'id' in request.json :
             id = request.json['id']
-            returnJsonData['html'] = ArticleModel.getById('html', id)
+            returnJsonData['html'] = ArticleModel.getHtmlById(id)
             returnJsonData['state'] = True
         elif 'order' in request.json :
             order = request.json['order']
-            returnJsonData['html'] = ArticleModel.getByOrder('html', order)
+            returnJsonData['html'] = ArticleModel.getHtmlByOrder(order)
             returnJsonData['state'] = True
         else :
             returnJsonData['state'] = False

@@ -37,7 +37,7 @@ Page.page404 = function()
 }
 
 /* 主页 */
-Page.home = function()
+Page.article = function()
 {
     Page.load('header', 'header/header.html', function()
     {
@@ -58,14 +58,25 @@ Page.home = function()
 
     Page.load('article', 'article/content.html', function()
     {
-        ArticleInterface.showLatest()
-        if(location.hash != "#")
+        if(location.hash == '#' || location.hash == '')
         {
-            location.hash = "#"
+            ArticleInterface.showLatest()
+        }
+        else
+        {
+            ArticleInterface.showByUrl()
         }
     })
 
     Page.load('footer', 'footer/footer.html', function(){})
+}
+
+
+/* 回到首页 */
+Page.home = function()
+{
+    location.hash='#'
+    Page.article()
 }
 
 /* 文章目录 */
