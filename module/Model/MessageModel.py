@@ -165,11 +165,11 @@ def getList(start, count) :
 
     return recent_message
 
-def getPageCount(perpage) :
+def getPageCount(perpage=40) :
     return math.ceil(getCount() / perpage)
 
 # 返回第n页留言
-def getMessagePage(page, perpage=20) :
+def getMessagePage(page, perpage=40) :
     recent_message = []
     if page == 1 :
         start = 0
