@@ -131,6 +131,11 @@ ArticleInterface.showMarkdown = function(id, label_selector)
     })
 }
 
+ArticleInterface.addReading = function(id)
+{
+    AsyncJsonPost('/article/add_reading', {"id" : id}, function(json){})
+}
+
 /* 保存文章 */
 ArticleInterface.save = function()
 {
@@ -416,6 +421,7 @@ ArticleInterface.showById = function(id)
         // MessageInterface.showCount()
         // MessageInterface.showAside()
         // ArticleInterface.showAside()
+        ArticleInterface.addReading(id)
         ArticleInterface.showTitle(id)
         ArticleInterface.showDate(id)
         ArticleInterface.showReading(id)

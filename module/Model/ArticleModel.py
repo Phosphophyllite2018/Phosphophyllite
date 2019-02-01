@@ -205,6 +205,13 @@ def setHtmlById(id, html) :
     cursor().execute(sql, params)
     print('setHtmlById')
 
+# 修改阅读量
+def setReadingById(id, reading) :
+    sql = "UPDATE article SET reading=? WHERE id=?;"
+    params = (reading,id)
+    cursor().execute(sql, params)
+    print('setHtmlById')
+
 # 根据排序查找
 # 整数正序，负数逆序
 def getByOrder(key, num) :
@@ -281,10 +288,10 @@ def delete(id) :
         return False
 
 # 访问量增加
-def addVisiting(id, n=1) :
+def addReading(id, n=1) :
     try :
-        visiting = getById('visiting', id)
-        setById('visiting', id, visiting+1)
+        reading = getReadingById(id)
+        setReadingById(id, reading+1)
     except Exception as e:
         PhosLog.log(e)
         return False
